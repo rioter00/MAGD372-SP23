@@ -31,12 +31,7 @@ public class Health : Monobehaviour
 	public void CollectPoints(int modification) {
 		score += modification;
 		ScoreEventArgs eventArgs = new ScoreEventArgs(score)
-		onScoreChange.Event?.Invoke(this, eventArgs);
-		/* 
-		The question mark means that it will only be activated if 
-		something is subscribed to it, preventing a null reference 
-		exception
-		*/
+		onScoreChange.CallEvent(this, eventArgs);
 	}
 }
 
