@@ -132,7 +132,7 @@ However, if none of the implementations of an event are using the Cooldown varia
 ---
 The variable's Value is shown in the inspector, and you can also click a box to reset the value on every playthrough. This can be used when you want the score to always start at whatever value you choose to reset to.
 
-For setting the Value of a Variable Object, you simply serialize a reference to it, and set its value property:
+For setting or getting the Value of a Variable Object, you simply serialize a reference to it, and set or get its value property:
 ```
 public class Health : Monobehaviour 
 {
@@ -145,11 +145,12 @@ public class Health : Monobehaviour
 
 	public void CollectPoints(int modification) {
 		score.Value += modification;
+		Debug.Log($"Score now at {score.Value}");
 	}
 }
 ```
 
-Similarly, to get the Value of a Variable Object, you serialize a reference to it and then get its Value property:
+Similarly to the EventBus, you can also subscribe to an event on the Variable that is automatically called when the value is modified as seen above
 ```
 public class UITextDisplay : Monobehaviour, IEventHandler 
 {
@@ -164,6 +165,13 @@ public class UITextDisplay : Monobehaviour, IEventHandler
 		tmp = GetComponent<TextMeshProUGUI>();
 		
 		onDeath += EventHandler;
+		
+		/*
+		When using Object Variables, you need to add custom event handlers for each variable, 
+		you cannot use the default included in the interface
+		*/
+		
+		score.ValueChanged += OnScoreValueChanged;
 	}
 
 	private override void EventHandler(object sender, EventArgs e) 
@@ -174,15 +182,16 @@ public class UITextDisplay : Monobehaviour, IEventHandler
 			return;
 		}
 	}
-
-	private void Update() 
+	
+	private void OnScoreValueChanged(object sender, EventArgs e) 
 	{
-		ChangeScore();
+	    // The event args for variables are empty since you can get the value directly from the object
+	    ChangeScore(score.Value.ToString());
 	}
 
-	private void ChangeScore() {
+	private void ChangeScore(string displayText) {
 		// Show new score on the text element
-		tmp.text = score.Value.ToString();
+		tmp.text = displayText;
 	}
 
 	public void Die(DeathEventArgs args)
