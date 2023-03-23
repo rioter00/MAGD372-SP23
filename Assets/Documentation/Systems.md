@@ -18,7 +18,7 @@ Each event bus must be used in two ways otherwise it isn't doing anything.
 
 The event caller will be controlling when the event is activated. For instance, in a Score script, when points are collected:
 ```
-public class Health : Monobehaviour 
+public class Score : Monobehaviour 
 {
 	[SerializeField] private EventBus onScoreChange;
 	private int score = 0;
