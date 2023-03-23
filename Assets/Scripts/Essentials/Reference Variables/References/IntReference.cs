@@ -10,7 +10,7 @@ namespace Essentials.Reference_Variables.References
         [SerializeField] private bool useConstant = true;
         [SerializeField] private int constantValue;
         [SerializeField] private IntVariable variable;
-
+        
         public int Value
         {
             get
