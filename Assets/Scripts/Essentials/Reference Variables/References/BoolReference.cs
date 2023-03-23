@@ -1,5 +1,6 @@
 using System;
 using Essentials.Reference_Variables.Variables;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Essentials.Reference_Variables.References
@@ -25,6 +26,14 @@ namespace Essentials.Reference_Variables.References
                     return;
                 }
                 variable.Value = value;
+            }
+        }
+
+        public BoolVariable Variable
+        {
+            get
+            {
+                return variable;
             }
         }
     }

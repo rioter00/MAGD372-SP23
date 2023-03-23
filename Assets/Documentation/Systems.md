@@ -171,7 +171,7 @@ public class UITextDisplay : Monobehaviour, IEventHandler
 		you cannot use the default included in the interface
 		*/
 		
-		score.ValueChanged += OnScoreValueChanged;
+		score.Variable.ValueChanged += OnScoreValueChanged;
 	}
 
 	private override void EventHandler(object sender, EventArgs e) 
