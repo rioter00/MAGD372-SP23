@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 582325993}
   - component: {fileID: 582325994}
+  - component: {fileID: 582325995}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -167,17 +168,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7673bdbfc9afa814a8b7e70bf00066e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 0
-  mapHeight: 0
-  levelOfDetail: 0
-  noiseScale: 0
-  octaves: 0
-  persitance: 0
-  lacunarity: 0
+  drawMode: 0
+  mapWidth: 20
+  mapHeight: 20
+  levelOfDetail: 6
+  noiseScale: 11.56
+  octaves: 5
+  persitance: 0.5
+  lacunarity: 2
   seed: 0
   offset: {x: 0, y: 0}
-  autoUPdate: 0
-  hazards: []
+  autoUpdate: 0
+  hazards:
+  - name: Water
+    hazardPrefab: {fileID: 7616429610233617908, guid: a9fdb70daca6f7a4fb63c008062e462a, type: 3}
+    height: 0.3
+    colorTest: {r: 0.08551875, g: 0.023584902, b: 1, a: 0}
+  - name: Sand
+    hazardPrefab: {fileID: 0}
+    height: 0.4
+    colorTest: {r: 0.9056604, g: 0.8235294, b: 0.42745098, a: 0}
+  - name: Lava
+    hazardPrefab: {fileID: 0}
+    height: 0.5
+    colorTest: {r: 1, g: 0.17609838, b: 0, a: 0}
+  - name: Snow
+    hazardPrefab: {fileID: 0}
+    height: 1
+    colorTest: {r: 1, g: 1, b: 1, a: 0}
+  hazardHolder: {fileID: 1572353844}
+--- !u!114 &582325995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582325992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b672c1ffec22b248bf9c0a203865d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textureRender: {fileID: 643560485}
 --- !u!1 &643560483
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +263,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3fadb0d9475284a41974cd443809e397, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -270,7 +302,7 @@ Transform:
   m_GameObject: {fileID: 643560483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 20, y: 1, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -359,6 +391,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1572353843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1572353844}
+  m_Layer: 0
+  m_Name: Hazard Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1572353844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572353843}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1900849733
 GameObject:
