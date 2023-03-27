@@ -2,14 +2,10 @@ using UnityEngine;
 
 public class MapGeneration : MonoBehaviour
 {
-    public enum DrawMode { ColorMap, HazardPlacing};
-    public DrawMode drawMode;
-
     public int mapWidth;
     public int mapHeight;
+    public int prefabSpacing = 1;
 
-    [Range(0, 6)]
-    public int levelOfDetail;
     public float noiseScale;
 
     public int octaves;
@@ -44,7 +40,7 @@ public class MapGeneration : MonoBehaviour
                         if(hazards[i].hazardPrefab != null)
                         {
                             Debug.Log(x + ", " + y);
-                            Vector3 location = new Vector3(x + mapWidth, 0, y + mapHeight);
+                            Vector3 location = new Vector3((x + mapWidth) * prefabSpacing, 0, (y + mapHeight) * prefabSpacing);
                             Instantiate(hazards[i].hazardPrefab, location, hazards[i].hazardPrefab.transform.rotation, hazardHolder);
                         }
                         break;
@@ -55,8 +51,7 @@ public class MapGeneration : MonoBehaviour
 
         MapDisplay display = FindObjectOfType<MapDisplay>();
 
-        if(drawMode == DrawMode.ColorMap)
-            display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));
+        display.DrawTexture(TextureGenerator.TextureFromColorMap(colorMap, mapWidth, mapHeight));            
 
         
     }
