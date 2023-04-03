@@ -2,7 +2,7 @@
 
 These systems are used for communication between different scripts. There are multiple ways to communicate information across scripts. The default method, to serialize a reference to the script, works but it also requires direct references to the scripts and they need to be set in the inspector in every scene. These systems on the other hand allow for each prefab to just be dropped in because they use asset files, not references to other prefabs.
 
-This document will be changing a players score for context. Looking over the systems and the different applications of the systems that could be used for communication of the score between scripts.
+This document will be using relevant examples for context. Looking over the systems and different applications of the systems for communication across scripts.
 
 ## Event Bus
 
@@ -129,28 +129,35 @@ However, if none of the implementations of an event are using the Cooldown varia
  Reference Variables are ScriptableObjects that contain data of the following types: bool, int, float, Vector2, and Vector3. To create a ReferenceVariable in the project window:
  `Right Click -> Create -> Variables -> Variable Type`
 
----
-The variable's Value is shown in the inspector, and you can also click a box to reset the value on every playthrough. This can be used when you want the score to always start at whatever value you choose to reset to.
+The primary use case for a Reference Variable over a standard serialized variable, such as a FloatReference instead of a float, is when multiple instances of one data property are being used. The example below is for how a primitive health system for a split-screen multiplayer game might look. Because there are multiple players and multiple instances of a health class with what is expected to be the same value for the initial health, using a FloatReference Variable works nicer because if a value is to be changed later on, say early for testing the health is at 10, but it's later decided that 20 is a better value, then you only need to modify the one reference instead of each instance of the class.
 
 For setting or getting the Value of a Variable Object, you simply serialize a reference to it, and set or get its value property:
 ```
 public class Health : Monobehaviour 
 {
-	[SerializeField] private IntReference score;
 
-	private void OnTriggerEnter(Collider other)
-	{
-		CollectPoints(1);
-	}
+    [SerializeField] private IntReference initialHealth;
 
-	public void CollectPoints(int modification) {
-		score.Value += modification;
-		Debug.Log($"Score now at {score.Value}");
-	}
+    public int Health { get; private set; }
+
+    private void Start() {
+        Health = initialHealth.Value;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        TakeDamage(1);
+    }
+
+    public void TakeDamage(int damage) {
+        health -= damage;
+        Debug.Log($"Health Started at {initialHealth.Value}");
+        Debug.Log($"Health now at {initialHealth.Value}");
+    }
 }
 ```
 
-Similarly to the EventBus, you can also subscribe to an event on the Variable that is automatically called when the value is modified as seen above
+Similarly to the EventBus, you can also subscribe to an event on the Variable that is automatically called when the value is modified as seen above. For the following example, let's return back to the score example and look at how a scoring system might be implemented using a Reference Variable. This is rarely preferable over an event bus, though there may be specific applications not yet considered.
 ```
 public class UITextDisplay : Monobehaviour, IEventHandler 
 {
