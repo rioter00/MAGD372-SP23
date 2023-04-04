@@ -76,6 +76,10 @@ public class ValuesManager<T>
         {
             return GetGridValue(x - xMax, yMax + y);
         }
+        if(x >= xMax && y >= yMax)
+        {
+            return GetGridValue(x - xMax, y - yMax);
+        }
         if(x < 0)
         {
             return GetGridValue(xMax + x, y);
@@ -88,7 +92,7 @@ public class ValuesManager<T>
         {
             return GetGridValue(x, yMax + y);
         }
-        if(y > yMax)
+        if(y >= yMax)
         {
             return GetGridValue(x, y - yMax);
         }
