@@ -43,6 +43,15 @@ public class PropagationHelper
         }
     }
 
+    internal void EnqueueUncollapseNeighbours(VectorPair propagatePair)
+    {
+        var uncollapsedNeighbours = coreHelper.CheckIfNeighboursAreCollapsed(propagatePair, outputGrid);
+        foreach(var uncollapsed in uncollapsedNeighbours)
+        {
+            pairsToPropagate.Enqueue(uncollapsed);
+        }
+    }
+
     private void AddToLowEntropySet(Vector2Int cellToPropagatePosition)
     {
         var elementOfLowEntropySet = lowEntropySet.Where(x => x.Position == cellToPropagatePosition).FirstOrDefault();
@@ -59,7 +68,7 @@ public class PropagationHelper
         }
     }
 
-    private void AddNewPairsToPropagateQueue(Vector2Int cellToPropagatePosition, Vector2Int baseCellPosition)
+    public void AddNewPairsToPropagateQueue(Vector2Int cellToPropagatePosition, Vector2Int baseCellPosition)
     {
         var list = coreHelper.Create4DirectionNeighbours(cellToPropagatePosition, baseCellPosition); 
         foreach(var item in list)

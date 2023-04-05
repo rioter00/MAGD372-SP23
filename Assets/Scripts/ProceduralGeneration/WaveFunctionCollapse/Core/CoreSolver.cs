@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CoreSolver
@@ -40,6 +41,86 @@ public class CoreSolver
 
     private void ProcessCell(VectorPair propagatePair)
     {
-        throw new NotImplementedException();
+        if(outputGrid.CheckIfCellIsCollapsed(propagatePair.CellToPropagatePosition))
+        {
+            propagationHelper.EnqueueUncollapseNeighbours(propagatePair);
+        }
+        else
+        {
+            PropagateNeighbour(propagatePair);
+        }
+    }
+
+    private void PropagateNeighbour(VectorPair propagatePair)
+    {
+        var possibleValuesAtNeighbour = outputGrid.GetPossibleValueForPosition(propagatePair.CellToPropagatePosition);
+        int startCount = possibleValuesAtNeighbour.Count;
+
+        RemoveImpossibleNeighbours(propagatePair, possibleValuesAtNeighbour);
+
+        int newPossiblePatternCount = possibleValuesAtNeighbour.Count;
+        propagationHelper.AnalyzePropagationResults(propagatePair, startCount, newPossiblePatternCount);
+    }
+
+    private void RemoveImpossibleNeighbours(VectorPair propagatePair, HashSet<int> possibleValuesAtNeighbour)
+    {
+        HashSet<int> possibleIndices = new HashSet<int>();
+
+        foreach( var patternIndexAtBase in outputGrid.GetPossibleValueForPosition(propagatePair.BaseCellPosition))
+        {
+            var possibleNeighboursForBase = patternManager.GetPossibleNeighboursForPatternInDirection(patternIndexAtBase, propagatePair.DirectionFromBase);
+            possibleIndices.UnionWith(possibleNeighboursForBase);
+        }
+
+        possibleValuesAtNeighbour.IntersectWith(possibleIndices);
+    }
+
+    public Vector2Int GetLowestEntropyCell()
+    {
+        if(propagationHelper.LowEntropySet.Count <= 0)
+        {
+            return outputGrid.GetRandomCell();
+        }
+        else
+        {
+            var lowestEntropyElement = propagationHelper.LowEntropySet.First();
+            Vector2Int returnVector = lowestEntropyElement.Position;
+            propagationHelper.LowEntropySet.Remove(lowestEntropyElement);
+            return returnVector;
+        }
+    }
+
+    public void CollapseCell(Vector2Int cellCoordinates)
+    {
+        var possiblevalue = outputGrid.GetPossibleValueForPosition(cellCoordinates).ToList();
+
+        if(possiblevalue.Count == 0 || possiblevalue.Count == 1)
+        {
+            return;
+        }
+        else
+        {
+            int index = coreHelper.SelectSolutionPatternFromFrequency(possiblevalue);
+            outputGrid.SetPatternOnPosition(cellCoordinates.x, cellCoordinates.y, possiblevalue[index]);
+        }
+
+        if(coreHelper.CheckCellSolutionForCollision(cellCoordinates,outputGrid) == false)
+        {
+            propagationHelper.AddNewPairsToPropagateQueue(cellCoordinates, cellCoordinates);
+        }
+        else
+        {
+            propagationHelper.SetConflictFlag();
+        }
+    }
+
+    public bool CheckIfSolved()
+    {
+        return outputGrid.CheckIfGridIsSolved();
+    }
+
+    public bool CheckForConflicts()
+    {
+        return propagationHelper.CheckForConflicts();
     }
 }

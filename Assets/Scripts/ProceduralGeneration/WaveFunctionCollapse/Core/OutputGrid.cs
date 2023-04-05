@@ -19,7 +19,7 @@ public class OutputGrid
         ResetAllPossibilites();
     }
 
-    private void ResetAllPossibilites()
+    public void ResetAllPossibilites()
     {
         HashSet<int> allPossiblePatternList = new HashSet<int>(); ;
         allPossiblePatternList.UnionWith(Enumerable.Range(0, this.maxNumberOfPatterns).ToList());
@@ -55,6 +55,11 @@ public class OutputGrid
             return indexPossiblePatternDictionary[index];
         }
         return new HashSet<int>();
+    }
+
+    internal void PrintResultsToConsole()
+    {
+        throw new NotImplementedException();
     }
 
     public bool CheckIfGridIsSolved()
