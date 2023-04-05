@@ -1,37 +1,35 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PatternDataResults
 {
-    private int[][] patternIndciesGrid;
+    private int[][] patternIndicesGrid;
 
     public Dictionary<int, PatternData> PatternIndexDictionary { get; internal set; }
 
     public PatternDataResults(int[][] patternIndicesGrid, Dictionary<int, PatternData> patternIndexDictionary)
     {
-        this.patternIndciesGrid = patternIndciesGrid;
+        this.patternIndicesGrid = patternIndicesGrid;
         PatternIndexDictionary = patternIndexDictionary;
     }
 
     public int GetGridLengthX()
     {
-        return patternIndciesGrid[0].Length;
+        return patternIndicesGrid[0].Length;
     }
 
     public int GetGridLengthY()
     {
-        return patternIndciesGrid.Length;
+        return patternIndicesGrid.Length;
     }
 
     public int GetIndexAt(int x, int y)
     {
-        return patternIndciesGrid[y][x];
+        return patternIndicesGrid[y][x];
     }
     
     public int GetNeighbourInDirection(int x, int y, Direction dir)
     {
-        if(patternIndciesGrid.CheckJaggedArray2IfIndexIsValid(x,y) == false)
+        if(patternIndicesGrid.CheckJaggedArray2IfIndexIsValid(x,y) == false)
         {
             return -1;
         }
@@ -39,25 +37,25 @@ public class PatternDataResults
         switch(dir)
         {
             case Direction.Up:
-                if(patternIndciesGrid.CheckJaggedArray2IfIndexIsValid(x, y + 1))
+                if(patternIndicesGrid.CheckJaggedArray2IfIndexIsValid(x, y + 1))
                 {
                     return GetIndexAt(x, y + 1);
                 }
                 return -1;
             case Direction.Down:
-                if (patternIndciesGrid.CheckJaggedArray2IfIndexIsValid(x, y - 1))
+                if (patternIndicesGrid.CheckJaggedArray2IfIndexIsValid(x, y - 1))
                 {
                     return GetIndexAt(x, y - 1);
                 }
                 return -1;
             case Direction.Left:
-                if (patternIndciesGrid.CheckJaggedArray2IfIndexIsValid(x - 1, y))
+                if (patternIndicesGrid.CheckJaggedArray2IfIndexIsValid(x - 1, y))
                 {
                     return GetIndexAt(x - 1, y);
                 }
                 return -1;
             case Direction.Right:
-                if (patternIndciesGrid.CheckJaggedArray2IfIndexIsValid(x + 1, y))
+                if (patternIndicesGrid.CheckJaggedArray2IfIndexIsValid(x + 1, y))
                 {
                     return GetIndexAt(x + 1, y);
                 }
