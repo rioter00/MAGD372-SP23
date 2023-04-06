@@ -18,6 +18,7 @@ public class WFCCore
 
     public int[][] CreateOutputGrid()
     {
+        Debug.Log("Inside");
         int iteration = 0;
         while(iteration < this.maxIterations)
         {

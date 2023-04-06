@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Text;
 using System.Linq;
+using UnityEditor;
 
 public class WaveFunctionCollapse : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class WaveFunctionCollapse : MonoBehaviour
     ValuesManager<TileBase> valueManager;
     WFCCore core;
     PatternManager manager;
-    Tilemap output;
+    TileMapOutput output;
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class WaveFunctionCollapse : MonoBehaviour
         var grid = reader.ReadInputToGrid();
         valueManager = new ValuesManager<TileBase>(grid);
         manager = new PatternManager(2);
-        manager.Processgrid(valueManager, false);
+        manager.ProcessGrid(valueManager, equalWeights);
         core = new WFCCore(5, 5, 500, manager);
 
     }
@@ -38,12 +39,19 @@ public class WaveFunctionCollapse : MonoBehaviour
     public void CreateTilemap()
     {
         output = new TileMapOutput(valueManager, outputTilemap);
+        Debug.Log(core.CreateOutputGrid());
         var result = core.CreateOutputGrid();
         output.CreateOutput(manager, result, outputWidth, outputHeight);
     }
 
     public void SaveTilemap()
     {
+        if(output.OutputImage != null)
+        {
+            outputTilemap = output.OutputImage;
+            GameObject objectToSave = outputTilemap.gameObject;
 
+            PrefabUtility.SaveAsPrefabAsset(objectToSave, "Assets/Saved/output.prefab");
+        }
     }
 }

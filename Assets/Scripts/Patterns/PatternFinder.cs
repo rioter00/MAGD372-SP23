@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class PatternFinder
 {
-    internal static PatternDataResults GetPatternDataFromGrid<T>(ValuesManager<T> valueManager, int patternSize, bool equalWeights)
+    public static PatternDataResults GetPatternDataFromGrid<T>(ValuesManager<T> valueManager, int patternSize, bool equalWeights)
     {
         Dictionary<string, PatternData> patternHashcodeDictionary = new Dictionary<string, PatternData>();
         Dictionary<int, PatternData> patternIndexDictionary = new Dictionary<int, PatternData>();
@@ -54,7 +54,7 @@ public static class PatternFinder
                 totalFrequency++;
                 if (patternSize < 3)
                 {
-                    patternIndicesGrid[row + 1][colMax + 1] = patternHashcodeDictionary[hashValue].Pattern.Index;
+                    patternIndicesGrid[row + 1][col + 1] = patternHashcodeDictionary[hashValue].Pattern.Index;
                 }
                 else
                 {
