@@ -7,7 +7,7 @@ public class WFCV2_Main : MonoBehaviour
     public List<GameObject> allPrefabs;
     public Vector3 grid;
     public float cellSize;
-    public float spawnEvery;
+    public float SpawnEvery;
 
     private Vector3 boundingUnit;
     private Dictionary<string, List<Vector3>> sockets = new Dictionary<string, List<Vector3>>();
@@ -17,17 +17,20 @@ public class WFCV2_Main : MonoBehaviour
     [SerializeField] private WFC_Spawned_Data_List allSpawnedPrefab = new WFC_Spawned_Data_List();
     private int collapsed;
     private float timer;
+
+    [SerializeField] private Transform IslandHolder;
     // Start is called before the first frame update
     void Start()
     {
         collapsed = 0;
         boundingUnit = new Vector3(cellSize / 2, 0, cellSize / 2);
-        processPrefab();
-        allocatePossiblitySpace();
+        ProcessPrefab();
+        AllocatePossiblitySpace();
         triggerCollapse();
-        propogateCollapseNew();
+        PropogateCollapseNew();
         collapsed++;
-        timer = spawnEvery;
+        timer = SpawnEvery;
+        Debug.Log(allPrefabs[4].name);
     }
 
     // Update is called once per frame
@@ -36,9 +39,9 @@ public class WFCV2_Main : MonoBehaviour
         timer = timer - Time.deltaTime;
         if (timer <= 0 && collapsed < allCells.Count)
         {
-            timer = spawnEvery;
-            getLowestEntropyCellAndSpawn();
-            propogateCollapseNew();
+            timer = SpawnEvery;
+            GetLowestEntropyCellAndSpawn();
+            PropogateCollapseNew();
         }
     }
 
@@ -48,29 +51,29 @@ public class WFCV2_Main : MonoBehaviour
         //File.WriteAllText(Application.dataPath + "/CustomAssets/WFC/Prototype/Spawned.json", json);
     }
 
-    private void processPrefab()
+    private void ProcessPrefab()
     {
         for (int i = 0; i < allPrefabs.Count; i++)
         {
             GameObject g = allPrefabs[i];
             g.transform.position = Vector3.zero;
             g.transform.rotation = Quaternion.Euler(g.transform.localEulerAngles.x, g.transform.localEulerAngles.y + 0, g.transform.localEulerAngles.z);
-            processMesh(g);
+            ProcessMesh(g);
             g.transform.rotation = Quaternion.Euler(g.transform.localEulerAngles.x, g.transform.localEulerAngles.y + 90, g.transform.localEulerAngles.z);
-            processMesh(g);
+            ProcessMesh(g);
             g.transform.rotation = Quaternion.Euler(g.transform.localEulerAngles.x, g.transform.localEulerAngles.y + 90, g.transform.localEulerAngles.z);
-            processMesh(g);
+            ProcessMesh(g);
             g.transform.rotation = Quaternion.Euler(g.transform.localEulerAngles.x, g.transform.localEulerAngles.y + 90, g.transform.localEulerAngles.z);
-            processMesh(g);
+            ProcessMesh(g);
         }
     }
 
-    private void processMesh(GameObject prefab)
+    private void ProcessMesh(GameObject prefab)
     {
-        examineMesh(prefab, (int)prefab.transform.localEulerAngles.y);
+        ExamineMesh(prefab, (int)prefab.transform.localEulerAngles.y);
     }
 
-    private void examineMesh(GameObject prefab, int rotationIndex)
+    private void ExamineMesh(GameObject prefab, int rotationIndex)
     {
         MeshFilter m = prefab.GetComponentInChildren<MeshFilter>();
         List<Vector3> allPositionsx_posbnd = new List<Vector3>();
@@ -109,21 +112,28 @@ public class WFCV2_Main : MonoBehaviour
         WFCV2_SingleState ss = new WFCV2_SingleState();
         ss.prefab = prefab;
         ss.rotationIndex = rotationIndex;
-        ss.right_SocketCode = getOrCreateSocketCode(allPositionsx_posbnd);
-        ss.left_SocketCode = getOrCreateSocketCode(allPositionsx_negbnd);
-        ss.back_SocketCode = getOrCreateSocketCode(allPositionsz_negbnd);
-        ss.front_SocketCode = getOrCreateSocketCode(allPositionsz_posbnd);
+        ss.right_SocketCode = GetOrCreateSocketCode(allPositionsx_posbnd);
+        ss.left_SocketCode = GetOrCreateSocketCode(allPositionsx_negbnd);
+        ss.back_SocketCode = GetOrCreateSocketCode(allPositionsz_negbnd);
+        ss.front_SocketCode = GetOrCreateSocketCode(allPositionsz_posbnd);
         superPosition.Add(ss);
+        //if(ss.prefab.name == "Base")
+        //{
+        //    Debug.Log(ss.right_SocketCode);
+        //    Debug.Log(ss.left_SocketCode);
+        //    Debug.Log(ss.back_SocketCode);
+        //    Debug.Log(ss.front_SocketCode);
+        //}
     }
 
-    private string getOrCreateSocketCode(List<Vector3> source)
+    private string GetOrCreateSocketCode(List<Vector3> source)
     {
         string socketCode = null;
         float hashSocket = 0;
 
         for (int i = 0; i < source.Count - 1; i++)
         {
-            hashSocket += hashVertexPos(new Vector3(Mathf.Abs(source[i].x), Mathf.Abs(source[i].y), Mathf.Abs(source[i].z)));
+            hashSocket += HashVertexPos(new Vector3(Mathf.Abs(source[i].x), Mathf.Abs(source[i].y), Mathf.Abs(source[i].z)));
         }
         socketCode = System.Math.Round(hashSocket, 0).ToString();
         if (socketCode != null)
@@ -136,12 +146,12 @@ public class WFCV2_Main : MonoBehaviour
         }
     }
 
-    private float hashVertexPos(Vector3 pos)
+    private float HashVertexPos(Vector3 pos)
     {
         return ((pos.x * 47) + (pos.y * 53) + (pos.z * 59));
     }
 
-    private void allocatePossiblitySpace()
+    private void AllocatePossiblitySpace()
     {
         for (int i = 0; i <= grid.x; i += (int)cellSize)
         {
@@ -170,7 +180,7 @@ public class WFCV2_Main : MonoBehaviour
         Vector3 randomCell = allCells[randomCellIndex].cellCoordinate;
         int randomStateIndex = Random.Range(0, allCells[randomCellIndex].superPosition.Count);
         WFCV2_SingleState ss = allCells[randomCellIndex].superPosition[randomStateIndex];
-        spawn(ss.prefab, randomCell, ss.rotationIndex);
+        Spawn(ss.prefab, randomCell, ss.rotationIndex);
         allCells[randomCellIndex].isCollapsed = true;
         foreach (WFCV2_SingleState wss in allCells[randomCellIndex].superPosition.ToArray())
         {
@@ -182,7 +192,7 @@ public class WFCV2_Main : MonoBehaviour
         cellToProcess.Add(allCells[randomCellIndex]);
     }
 
-    private void propogateCollapseNew()
+    private void PropogateCollapseNew()
     {
         Vector3 frontCellDelta = new Vector3(0, 0, cellSize);
         Vector3 backCellDelta = new Vector3(0, 0, -cellSize);
@@ -270,7 +280,7 @@ public class WFCV2_Main : MonoBehaviour
         }
     }
 
-    private void getLowestEntropyCellAndSpawn()
+    private void GetLowestEntropyCellAndSpawn()
     {
         int lowestCount = allPrefabs.Count * 400;
         WFCV2_CellInfo lowestEntropyCellInfo = new WFCV2_CellInfo();
@@ -290,7 +300,7 @@ public class WFCV2_Main : MonoBehaviour
         ss = lowestEntropyCellInfo.superPosition[lowestCount];
         if (lowestEntropyCellInfo != null)
         {
-            spawn(ss.prefab, lowestEntropyCellInfo.cellCoordinate, ss.rotationIndex);
+            Spawn(ss.prefab, lowestEntropyCellInfo.cellCoordinate, ss.rotationIndex);
             collapsed++;
         }
         foreach (WFCV2_SingleState wss in lowestEntropyCellInfo.superPosition.ToArray())
@@ -304,9 +314,9 @@ public class WFCV2_Main : MonoBehaviour
         cellToProcess.Add(lowestEntropyCellInfo);
     }
 
-    private void spawn(GameObject prefab, Vector3 position, int rotationIndex)
+    private void Spawn(GameObject prefab, Vector3 position, int rotationIndex)
     {
-        GameObject pf = GameObject.Instantiate(prefab, position, Quaternion.identity);
+        GameObject pf = GameObject.Instantiate(prefab, position, Quaternion.identity, IslandHolder);
         pf.transform.Rotate(0, rotationIndex, 0);
         WFC_Spawned_Data wsd = new WFC_Spawned_Data();
         wsd.prefabName = prefab.name;

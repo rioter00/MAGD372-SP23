@@ -157,11 +157,13 @@ MonoBehaviour:
   - {fileID: 5081040530992606762, guid: 872997ed31a16214cb9129d48b3d6ca1, type: 3}
   - {fileID: 7616429610233617908, guid: a9fdb70daca6f7a4fb63c008062e462a, type: 3}
   - {fileID: 4006167001771855618, guid: e29753ded837f834cb6eee3577191ea7, type: 3}
+  - {fileID: 7552080542404803687, guid: e3ddf9bd9f418e44ab868ef038f76012, type: 3}
   grid: {x: 10, y: 0, z: 10}
   cellSize: 2
-  spawnEvery: 0.05
+  SpawnEvery: 0
   allSpawnedPrefab:
     wsdList: []
+  IslandHolder: {fileID: 45420299}
 --- !u!4 &41069140
 Transform:
   m_ObjectHideFlags: 0
@@ -176,6 +178,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &45420298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 45420299}
+  m_Layer: 0
+  m_Name: IslandHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &45420299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45420298}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &582325992
 GameObject:
@@ -366,7 +399,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 643560483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 50.7, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 1, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
