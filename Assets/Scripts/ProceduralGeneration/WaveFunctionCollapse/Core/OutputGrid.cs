@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 public class OutputGrid
@@ -15,7 +16,7 @@ public class OutputGrid
     {
         this.width = width;
         this.height = height;
-        this.maxNumberOfPatterns = numberOfPatterns;
+        maxNumberOfPatterns = numberOfPatterns;
         ResetAllPossibilites();
     }
 
@@ -59,7 +60,36 @@ public class OutputGrid
 
     internal void PrintResultsToConsole()
     {
-        throw new NotImplementedException();
+        StringBuilder builder = null;
+        List<string> list = new List<string>();
+        for(int row = 0; row < this.height; row++)
+        {
+            builder = new StringBuilder();
+            for(int col = 0; col < this.width; col++)
+            {
+                var result = GetPossibleValueForPosition(new Vector2Int(col, row));
+                if(result.Count == 1)
+                {
+                    builder.Append(result.First() + " ");
+                }
+                else
+                {
+                    string newString = "";
+                    foreach(var item in result)
+                    {
+                        newString += item + ",";
+                    }
+                    builder.Append(newString);
+                }
+            }
+            list.Add(builder.ToString());
+        }
+        list.Reverse();
+        foreach(var item in list)
+        {
+            Debug.Log(item);
+        }
+        Debug.Log("---");
     }
 
     public bool CheckIfGridIsSolved()

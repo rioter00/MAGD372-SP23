@@ -39,7 +39,6 @@ public class WaveFunctionCollapse : MonoBehaviour
     public void CreateTilemap()
     {
         output = new TileMapOutput(valueManager, outputTilemap);
-        Debug.Log(core.CreateOutputGrid());
         var result = core.CreateOutputGrid();
         output.CreateOutput(manager, result, outputWidth, outputHeight);
     }
@@ -53,5 +52,10 @@ public class WaveFunctionCollapse : MonoBehaviour
 
             PrefabUtility.SaveAsPrefabAsset(objectToSave, "Assets/Saved/output.prefab");
         }
+    }
+
+    public void ClearTilemap()
+    {
+        outputTilemap.ClearAllTiles();
     }
 }

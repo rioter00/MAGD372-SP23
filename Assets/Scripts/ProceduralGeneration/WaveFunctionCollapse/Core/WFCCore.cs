@@ -9,16 +9,15 @@ public class WFCCore
 
     private int maxIterations = 0;
 
-    public WFCCore(int outputWidth, int outputHeigh, int maxIterations, PatternManager patternManager)
+    public WFCCore(int outputWidth, int outputHeight, int maxIterations, PatternManager patternManager)
     {
-        this.outputGrid = new OutputGrid(outputWidth, outputHeigh, patternManager.GetNumberOfPatterns());
+        this.outputGrid = new OutputGrid(outputWidth, outputHeight, patternManager.GetNumberOfPatterns());
         this.patternManager = patternManager;
         this.maxIterations = maxIterations;
     }
 
     public int[][] CreateOutputGrid()
     {
-        Debug.Log("Inside");
         int iteration = 0;
         while(iteration < this.maxIterations)
         {

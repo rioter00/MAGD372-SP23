@@ -17,6 +17,7 @@ public class WFCEditor : Editor
 
         if (GUILayout.Button("Generate"))
         {
+            wfc.ClearTilemap();
             wfc.CreateTilemap();
         }
     }
