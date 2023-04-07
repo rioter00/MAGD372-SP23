@@ -153,17 +153,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allPrefabs:
+  - {fileID: 7552080542404803687, guid: e3ddf9bd9f418e44ab868ef038f76012, type: 3}
+  - {fileID: 1748383246633818730, guid: 23622aeef136a2543941107a13afa597, type: 3}
   - {fileID: 4089718054783853019, guid: 841cbc0c813e8954a8cb1b467385c370, type: 3}
   - {fileID: 5081040530992606762, guid: 872997ed31a16214cb9129d48b3d6ca1, type: 3}
   - {fileID: 7616429610233617908, guid: a9fdb70daca6f7a4fb63c008062e462a, type: 3}
   - {fileID: 4006167001771855618, guid: e29753ded837f834cb6eee3577191ea7, type: 3}
-  - {fileID: 7552080542404803687, guid: e3ddf9bd9f418e44ab868ef038f76012, type: 3}
   grid: {x: 10, y: 0, z: 10}
   cellSize: 2
-  SpawnEvery: 0
+  spawnEvery: 0
+  allCells: []
   allSpawnedPrefab:
     wsdList: []
-  IslandHolder: {fileID: 45420299}
 --- !u!4 &41069140
 Transform:
   m_ObjectHideFlags: 0
