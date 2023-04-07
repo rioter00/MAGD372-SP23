@@ -12,7 +12,7 @@ public class WFCV2_Main : MonoBehaviour
     private Vector3 boundingUnit;
     private Dictionary<string, List<Vector3>> sockets = new Dictionary<string, List<Vector3>>();
     private List<WFCV2_SingleState> superPosition = new List<WFCV2_SingleState>();
-    public List<WFCV2_CellInfo> allCells = new List<WFCV2_CellInfo>();
+    private List<WFCV2_CellInfo> allCells = new List<WFCV2_CellInfo>();
     private List<WFCV2_CellInfo> cellToProcess = new List<WFCV2_CellInfo>();
     [SerializeField] private WFC_Spawned_Data_List allSpawnedPrefab = new WFC_Spawned_Data_List();
     private int collapsed;
@@ -23,6 +23,7 @@ public class WFCV2_Main : MonoBehaviour
     private List<Vector3> wellPositions = new List<Vector3>();
     private List<int> wellIndices = new List<int>();
     Vector3 tempCord = new Vector3();
+    [SerializeField] private Transform IslandHolder;
 
     // Start is called before the first frame update
     void Start()
@@ -223,8 +224,7 @@ public class WFCV2_Main : MonoBehaviour
         Vector3 randomCell = allCells[randomCellIndex].cellCoordinate;
         int randomStateIndex = Random.Range(0, allCells[randomCellIndex].superPosition.Count);
         WFCV2_SingleState ss = allCells[randomCellIndex].superPosition[randomStateIndex];
-        tempCord.x = grid.x - randomCell.x;
-        tempCord.z = randomCell.z;
+        tempCord = GetReflectedPosition(randomCell);
         if (ss.prefab.name == "Base" || ss.prefab.name == "Well")
         {
             while (ss.prefab.name == "Base" || ss.prefab.name == "Well")
@@ -233,7 +233,7 @@ public class WFCV2_Main : MonoBehaviour
             }
         }
         spawn(ss.prefab, randomCell, ss.rotationIndex);
-        Instantiate(ss.prefab, tempCord, Quaternion.identity);//flip rotation?
+        Instantiate(ss.prefab, tempCord, Quaternion.identity, IslandHolder);//flip rotation?
         allCells[randomCellIndex].isCollapsed = true;
         foreach (WFCV2_SingleState wss in allCells[randomCellIndex].superPosition.ToArray())
         {
@@ -351,19 +351,18 @@ public class WFCV2_Main : MonoBehaviour
             lowestCount = Random.Range(0, lowestCount);
         }
         ss = lowestEntropyCellInfo.superPosition[lowestCount];
-        tempCord.x = grid.x - lowestEntropyCellInfo.cellCoordinate.x;
-        tempCord.z = lowestEntropyCellInfo.cellCoordinate.z;
+        tempCord = GetReflectedPosition(lowestEntropyCellInfo.cellCoordinate);
         if (lowestEntropyCellInfo != null)
         {
             if (CheckIfBasePosition(lowestEntropyCellInfo.cellCoordinate))
             {
                 spawn(allPrefabs[0], lowestEntropyCellInfo.cellCoordinate, ss.rotationIndex);
-                Instantiate(allPrefabs[0], tempCord, Quaternion.identity);//flip rotation?
+                Instantiate(allPrefabs[0], tempCord, Quaternion.identity, IslandHolder);//flip rotation?
             }
             else if (CheckIfWellPosition(lowestEntropyCellInfo.cellCoordinate))
             {
                 spawn(allPrefabs[1], lowestEntropyCellInfo.cellCoordinate, ss.rotationIndex);
-                Instantiate(allPrefabs[1], tempCord, Quaternion.identity);//flip rotation?
+                Instantiate(allPrefabs[1], tempCord, Quaternion.identity, IslandHolder);//flip rotation?
             }
             else
             {
@@ -372,7 +371,7 @@ public class WFCV2_Main : MonoBehaviour
                     ss = FindLowestEntropyAgain();
                 }
                 spawn(ss.prefab, lowestEntropyCellInfo.cellCoordinate, ss.rotationIndex);
-                spawn(ss.prefab, tempCord, ss.rotationIndex);
+                spawn(ss.prefab, tempCord, ss.rotationIndex);//flip rotation?
 
             }
 
@@ -391,7 +390,7 @@ public class WFCV2_Main : MonoBehaviour
 
     private void spawn(GameObject prefab, Vector3 position, int rotationIndex)
     {
-        GameObject pf = GameObject.Instantiate(prefab, position, Quaternion.identity);
+        GameObject pf = GameObject.Instantiate(prefab, position, Quaternion.identity, IslandHolder);
         pf.transform.Rotate(0, rotationIndex, 0);
         WFC_Spawned_Data wsd = new WFC_Spawned_Data();
         wsd.prefabName = prefab.name;
@@ -420,5 +419,10 @@ public class WFCV2_Main : MonoBehaviour
         }
 
         return lowestEntropyCellInfo.superPosition[lowestCount];
+    }
+
+    private Vector3 GetReflectedPosition(Vector3 pos)
+    {
+        return new Vector3(grid.x - pos.x, 0, pos.z);
     }
 }

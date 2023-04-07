@@ -161,10 +161,10 @@ MonoBehaviour:
   - {fileID: 4006167001771855618, guid: e29753ded837f834cb6eee3577191ea7, type: 3}
   grid: {x: 10, y: 0, z: 10}
   cellSize: 2
-  spawnEvery: 0
-  allCells: []
+  spawnEvery: 0.01
   allSpawnedPrefab:
     wsdList: []
+  IslandHolder: {fileID: 45420299}
 --- !u!4 &41069140
 Transform:
   m_ObjectHideFlags: 0
@@ -483,14 +483,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006222888}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 23.4, z: -49.7}
+  m_LocalRotation: {x: 0.22957414, y: -0, z: -0, w: 0.97329116}
+  m_LocalPosition: {x: 5.72, y: 36.1, z: -25.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 26.544, y: 0, z: 0}
 --- !u!1 &1572353843
 GameObject:
   m_ObjectHideFlags: 0
