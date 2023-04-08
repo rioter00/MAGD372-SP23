@@ -35,10 +35,10 @@ public class WFCV2_Main : MonoBehaviour
 
         allocatePossiblitySpace();
 
-        triggerCollapse();
-        propogateCollapseNew();
+        //triggerCollapse();
+        //propogateCollapseNew();
 
-        collapsed++;
+        //collapsed++;
         timer = spawnEvery;
     }
 
