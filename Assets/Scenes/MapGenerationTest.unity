@@ -162,7 +162,9 @@ MonoBehaviour:
   - {fileID: 7887240129051513409, guid: 174e8ed88cc0d484daf58cc73145c83f, type: 3}
   grid: {x: 10, y: 0, z: 10}
   cellSize: 2
+  cellSpacing: 2
   spawnEvery: 0.05
+  allCells: []
   allSpawnedPrefab:
     wsdList: []
   IslandHolder: {fileID: 45420299}

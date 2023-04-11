@@ -12,7 +12,7 @@ public class WFCV2_Main : MonoBehaviour
     private Vector3 boundingUnit;
     private Dictionary<string, List<Vector3>> sockets = new Dictionary<string, List<Vector3>>();
     private List<WFCV2_SingleState> superPosition = new List<WFCV2_SingleState>();
-    public List<WFCV2_CellInfo> allCells = new List<WFCV2_CellInfo>();
+    private List<WFCV2_CellInfo> allCells = new List<WFCV2_CellInfo>();
     private List<WFCV2_CellInfo> cellToProcess = new List<WFCV2_CellInfo>();
     [SerializeField] private WFC_Spawned_Data_List allSpawnedPrefab = new WFC_Spawned_Data_List();
     private int collapsed;
@@ -369,6 +369,19 @@ public class WFCV2_Main : MonoBehaviour
                 while (ss.prefab.name == "Base" || ss.prefab.name == "Well")
                 {
                     ss = FindLowestEntropyAgain();
+                }
+                if(ss.prefab.name.Contains("Plank"))
+                {
+                    if(lowestEntropyCellInfo.cellCoordinate.x == 0)
+                    {
+                        Debug.Log("plank is on an edge at " + lowestEntropyCellInfo.cellCoordinate + " and should NOT be place horizontally");
+                        ss.rotationIndex = 90;
+                    }
+                    if(lowestEntropyCellInfo.cellCoordinate.z == 0)
+                    {
+                        Debug.Log("plank is on an edge at " + lowestEntropyCellInfo.cellCoordinate + " and should NOT be placed vertically");
+                        ss.rotationIndex = 0;
+                    }
                 }
                 spawn(ss.prefab, lowestEntropyCellInfo.cellCoordinate, ss.rotationIndex);
                 spawn(ss.prefab, tempCord, ss.rotationIndex);//flip rotation?
