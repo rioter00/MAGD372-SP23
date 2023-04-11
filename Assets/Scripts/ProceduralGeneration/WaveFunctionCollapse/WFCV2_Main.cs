@@ -374,12 +374,12 @@ public class WFCV2_Main : MonoBehaviour
                 {
                     if(lowestEntropyCellInfo.cellCoordinate.x == 0)
                     {
-                        Debug.Log("plank is on an edge at " + lowestEntropyCellInfo.cellCoordinate + " and should NOT be place horizontally");
+                        //Debug.Log("plank is on an edge at " + lowestEntropyCellInfo.cellCoordinate + " and should NOT be place horizontally");
                         ss.rotationIndex = 90;
                     }
-                    if(lowestEntropyCellInfo.cellCoordinate.z == 0)
+                    if(lowestEntropyCellInfo.cellCoordinate.z == 0 || lowestEntropyCellInfo.cellCoordinate.z == grid.z)
                     {
-                        Debug.Log("plank is on an edge at " + lowestEntropyCellInfo.cellCoordinate + " and should NOT be placed vertically");
+                        //Debug.Log("plank is on an edge at " + lowestEntropyCellInfo.cellCoordinate + " and should NOT be placed vertically");
                         ss.rotationIndex = 0;
                     }
                 }
