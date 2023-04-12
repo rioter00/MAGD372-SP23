@@ -15,6 +15,7 @@ public class MapGeneratorEditor : Editor
         {
             if (mapGen.autoUpdate)
             {
+                mapGen.RemoveHazards();
                 mapGen.GenerateMap();
             }
         }

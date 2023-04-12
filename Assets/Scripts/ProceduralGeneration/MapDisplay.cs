@@ -4,8 +4,6 @@ using System.Collections;
 public class MapDisplay : MonoBehaviour
 {
     public Renderer textureRender;
-
-    //Just for testing where the prefabs would go
     public void DrawTexture(Texture2D texture)
     {
         textureRender.sharedMaterial.mainTexture = texture;
