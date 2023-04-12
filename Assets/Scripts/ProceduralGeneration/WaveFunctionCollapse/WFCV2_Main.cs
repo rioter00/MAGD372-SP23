@@ -7,6 +7,7 @@ public class WFCV2_Main : MonoBehaviour
     public List<GameObject> allPrefabs;
     public Vector3 grid;
     public float cellSize;
+    public float cellSpacing;
     public float spawnEvery;
 
     private Vector3 boundingUnit;
@@ -23,6 +24,7 @@ public class WFCV2_Main : MonoBehaviour
     private List<Vector3> wellPositions = new List<Vector3>();
     private List<int> wellIndices = new List<int>();
     Vector3 tempCord = new Vector3();
+    Vector3 adjustedCord = new Vector3();
     [SerializeField] private Transform IslandHolder;
 
     // Start is called before the first frame update
@@ -352,17 +354,20 @@ public class WFCV2_Main : MonoBehaviour
             lowestCount = Random.Range(0, lowestCount);
         }
         ss = lowestEntropyCellInfo.superPosition[lowestCount];
-        tempCord = GetReflectedPosition(lowestEntropyCellInfo.cellCoordinate);
+        
+        adjustedCord = lowestEntropyCellInfo.cellCoordinate;
+        adjustedCord = new Vector3(adjustedCord.x * cellSpacing, 0, adjustedCord.z * cellSpacing);
+        tempCord = GetReflectedPosition(adjustedCord);
         if (lowestEntropyCellInfo != null)
         {
             if (CheckIfBasePosition(lowestEntropyCellInfo.cellCoordinate))
             {
-                spawn(allPrefabs[0], lowestEntropyCellInfo.cellCoordinate, ss.rotationIndex);
+                spawn(allPrefabs[0], adjustedCord, ss.rotationIndex);
                 Instantiate(allPrefabs[0], tempCord, Quaternion.identity, IslandHolder);//flip rotation?
             }
             else if (CheckIfWellPosition(lowestEntropyCellInfo.cellCoordinate))
             {
-                spawn(allPrefabs[1], lowestEntropyCellInfo.cellCoordinate, ss.rotationIndex);
+                spawn(allPrefabs[1], adjustedCord, ss.rotationIndex);
                 Instantiate(allPrefabs[1], tempCord, Quaternion.identity, IslandHolder);//flip rotation?
             }
             else
@@ -384,7 +389,7 @@ public class WFCV2_Main : MonoBehaviour
                         ss.rotationIndex = 0;
                     }
                 }
-                spawn(ss.prefab, lowestEntropyCellInfo.cellCoordinate, ss.rotationIndex);
+                spawn(ss.prefab, adjustedCord, ss.rotationIndex);
                 spawn(ss.prefab, tempCord, ss.rotationIndex);//flip rotation?
 
             }

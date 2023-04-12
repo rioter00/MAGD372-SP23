@@ -153,15 +153,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allPrefabs:
-  - {fileID: 7552080542404803687, guid: e3ddf9bd9f418e44ab868ef038f76012, type: 3}
-  - {fileID: 1748383246633818730, guid: 23622aeef136a2543941107a13afa597, type: 3}
+  - {fileID: 634393359602844719, guid: 474b646aef97ba042857f18db29c6a3b, type: 3}
+  - {fileID: 3513883045877119245, guid: e61cd9582dd8012488fb6a7995990807, type: 3}
   - {fileID: 4089718054783853019, guid: 841cbc0c813e8954a8cb1b467385c370, type: 3}
   - {fileID: 5081040530992606762, guid: 872997ed31a16214cb9129d48b3d6ca1, type: 3}
-  - {fileID: 7616429610233617908, guid: a9fdb70daca6f7a4fb63c008062e462a, type: 3}
+  - {fileID: 1729149891597502435, guid: 06852c87c3194ee40827816ef188da29, type: 3}
   - {fileID: 4006167001771855618, guid: e29753ded837f834cb6eee3577191ea7, type: 3}
   - {fileID: 7887240129051513409, guid: 174e8ed88cc0d484daf58cc73145c83f, type: 3}
   grid: {x: 10, y: 0, z: 10}
   cellSize: 2
+  cellSpacing: 2
   spawnEvery: 0.05
   allSpawnedPrefab:
     wsdList: []
