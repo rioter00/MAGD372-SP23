@@ -110,6 +110,7 @@ public class WFCV2_Main : MonoBehaviour
             processMesh(g);
         }
     }
+
     private void processMesh(GameObject prefab)
     {
         examineMesh(prefab, (int)prefab.transform.localEulerAngles.y);
@@ -366,7 +367,7 @@ public class WFCV2_Main : MonoBehaviour
             }
             else
             {
-                while (ss.prefab.name == "Base" || ss.prefab.name == "Well")
+                while (ss.prefab.name.Contains("Base") || ss.prefab.name.Contains("Well"))
                 {
                     ss = FindLowestEntropyAgain();
                 }
