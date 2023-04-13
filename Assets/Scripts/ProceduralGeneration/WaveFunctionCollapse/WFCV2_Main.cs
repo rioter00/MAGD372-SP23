@@ -442,6 +442,6 @@ public class WFCV2_Main : MonoBehaviour
 
     private Vector3 GetReflectedPosition(Vector3 pos)
     {
-        return new Vector3(grid.x - pos.x, 0, pos.z);
+        return new Vector3(grid.x * cellSpacing - pos.x, 0, pos.z);
     }
 }
