@@ -13,7 +13,7 @@ public class WFCV2_Main : MonoBehaviour
     private Vector3 boundingUnit;
     private Dictionary<string, List<Vector3>> sockets = new Dictionary<string, List<Vector3>>();
     private List<WFCV2_SingleState> superPosition = new List<WFCV2_SingleState>();
-    private List<WFCV2_CellInfo> allCells = new List<WFCV2_CellInfo>();
+    public List<WFCV2_CellInfo> allCells = new List<WFCV2_CellInfo>();
     private List<WFCV2_CellInfo> cellToProcess = new List<WFCV2_CellInfo>();
     [SerializeField] private WFC_Spawned_Data_List allSpawnedPrefab = new WFC_Spawned_Data_List();
     private int collapsed;
@@ -376,6 +376,7 @@ public class WFCV2_Main : MonoBehaviour
                 {
                     ss = FindLowestEntropyAgain();
                 }
+                CheckAdjacency(ss.prefab.name, lowestEntropyCellInfo.cellCoordinate);
                 if(ss.prefab.name.Contains("Plank"))
                 {
                     if(lowestEntropyCellInfo.cellCoordinate.x == 0)
@@ -443,5 +444,26 @@ public class WFCV2_Main : MonoBehaviour
     private Vector3 GetReflectedPosition(Vector3 pos)
     {
         return new Vector3(grid.x * cellSpacing - pos.x, 0, pos.z);
+    }
+
+    private void CheckAdjacency(string name, Vector3 position)
+    {
+        Vector3 left = new Vector3(position.x - cellSize, 0, position.z);
+        Vector3 up = new Vector3(position.x, 0, position.z - cellSize);
+
+        WFCV2_CellInfo ciLeft = allCells.Find(x => x.cellCoordinate == left);
+        WFCV2_CellInfo ciUp = allCells.Find(x => x.cellCoordinate == up);
+        if (ciLeft != null || ciUp != null)
+        {
+            Debug.Log("Current position for " + name + " is " + position);
+            Debug.Log("To the left of " + position + " is " + left);
+            if (ciLeft.superPosition[0].prefab.name == name)
+            {
+                Debug.Log("Matching cell");
+                //Debug.Log(ob.superPosition[0].prefab.name + " at " + left);
+                //Debug.Log("Cell to the left has the same name as the current cell. Cannot use " + name + " at " + position);
+            }
+
+        }
     }
 }
