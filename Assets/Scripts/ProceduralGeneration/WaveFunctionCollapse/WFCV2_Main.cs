@@ -372,12 +372,11 @@ public class WFCV2_Main : MonoBehaviour
             }
             else
             {
-                while (ss.prefab.name.Contains("Base") || ss.prefab.name.Contains("Well"))
+                while (ss.prefab.name.Contains("Base") || ss.prefab.name.Contains("Well") || CheckAdjacency(ss.prefab.name, lowestEntropyCellInfo.cellCoordinate) == false)
                 {
                     ss = FindLowestEntropyAgain();
                 }
-                CheckAdjacency(ss.prefab.name, lowestEntropyCellInfo.cellCoordinate);
-                if(ss.prefab.name.Contains("Plank"))
+                if(ss.prefab.name.Contains("Plank"))//Probably will get removed
                 {
                     if(lowestEntropyCellInfo.cellCoordinate.x == 0)
                     {
@@ -446,24 +445,28 @@ public class WFCV2_Main : MonoBehaviour
         return new Vector3(grid.x * cellSpacing - pos.x, 0, pos.z);
     }
 
-    private void CheckAdjacency(string name, Vector3 position)
+    private bool CheckAdjacency(string name, Vector3 position)
     {
         Vector3 left = new Vector3(position.x - cellSize, 0, position.z);
         Vector3 up = new Vector3(position.x, 0, position.z - cellSize);
 
         WFCV2_CellInfo ciLeft = allCells.Find(x => x.cellCoordinate == left);
         WFCV2_CellInfo ciUp = allCells.Find(x => x.cellCoordinate == up);
-        if (ciLeft != null || ciUp != null)
+        if (ciLeft != null)
         {
-            Debug.Log("Current position for " + name + " is " + position);
-            Debug.Log("To the left of " + position + " is " + left);
             if (ciLeft.superPosition[0].prefab.name == name)
             {
-                Debug.Log("Matching cell");
-                //Debug.Log(ob.superPosition[0].prefab.name + " at " + left);
-                //Debug.Log("Cell to the left has the same name as the current cell. Cannot use " + name + " at " + position);
+                return false;
             }
 
         }
+        if (ciUp != null)
+        {
+            if (ciUp.superPosition[0].prefab.name == name)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
