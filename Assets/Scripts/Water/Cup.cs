@@ -8,9 +8,11 @@ using UnityEngine;
 public class Cup : WaterContainer
 {
     [SerializeField] private FloatVariable bucketFillInputVariable;
-    [SerializeField] private string bucketFillEventKey;
     [SerializeField] private FloatReference bucketFillRateReference;
     [SerializeField] private FloatReference bucketRangeReference;
+    [SerializeField] private string bucketFillEventKey;
+    [Space]
+    [SerializeField] private string shovedEventKey;
 
     private float bucketFillInput;
     private float bucketFillRate
@@ -33,6 +35,7 @@ public class Cup : WaterContainer
 
     private void Awake()
     {
+        EventManager.AddListener<ShoveEvent>(shovedEventKey, OnShovedEvent);
         bucketFillInputVariable.ValueChanged += InputHandler;
 
         var body = GetComponent<Rigidbody>();
@@ -40,6 +43,11 @@ public class Cup : WaterContainer
         body.useGravity = false;
     }
 
+    private void OnShovedEvent(ShoveEvent args)
+    {
+        water = 0;
+    }
+    
     private void InputHandler(object sender, EventArgs e)
     {
         if (bucketFillInput == 0 && bucketFilling != null)
@@ -103,4 +111,9 @@ public class Cup : WaterContainer
     {
         StopCoroutine(waterCollection);
     }
+}
+
+public class ShoveEvent
+{
+    
 }
