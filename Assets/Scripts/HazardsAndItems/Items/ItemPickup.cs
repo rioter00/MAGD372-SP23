@@ -5,33 +5,38 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class ItemPickup : MonoBehaviour
 {
-    [SerializeField] Item[] items;
+    [SerializeField] Item[] itemScripts;
+    [SerializeField] GameObject[] itemModels;
     [SerializeField] float resetTime;
+    [SerializeField] Transform spawnPoint;
     int currentItem;
+    GameObject currentItemModel;
 
     void Start()
     {
         ResetItem();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            GameObject player = collision.gameObject;
+            GameObject player = other.gameObject;
             Collected(player);
         }
     }
 
     void Collected(GameObject player)
     {
-        player.AddComponent(items[currentItem].GetType()); // unsure if this will return Item.cs or specific item script
+        player.AddComponent(itemScripts[currentItem].GetType());
         StartCoroutine(StartReset());
+        Destroy(currentItemModel);
     }
 
     void ResetItem()
     {
-        currentItem = Random.Range(0, items.Length);
+        currentItem = Random.Range(0, itemScripts.Length);
+        currentItemModel = Instantiate(itemModels[currentItem], spawnPoint);
     }
 
     IEnumerator StartReset()
