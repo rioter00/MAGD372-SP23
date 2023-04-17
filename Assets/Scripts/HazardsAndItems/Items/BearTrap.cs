@@ -6,6 +6,6 @@ public class BearTrap : Item
 {
     public override void Activate()
     {
-        //Instantiate(Resources.Load("BearTrapGO"), transform);
+        Instantiate(Resources.Load("BearTrapGO"), transform);
     }
 }
