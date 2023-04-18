@@ -5,6 +5,8 @@ using System.IO;
 public class WFCV2_Main : MonoBehaviour
 {
     public List<GameObject> allPrefabs;
+    public List<GameObject> easyIslands;
+    public List<GameObject> mediumIslands;
     public Vector3 grid;
     public float cellSize;
     public float cellSpacing;
@@ -13,7 +15,7 @@ public class WFCV2_Main : MonoBehaviour
     private Vector3 boundingUnit;
     private Dictionary<string, List<Vector3>> sockets = new Dictionary<string, List<Vector3>>();
     private List<WFCV2_SingleState> superPosition = new List<WFCV2_SingleState>();
-    public List<WFCV2_CellInfo> allCells = new List<WFCV2_CellInfo>();
+    private List<WFCV2_CellInfo> allCells = new List<WFCV2_CellInfo>();
     private List<WFCV2_CellInfo> cellToProcess = new List<WFCV2_CellInfo>();
     [SerializeField] private WFC_Spawned_Data_List allSpawnedPrefab = new WFC_Spawned_Data_List();
     private int collapsed;
@@ -376,19 +378,6 @@ public class WFCV2_Main : MonoBehaviour
                 {
                     ss = FindLowestEntropyAgain();
                 }
-                if(ss.prefab.name.Contains("Plank"))//Probably will get removed
-                {
-                    if(lowestEntropyCellInfo.cellCoordinate.x == 0)
-                    {
-                        //Debug.Log("plank is on an edge at " + lowestEntropyCellInfo.cellCoordinate + " and should NOT be place horizontally");
-                        ss.rotationIndex = 90;
-                    }
-                    if(lowestEntropyCellInfo.cellCoordinate.z == 0 || lowestEntropyCellInfo.cellCoordinate.z == grid.z)
-                    {
-                        //Debug.Log("plank is on an edge at " + lowestEntropyCellInfo.cellCoordinate + " and should NOT be placed vertically");
-                        ss.rotationIndex = 0;
-                    }
-                }
                 spawn(ss.prefab, adjustedCord, ss.rotationIndex);
                 spawn(ss.prefab, tempCord, ss.rotationIndex);//flip rotation?
 
@@ -449,9 +438,11 @@ public class WFCV2_Main : MonoBehaviour
     {
         Vector3 left = new Vector3(position.x - cellSize, 0, position.z);
         Vector3 up = new Vector3(position.x, 0, position.z - cellSize);
+        Vector3 diagonal = new Vector3(position.x - cellSize, 0, position.z - cellSize);
 
         WFCV2_CellInfo ciLeft = allCells.Find(x => x.cellCoordinate == left);
         WFCV2_CellInfo ciUp = allCells.Find(x => x.cellCoordinate == up);
+        WFCV2_CellInfo ciDiagonal = allCells.Find(x => x.cellCoordinate == diagonal);
         if (ciLeft != null)
         {
             if (ciLeft.superPosition[0].prefab.name == name)
@@ -463,6 +454,13 @@ public class WFCV2_Main : MonoBehaviour
         if (ciUp != null)
         {
             if (ciUp.superPosition[0].prefab.name == name)
+            {
+                return false;
+            }
+        }
+        if(ciDiagonal != null)
+        {
+            if(ciDiagonal.superPosition[0].prefab.name == name)
             {
                 return false;
             }
