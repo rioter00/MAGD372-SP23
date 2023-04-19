@@ -20,6 +20,8 @@ public class EnergyDrink : Item
 
         //water.material.SetColor("_Color", Color.green);
 
+        Debug.Log("Energy drink activated!"); // *remove*
+
         StartCoroutine(StartDeactivation());
     }
 
