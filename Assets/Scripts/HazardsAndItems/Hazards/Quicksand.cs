@@ -19,7 +19,6 @@ public class Quicksand : MonoBehaviour
 
     void Pull(Rigidbody player)
     {
-        //player.position = Vector3.MoveTowards(player.position, new Vector3(center.position.x, player.position.y, center.position.z), pullSpeed);
         Vector3 direction = center.position - player.position;
         direction.Normalize();
         player.AddForce(direction * pullSpeed, ForceMode.Force);
