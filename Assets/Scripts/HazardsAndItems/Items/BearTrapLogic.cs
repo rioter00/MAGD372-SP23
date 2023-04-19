@@ -9,7 +9,10 @@ public class BearTrapLogic : MonoBehaviour
 {
     [SerializeField] float despawnTime;
     [SerializeField] float clampTime;
+    [SerializeField] MeshRenderer openModel;
+    [SerializeField] MeshRenderer clampedModel;
     bool isClamped;
+    bool gracePeriod = true;
 
     void Start()
     {
@@ -25,11 +28,20 @@ public class BearTrapLogic : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // either player can get trapped
+        if (!gracePeriod && other.CompareTag("Player")) // either player can get trapped
         {
+            openModel.enabled = false;
+            clampedModel.enabled = true;
+
             //PlayerInput input = other.GetComponent<PlayerInput>();
             //Clamp(input);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            gracePeriod = false;
     }
 
     //void Clamp(PlayerInput input)
