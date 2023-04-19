@@ -45,9 +45,15 @@ public class Cup : WaterContainer
 
     private void OnShovedEvent(ShoveEvent args)
     {
+        SpillWater();
+    }
+
+    public void SpillWater()
+    {
+
         water = 0;
     }
-    
+
     private void InputHandler(object sender, EventArgs e)
     {
         if (bucketFillInput == 0 && bucketFilling != null)
