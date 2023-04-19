@@ -10,6 +10,7 @@ public class Lid : Item
     {
         //water = GetComponent<Water>();
         //water.SetActive(false); // for this to work, water bar (health bar) might need a "if null"
+        Debug.Log("Lid activated!"); // *remove*
         StartCoroutine(StartDeactivation());
     }
 

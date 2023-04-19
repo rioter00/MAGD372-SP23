@@ -11,6 +11,8 @@ public class Cactus : MonoBehaviour // IDrain? ISpill? IWater?
         {
             //Spill();
             //Drain();
+
+            Debug.Log("YEEEEEEEEEEEOOOOOOOOOOUUUUCHH!!!");
         }
     }
 }
