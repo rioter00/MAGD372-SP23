@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 
-public class PlayAudioClipOnClick : MonoBehaviour // C# Script
+public class PlayAudioClipOnCollision : MonoBehaviour // C# Script
 {
     public AudioSource m_MyAudioSource;
     AudioClip song;
@@ -16,7 +16,7 @@ public class PlayAudioClipOnClick : MonoBehaviour // C# Script
         m_MyAudioSource.Pause(); // Pauses the designated audio source on start to keep the audio from immediately playing
     }
 
-    void OnMouseDown()
+    void OnCollisionEnter(Collision collision)
     {
         PlayTaskOnClick();
     }
