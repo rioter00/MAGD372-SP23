@@ -84,8 +84,8 @@ public class Cup : WaterContainer
     {
         for (;;)
         {
-            //EventManager.TriggerEvent(bucketFillEventKey, new BucketFillEvent(Mathf.Min(water, bucketFillRate)));
-            bucket.FillBucket(Mathf.Min(water, bucketFillRate));
+            EventManager.TriggerEvent(bucketFillEventKey, new BucketFillEvent(Mathf.Min(water, bucketFillRate)));
+            //bucket.FillBucket(Mathf.Min(water, bucketFillRate));
             water -= Mathf.Min(water, bucketFillRate);
             yield return new WaitForSeconds(1);
         }
