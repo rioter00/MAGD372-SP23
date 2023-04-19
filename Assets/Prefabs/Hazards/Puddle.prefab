@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ae3af2894b40e94ebd4859cf1295760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinForce: 0
+  spinForce: 50
 --- !u!1001 &5599395543416032833
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,10 +20,12 @@ public class Puddle : MonoBehaviour
     void Spin(Rigidbody player)
     {
         //player.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, transform.rotation.eulerAngles + new Vector3(0, 360, 0), spinTime);
-        
+
         //Quaternion rot = Quaternion.Euler(0, spinTime, 0);
         //player.MoveRotation(player.rotation * rot);
 
-        //player.AddTorque(Vector3.up * spinForce);
+        Debug.Log("The part where you spin");
+
+        player.AddTorque(Vector3.forward * spinForce, ForceMode.Impulse);
     }
 }

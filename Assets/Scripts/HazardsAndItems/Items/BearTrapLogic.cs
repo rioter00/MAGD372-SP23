@@ -33,8 +33,8 @@ public class BearTrapLogic : MonoBehaviour
             openModel.enabled = false;
             clampedModel.enabled = true;
 
-            //PlayerInput input = other.GetComponent<PlayerInput>();
-            //Clamp(input);
+            Rigidbody player = other.GetComponent<Rigidbody>();
+            Clamp(player);
         }
     }
 
@@ -44,16 +44,19 @@ public class BearTrapLogic : MonoBehaviour
             gracePeriod = false;
     }
 
-    //void Clamp(PlayerInput input)
-    //{
-    //    input.SetActive(false); // or deactivate movement method(s) so player can still look around or use powerups
-    //    StartCoroutine(StartRelease(input));
-    //}
+    void Clamp(Rigidbody player)
+    {
+        isClamped = true;
+        player.constraints = RigidbodyConstraints.FreezeAll;
+        StartCoroutine(StartRelease(player));
+    }
 
-    //IEnumerator StartRelease(PlayerInput input)
-    //{
-    //    yield return new WaitForSeconds(clampTime);
-    //    input.SetActive(true);
-    //    Destroy(gameObject);
-    //}
+    IEnumerator StartRelease(Rigidbody player)
+    {
+        yield return new WaitForSeconds(clampTime);
+        player.constraints &= ~RigidbodyConstraints.FreezePositionX;
+        player.constraints &= ~RigidbodyConstraints.FreezePositionY;
+        player.constraints &= ~RigidbodyConstraints.FreezePositionZ;
+        Destroy(gameObject);
+    }
 }

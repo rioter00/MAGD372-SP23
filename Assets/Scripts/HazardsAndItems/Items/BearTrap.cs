@@ -11,5 +11,6 @@ public class BearTrap : Item
     {
         Vector3 bottomPosition = transform.TransformPoint(0, transform.position.y - 2.35f, 0);
         Instantiate(bearTrap, bottomPosition, Quaternion.identity);
+        Destroy(this);
     }
 }
