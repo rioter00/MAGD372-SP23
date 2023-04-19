@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 20
+  bearTrap: {fileID: 3778973730438090371, guid: f24926b34adaf894a9aaa79d48c2c7a0, type: 3}
 --- !u!1001 &7638627411262550940
 PrefabInstance:
   m_ObjectHideFlags: 0
