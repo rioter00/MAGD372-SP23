@@ -8,6 +8,6 @@ public class Log : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(0, Time.deltaTime * rotateSpeed, 0);
+        transform.Rotate(0, 0, Time.deltaTime * rotateSpeed);
     }
 }
