@@ -7,12 +7,13 @@ public class WFCV2_Main : MonoBehaviour
     public List<GameObject> allPrefabs;
     public Vector3 grid;
     public float cellSize;
+    public float cellSpacing;
     public float spawnEvery;
 
     private Vector3 boundingUnit;
     private Dictionary<string, List<Vector3>> sockets = new Dictionary<string, List<Vector3>>();
     private List<WFCV2_SingleState> superPosition = new List<WFCV2_SingleState>();
-    private List<WFCV2_CellInfo> allCells = new List<WFCV2_CellInfo>();
+    public List<WFCV2_CellInfo> allCells = new List<WFCV2_CellInfo>();
     private List<WFCV2_CellInfo> cellToProcess = new List<WFCV2_CellInfo>();
     [SerializeField] private WFC_Spawned_Data_List allSpawnedPrefab = new WFC_Spawned_Data_List();
     private int collapsed;
@@ -23,6 +24,7 @@ public class WFCV2_Main : MonoBehaviour
     private List<Vector3> wellPositions = new List<Vector3>();
     private List<int> wellIndices = new List<int>();
     Vector3 tempCord = new Vector3();
+    Vector3 adjustedCord = new Vector3();
     [SerializeField] private Transform IslandHolder;
 
     // Start is called before the first frame update
@@ -110,6 +112,7 @@ public class WFCV2_Main : MonoBehaviour
             processMesh(g);
         }
     }
+
     private void processMesh(GameObject prefab)
     {
         examineMesh(prefab, (int)prefab.transform.localEulerAngles.y);
@@ -351,26 +354,42 @@ public class WFCV2_Main : MonoBehaviour
             lowestCount = Random.Range(0, lowestCount);
         }
         ss = lowestEntropyCellInfo.superPosition[lowestCount];
-        tempCord = GetReflectedPosition(lowestEntropyCellInfo.cellCoordinate);
+        
+        adjustedCord = lowestEntropyCellInfo.cellCoordinate;
+        adjustedCord = new Vector3(adjustedCord.x * cellSpacing, 0, adjustedCord.z * cellSpacing);
+        tempCord = GetReflectedPosition(adjustedCord);
         if (lowestEntropyCellInfo != null)
         {
             if (CheckIfBasePosition(lowestEntropyCellInfo.cellCoordinate))
             {
-                spawn(allPrefabs[0], lowestEntropyCellInfo.cellCoordinate, ss.rotationIndex);
+                spawn(allPrefabs[0], adjustedCord, ss.rotationIndex);
                 Instantiate(allPrefabs[0], tempCord, Quaternion.identity, IslandHolder);//flip rotation?
             }
             else if (CheckIfWellPosition(lowestEntropyCellInfo.cellCoordinate))
             {
-                spawn(allPrefabs[1], lowestEntropyCellInfo.cellCoordinate, ss.rotationIndex);
+                spawn(allPrefabs[1], adjustedCord, ss.rotationIndex);
                 Instantiate(allPrefabs[1], tempCord, Quaternion.identity, IslandHolder);//flip rotation?
             }
             else
             {
-                while (ss.prefab.name == "Base" || ss.prefab.name == "Well")
+                while (ss.prefab.name.Contains("Base") || ss.prefab.name.Contains("Well") || CheckAdjacency(ss.prefab.name, lowestEntropyCellInfo.cellCoordinate) == false)
                 {
                     ss = FindLowestEntropyAgain();
                 }
-                spawn(ss.prefab, lowestEntropyCellInfo.cellCoordinate, ss.rotationIndex);
+                if(ss.prefab.name.Contains("Plank"))//Probably will get removed
+                {
+                    if(lowestEntropyCellInfo.cellCoordinate.x == 0)
+                    {
+                        //Debug.Log("plank is on an edge at " + lowestEntropyCellInfo.cellCoordinate + " and should NOT be place horizontally");
+                        ss.rotationIndex = 90;
+                    }
+                    if(lowestEntropyCellInfo.cellCoordinate.z == 0 || lowestEntropyCellInfo.cellCoordinate.z == grid.z)
+                    {
+                        //Debug.Log("plank is on an edge at " + lowestEntropyCellInfo.cellCoordinate + " and should NOT be placed vertically");
+                        ss.rotationIndex = 0;
+                    }
+                }
+                spawn(ss.prefab, adjustedCord, ss.rotationIndex);
                 spawn(ss.prefab, tempCord, ss.rotationIndex);//flip rotation?
 
             }
@@ -423,6 +442,31 @@ public class WFCV2_Main : MonoBehaviour
 
     private Vector3 GetReflectedPosition(Vector3 pos)
     {
-        return new Vector3(grid.x - pos.x, 0, pos.z);
+        return new Vector3(grid.x * cellSpacing - pos.x, 0, pos.z);
+    }
+
+    private bool CheckAdjacency(string name, Vector3 position)
+    {
+        Vector3 left = new Vector3(position.x - cellSize, 0, position.z);
+        Vector3 up = new Vector3(position.x, 0, position.z - cellSize);
+
+        WFCV2_CellInfo ciLeft = allCells.Find(x => x.cellCoordinate == left);
+        WFCV2_CellInfo ciUp = allCells.Find(x => x.cellCoordinate == up);
+        if (ciLeft != null)
+        {
+            if (ciLeft.superPosition[0].prefab.name == name)
+            {
+                return false;
+            }
+
+        }
+        if (ciUp != null)
+        {
+            if (ciUp.superPosition[0].prefab.name == name)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
