@@ -3,31 +3,31 @@ using System.Collections.Generic;
 
 public static class EventManager
 {
-    private static Dictionary<Type, object> events = new Dictionary<Type, object>();
+    private static Dictionary<string, object> events = new Dictionary<string, object>();
 
-    public static void AddListener<T>(Action<T> listener)
+    public static void AddListener<T>(string key, Action<T> listener)
     {
-        if (!events.ContainsKey(typeof(T)))
+        if (!events.ContainsKey(key))
         {
-            events[typeof(T)] = new GameEvent<T>();
+            events[key] = new GameEvent<T>();
         }
 
-        var gameEvent = (GameEvent<T>) events[typeof(T)];
+        var gameEvent = (GameEvent<T>) events[key];
         gameEvent.AddListener(listener);
     }
 
-    public static void RemoveListener<T>(Action<T> listener)
+    public static void RemoveListener<T>(string key, Action<T> listener)
     {
-        if (!events.ContainsKey(typeof(T)))
+        if (!events.ContainsKey(key))
             return;
 
-        var gameEvent = (GameEvent<T>) events[typeof(T)];
+        var gameEvent = (GameEvent<T>) events[key];
         gameEvent.RemoveListener(listener);
     }
 
-    public static void TriggerEvent<T>(T args)
+    public static void TriggerEvent<T>(string key, T args)
     {
-        var gameEvent = (GameEvent<T>) events[typeof(T)];
+        var gameEvent = (GameEvent<T>) events[key];
         gameEvent.Invoke(args);
     }
 }

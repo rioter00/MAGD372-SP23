@@ -8,7 +8,7 @@ public class EventTesting : MonoBehaviour
     
     private void Awake()
     {
-        EventManager.AddListener<EventDemo>(EventTest);
+        EventManager.AddListener<EventDemo>("TestEvents", EventTest);
     }
 
     private void EventTest(EventDemo args)
@@ -21,7 +21,7 @@ public class EventTesting : MonoBehaviour
         while (true)
         {
             var args = new EventDemo(counter++);
-            EventManager.TriggerEvent(args);
+            EventManager.TriggerEvent("TestEvents", args);
             yield return new WaitForSeconds(1);
         }
     }
