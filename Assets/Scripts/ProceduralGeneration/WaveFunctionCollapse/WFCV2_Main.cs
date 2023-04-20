@@ -7,6 +7,7 @@ public class WFCV2_Main : MonoBehaviour
     public List<GameObject> allPrefabs;
     public List<GameObject> easyIslands;
     public List<GameObject> mediumIslands;
+    public List<GameObject> selectableIslands;
     public Vector3 grid;
     public float cellSize;
     public float cellSpacing;
@@ -32,6 +33,9 @@ public class WFCV2_Main : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        selectableIslands.AddRange(allPrefabs);
+        selectableIslands.AddRange(easyIslands);
+        selectableIslands.AddRange(mediumIslands);
         collapsed = 0;
         boundingUnit = new Vector3(cellSize / 2, 0, cellSize / 2);
         processPrefab();
@@ -49,7 +53,7 @@ public class WFCV2_Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer = timer - Time.deltaTime;
+        timer -= Time.deltaTime;
         if (timer <= 0 && collapsed < allCells.Count / 2)
         {
             timer = spawnEvery;
@@ -100,9 +104,9 @@ public class WFCV2_Main : MonoBehaviour
 
     private void processPrefab()
     {
-        for (int i = 0; i < allPrefabs.Count; i++)
+        for (int i = 0; i < selectableIslands.Count; i++)
         {
-            GameObject g = allPrefabs[i];
+            GameObject g = selectableIslands[i];
             g.transform.position = Vector3.zero;
             g.transform.rotation = Quaternion.Euler(g.transform.localEulerAngles.x, g.transform.localEulerAngles.y + 0, g.transform.localEulerAngles.z);
             processMesh(g);
@@ -340,7 +344,7 @@ public class WFCV2_Main : MonoBehaviour
 
     private void getLowestEntropyCellAndSpawn()
     {
-        int lowestCount = allPrefabs.Count * 400;
+        int lowestCount = selectableIslands.Count * 400;
         WFCV2_CellInfo lowestEntropyCellInfo = new WFCV2_CellInfo();
         WFCV2_SingleState ss = new WFCV2_SingleState();
         foreach (WFCV2_CellInfo ci in allCells)
@@ -364,13 +368,13 @@ public class WFCV2_Main : MonoBehaviour
         {
             if (CheckIfBasePosition(lowestEntropyCellInfo.cellCoordinate))
             {
-                spawn(allPrefabs[0], adjustedCord, ss.rotationIndex);
-                Instantiate(allPrefabs[0], tempCord, Quaternion.identity, IslandHolder);//flip rotation?
+                spawn(selectableIslands[0], adjustedCord, ss.rotationIndex);
+                Instantiate(selectableIslands[0], tempCord, Quaternion.identity, IslandHolder);//flip rotation?
             }
             else if (CheckIfWellPosition(lowestEntropyCellInfo.cellCoordinate))
             {
-                spawn(allPrefabs[1], adjustedCord, ss.rotationIndex);
-                Instantiate(allPrefabs[1], tempCord, Quaternion.identity, IslandHolder);//flip rotation?
+                spawn(selectableIslands[1], adjustedCord, ss.rotationIndex);
+                Instantiate(selectableIslands[1], tempCord, Quaternion.identity, IslandHolder);//flip rotation?
             }
             else
             {
@@ -410,7 +414,7 @@ public class WFCV2_Main : MonoBehaviour
     private WFCV2_SingleState FindLowestEntropyAgain()
     {
 
-        int lowestCount = allPrefabs.Count * 400;
+        int lowestCount = selectableIslands.Count * 400;
         WFCV2_CellInfo lowestEntropyCellInfo = new WFCV2_CellInfo();
         WFCV2_SingleState ss = new WFCV2_SingleState();
         foreach (WFCV2_CellInfo ci in allCells)
