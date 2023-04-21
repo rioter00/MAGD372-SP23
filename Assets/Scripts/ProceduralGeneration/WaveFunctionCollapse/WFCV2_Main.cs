@@ -384,6 +384,8 @@ public class WFCV2_Main : MonoBehaviour
                 }
                 spawn(ss.prefab, adjustedCord, ss.rotationIndex);
                 spawn(ss.prefab, tempCord, ss.rotationIndex);//flip rotation?
+                //Instantiate(ss.prefab, adjustedCord, Quaternion.identity, IslandHolder);
+                //Instantiate(ss.prefab, tempCord, Quaternion.identity, IslandHolder);
 
             }
 
