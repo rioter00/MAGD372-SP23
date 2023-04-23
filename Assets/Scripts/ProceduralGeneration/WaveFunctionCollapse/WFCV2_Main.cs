@@ -8,6 +8,7 @@ public class WFCV2_Main : MonoBehaviour
     public List<GameObject> easyIslands;
     public List<GameObject> mediumIslands;
     public List<GameObject> selectableIslands;
+    public List<GameObject> mirroredIslands;
     public Vector3 grid;
     public float cellSize;
     public float cellSpacing;
@@ -29,6 +30,7 @@ public class WFCV2_Main : MonoBehaviour
     Vector3 tempCord = new Vector3();
     Vector3 adjustedCord = new Vector3();
     [SerializeField] private Transform IslandHolder;
+    private GameObject mirroredIsland;
 
     // Start is called before the first frame update
     void Start()
@@ -383,9 +385,20 @@ public class WFCV2_Main : MonoBehaviour
                     ss = FindLowestEntropyAgain();
                 }
                 spawn(ss.prefab, adjustedCord, ss.rotationIndex);
-                spawn(ss.prefab, tempCord, ss.rotationIndex);//flip rotation?
-                //Instantiate(ss.prefab, adjustedCord, Quaternion.identity, IslandHolder);
-                //Instantiate(ss.prefab, tempCord, Quaternion.identity, IslandHolder);
+                CheckIfMirrored(ss.prefab);
+                if (CheckIfMirrored(ss.prefab))
+                {
+                    spawn(mirroredIsland, tempCord, ss.rotationIndex);
+                }
+                else
+                {
+                    spawn(ss.prefab, tempCord, ss.rotationIndex + 90);//flip rotation?
+                }  
+                //GameObject ob = GameObject.Instantiate(ss.prefab, adjustedCord, Quaternion.identity, IslandHolder);
+                //ob.transform.rotation.SetLookRotation(Vector3.right, Vector3.up);
+
+                //GameObject obj = GameObject.Instantiate(ss.prefab, tempCord, Quaternion.identity, IslandHolder);
+                //obj.transform.rotation.SetLookRotation(Vector3.left, Vector3.up);
 
             }
 
@@ -415,10 +428,8 @@ public class WFCV2_Main : MonoBehaviour
 
     private WFCV2_SingleState FindLowestEntropyAgain()
     {
-
         int lowestCount = selectableIslands.Count * 400;
         WFCV2_CellInfo lowestEntropyCellInfo = new WFCV2_CellInfo();
-        WFCV2_SingleState ss = new WFCV2_SingleState();
         foreach (WFCV2_CellInfo ci in allCells)
         {
             if (!ci.isCollapsed && lowestCount > ci.superPosition.Count)
@@ -472,5 +483,15 @@ public class WFCV2_Main : MonoBehaviour
             }
         }
         return true;
+    }
+
+    private bool CheckIfMirrored(GameObject island)
+    {
+        if(mirroredIslands.Find(mirroredIsland => mirroredIsland.name.Contains(island.name)))
+        {
+            Debug.Log(mirroredIsland);
+            return true;
+        }
+        return false;
     }
 }

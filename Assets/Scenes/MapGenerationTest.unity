@@ -176,6 +176,7 @@ MonoBehaviour:
   - {fileID: 8749824642869489813, guid: c46cd54e912943241a84760f5416c065, type: 3}
   - {fileID: 3899181808703092380, guid: f83587ff2767bcc4bb57f2796df8baed, type: 3}
   - {fileID: 6538775292819550993, guid: fa46cd7e4196bf249aab43393755c630, type: 3}
+  selectableIslands: []
   grid: {x: 10, y: 0, z: 10}
   cellSize: 2
   cellSpacing: 50
