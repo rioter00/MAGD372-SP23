@@ -557,6 +557,7 @@ MonoBehaviour:
   powerup_one_input: {fileID: 11400000, guid: c35a302eadc399341a292391077b841a, type: 2}
   powerup_two_input: {fileID: 11400000, guid: 5f2a3875943b4004d8a76afc8b77bc94, type: 2}
   pause_input: {fileID: 11400000, guid: 899cad8acf55b274496a0b5b4e9f2058, type: 2}
+  flipped: 1
 --- !u!1 &2066016571
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,15 +15,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private FloatVariable powerup_one_input;
     [SerializeField] private FloatVariable powerup_two_input;
     [SerializeField] private FloatVariable pause_input;
+    [SerializeField] bool flipped;
 
     public void PlayerMove(InputAction.CallbackContext context)
     {
-        move_input.Value = context.ReadValue<Vector2>();
+        Vector2 temp = context.ReadValue<Vector2>();
+        if (flipped)
+        {
+            temp.x = -temp.x;
+        }
+        move_input.Value = temp;
+        
     }
 
     public void PlayerCamera(InputAction.CallbackContext context)
     {
-        camera_input.Value = context.ReadValue<Vector2>();
+
+        Vector2 temp = context.ReadValue<Vector2>();
+        if (flipped)
+        {
+            temp.x = -temp.x;
+        }
+        camera_input.Value = temp;
     }
 
     public void PlayerJump(InputAction.CallbackContext context)
