@@ -3,14 +3,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Collider))]
 public class BearTrapLogic : MonoBehaviour
 {
     [SerializeField] float despawnTime;
     [SerializeField] float clampTime;
+    [SerializeField] MeshRenderer openModel;
+    [SerializeField] MeshRenderer clampedModel;
     bool isClamped;
+    bool gracePeriod = true;
 
     void Start()
     {
@@ -26,23 +28,35 @@ public class BearTrapLogic : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // either player can get trapped
+        if (!gracePeriod && other.CompareTag("Player")) // either player can get trapped
         {
-            //PlayerInput input = other.GetComponent<PlayerInput>();
-            //Clamp(input);
+            openModel.enabled = false;
+            clampedModel.enabled = true;
+
+            Rigidbody player = other.GetComponent<Rigidbody>();
+            Clamp(player);
         }
     }
 
-    //void Clamp(PlayerInput input)
-    //{
-    //    input.SetActive(false); // or deactivate movement method(s) so player can still look around or use powerups
-    //    StartCoroutine(StartRelease(input));
-    //}
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+            gracePeriod = false;
+    }
 
-    //IEnumerator StartRelease(PlayerInput input)
-    //{
-    //    yield return new WaitForSeconds(clampTime);
-    //    input.SetActive(true);
-    //    Destroy(gameObject);
-    //}
+    void Clamp(Rigidbody player)
+    {
+        isClamped = true;
+        player.constraints = RigidbodyConstraints.FreezeAll;
+        StartCoroutine(StartRelease(player));
+    }
+
+    IEnumerator StartRelease(Rigidbody player)
+    {
+        yield return new WaitForSeconds(clampTime);
+        player.constraints &= ~RigidbodyConstraints.FreezePositionX;
+        player.constraints &= ~RigidbodyConstraints.FreezePositionY;
+        player.constraints &= ~RigidbodyConstraints.FreezePositionZ;
+        Destroy(gameObject);
+    }
 }

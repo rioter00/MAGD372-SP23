@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,19 +6,26 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Puddle : MonoBehaviour
 {
-    [SerializeField] float spinTime;
+    [SerializeField] float spinForce;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Transform player = other.GetComponent<Transform>();
+            Rigidbody player = other.GetComponent<Rigidbody>();
             Spin(player);
         }
     }
 
-    void Spin(Transform player)
+    void Spin(Rigidbody player)
     {
-        player.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, -transform.rotation.eulerAngles, spinTime);
+        //player.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, transform.rotation.eulerAngles + new Vector3(0, 360, 0), spinTime);
+
+        //Quaternion rot = Quaternion.Euler(0, spinTime, 0);
+        //player.MoveRotation(player.rotation * rot);
+
+        Debug.Log("The part where you spin");
+
+        player.AddTorque(Vector3.forward * spinForce, ForceMode.Impulse);
     }
 }

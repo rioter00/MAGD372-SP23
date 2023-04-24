@@ -5,6 +5,10 @@ using System.IO;
 public class WFCV2_Main : MonoBehaviour
 {
     public List<GameObject> allPrefabs;
+    public List<GameObject> easyIslands;
+    public List<GameObject> mediumIslands;
+    public List<GameObject> selectableIslands;
+    public List<GameObject> mirroredIslands;
     public Vector3 grid;
     public float cellSize;
     public float cellSpacing;
@@ -13,11 +17,12 @@ public class WFCV2_Main : MonoBehaviour
     private Vector3 boundingUnit;
     private Dictionary<string, List<Vector3>> sockets = new Dictionary<string, List<Vector3>>();
     private List<WFCV2_SingleState> superPosition = new List<WFCV2_SingleState>();
-    public List<WFCV2_CellInfo> allCells = new List<WFCV2_CellInfo>();
+    private List<WFCV2_CellInfo> allCells = new List<WFCV2_CellInfo>();
     private List<WFCV2_CellInfo> cellToProcess = new List<WFCV2_CellInfo>();
     [SerializeField] private WFC_Spawned_Data_List allSpawnedPrefab = new WFC_Spawned_Data_List();
     private int collapsed;
     private float timer;
+    private bool islandsHaveBeenPlaced = false;
 
     private List<Vector3> basePositions = new List<Vector3>();
     private List<int> baseIndices = new List<int>();
@@ -26,10 +31,14 @@ public class WFCV2_Main : MonoBehaviour
     Vector3 tempCord = new Vector3();
     Vector3 adjustedCord = new Vector3();
     [SerializeField] private Transform IslandHolder;
+    private GameObject mirroredIsland;
 
     // Start is called before the first frame update
     void Start()
     {
+        selectableIslands.AddRange(allPrefabs);
+        selectableIslands.AddRange(easyIslands);
+        selectableIslands.AddRange(mediumIslands);
         collapsed = 0;
         boundingUnit = new Vector3(cellSize / 2, 0, cellSize / 2);
         processPrefab();
@@ -47,12 +56,19 @@ public class WFCV2_Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer = timer - Time.deltaTime;
+        timer -= Time.deltaTime;
         if (timer <= 0 && collapsed < allCells.Count / 2)
         {
             timer = spawnEvery;
             getLowestEntropyCellAndSpawn();
             propogateCollapseNew();
+        }
+        else if(collapsed >= allCells.Count / 2 && islandsHaveBeenPlaced == false)
+        {
+            islandsHaveBeenPlaced = true;
+            Vector3 wellPlacement = new Vector3(grid.x * 30, 0, grid.z * 30);
+            Instantiate(allPrefabs[2], wellPlacement, Quaternion.identity, IslandHolder);
+            CreateBases();
         }
     }
 
@@ -64,6 +80,23 @@ public class WFCV2_Main : MonoBehaviour
         basePositions.Add(new Vector3(grid.x, 0, grid.z));
         wellPositions.Add(new Vector3(grid.x / 2 - 1, 0, grid.z / 2 - 1));
         wellPositions.Add(new Vector3(grid.x / 2 - 1, 0, grid.z / 2 + 1));
+    }
+
+    private void CreateBases()
+    {
+        GameObject obj;
+
+        obj = Instantiate(allPrefabs[3], basePositions[0], Quaternion.identity, IslandHolder);
+        obj.transform.Rotate(0, 180, 0);
+
+        obj = Instantiate(allPrefabs[4], new Vector3(0, 0, grid.z * 50), Quaternion.identity, IslandHolder);
+        obj.transform.Rotate(0, 270, 0);
+
+        obj = Instantiate (allPrefabs[5], new Vector3(grid.x * 50, 0, 0), Quaternion.identity, IslandHolder);
+        obj.transform.Rotate(0, 90, 0);
+
+        obj = Instantiate(allPrefabs[6], new Vector3(grid.x * 50, 0, grid.z * 50), Quaternion.identity, IslandHolder);
+        obj.transform.Rotate(0, 0, 0);
     }
 
     public bool CheckIfBasePosition(Vector3 pos)
@@ -98,9 +131,9 @@ public class WFCV2_Main : MonoBehaviour
 
     private void processPrefab()
     {
-        for (int i = 0; i < allPrefabs.Count; i++)
+        for (int i = 0; i < selectableIslands.Count; i++)
         {
-            GameObject g = allPrefabs[i];
+            GameObject g = selectableIslands[i];
             g.transform.position = Vector3.zero;
             g.transform.rotation = Quaternion.Euler(g.transform.localEulerAngles.x, g.transform.localEulerAngles.y + 0, g.transform.localEulerAngles.z);
             processMesh(g);
@@ -338,7 +371,7 @@ public class WFCV2_Main : MonoBehaviour
 
     private void getLowestEntropyCellAndSpawn()
     {
-        int lowestCount = allPrefabs.Count * 400;
+        int lowestCount = selectableIslands.Count * 400;
         WFCV2_CellInfo lowestEntropyCellInfo = new WFCV2_CellInfo();
         WFCV2_SingleState ss = new WFCV2_SingleState();
         foreach (WFCV2_CellInfo ci in allCells)
@@ -362,13 +395,13 @@ public class WFCV2_Main : MonoBehaviour
         {
             if (CheckIfBasePosition(lowestEntropyCellInfo.cellCoordinate))
             {
-                spawn(allPrefabs[0], adjustedCord, ss.rotationIndex);
-                Instantiate(allPrefabs[0], tempCord, Quaternion.identity, IslandHolder);//flip rotation?
+                spawn(selectableIslands[0], adjustedCord, ss.rotationIndex);
+                Instantiate(selectableIslands[0], tempCord, Quaternion.identity, IslandHolder);
             }
             else if (CheckIfWellPosition(lowestEntropyCellInfo.cellCoordinate))
             {
-                spawn(allPrefabs[1], adjustedCord, ss.rotationIndex);
-                Instantiate(allPrefabs[1], tempCord, Quaternion.identity, IslandHolder);//flip rotation?
+                spawn(selectableIslands[1], adjustedCord, ss.rotationIndex);
+                Instantiate(selectableIslands[1], tempCord, Quaternion.identity, IslandHolder);
             }
             else
             {
@@ -376,21 +409,47 @@ public class WFCV2_Main : MonoBehaviour
                 {
                     ss = FindLowestEntropyAgain();
                 }
-                if(ss.prefab.name.Contains("Plank"))//Probably will get removed
+                spawn(ss.prefab, adjustedCord, ss.rotationIndex);
+                CheckIfMirrored(ss.prefab);
+                if (CheckIfMirrored(ss.prefab))
                 {
-                    if(lowestEntropyCellInfo.cellCoordinate.x == 0)
+                    if (ss.prefab.name.Contains("PlanksOnSand"))
                     {
-                        //Debug.Log("plank is on an edge at " + lowestEntropyCellInfo.cellCoordinate + " and should NOT be place horizontally");
-                        ss.rotationIndex = 90;
+                        if(ss.rotationIndex == 180 || ss.rotationIndex == 0)
+                            spawn(mirroredIsland, tempCord, ss.rotationIndex);
+                        else
+                            spawn(mirroredIsland, tempCord, ss.rotationIndex + 180);
                     }
-                    if(lowestEntropyCellInfo.cellCoordinate.z == 0 || lowestEntropyCellInfo.cellCoordinate.z == grid.z)
+                    else if(ss.prefab.name.Contains("TilesOnSand"))
                     {
-                        //Debug.Log("plank is on an edge at " + lowestEntropyCellInfo.cellCoordinate + " and should NOT be placed vertically");
-                        ss.rotationIndex = 0;
+                        if(ss.rotationIndex == 90 || ss.rotationIndex == 270)
+                            spawn(mirroredIsland, tempCord, ss.rotationIndex + 180);
+                        else
+                            spawn(mirroredIsland, tempCord, ss.rotationIndex);
+                    }
+                    else if(ss.prefab.name.ToLower().Contains("quicksand"))
+                    {
+                        if (ss.rotationIndex == 90 || ss.rotationIndex == 270)
+                            spawn(mirroredIsland, tempCord, ss.rotationIndex + 180);
+                        else
+                            spawn(mirroredIsland, tempCord, ss.rotationIndex);
+                    }
+                    else if(ss.prefab.name.Contains("Spring") || ss.prefab.name.Contains("Weeds"))
+                    {
+                        if(ss.rotationIndex == 90 || ss.rotationIndex == 270)
+                            spawn(mirroredIsland, tempCord, ss.rotationIndex + 180);
+                        else
+                            spawn(mirroredIsland, tempCord, ss.rotationIndex);
+                    }
+                    else
+                    {
+                        spawn(mirroredIsland, tempCord, ss.rotationIndex);
                     }
                 }
-                spawn(ss.prefab, adjustedCord, ss.rotationIndex);
-                spawn(ss.prefab, tempCord, ss.rotationIndex);//flip rotation?
+                else
+                {
+                    spawn(ss.prefab, tempCord, ss.rotationIndex);//flip rotation?
+                }  
 
             }
 
@@ -420,10 +479,8 @@ public class WFCV2_Main : MonoBehaviour
 
     private WFCV2_SingleState FindLowestEntropyAgain()
     {
-
-        int lowestCount = allPrefabs.Count * 400;
+        int lowestCount = selectableIslands.Count * 400;
         WFCV2_CellInfo lowestEntropyCellInfo = new WFCV2_CellInfo();
-        WFCV2_SingleState ss = new WFCV2_SingleState();
         foreach (WFCV2_CellInfo ci in allCells)
         {
             if (!ci.isCollapsed && lowestCount > ci.superPosition.Count)
@@ -449,9 +506,13 @@ public class WFCV2_Main : MonoBehaviour
     {
         Vector3 left = new Vector3(position.x - cellSize, 0, position.z);
         Vector3 up = new Vector3(position.x, 0, position.z - cellSize);
+        Vector3 diagonalUpLeft = new Vector3(position.x - cellSize, 0, position.z - cellSize);
+        Vector3 diagonalDownLeft = new Vector3(position.x - cellSize, 0, position.z + cellSize);
 
         WFCV2_CellInfo ciLeft = allCells.Find(x => x.cellCoordinate == left);
         WFCV2_CellInfo ciUp = allCells.Find(x => x.cellCoordinate == up);
+        WFCV2_CellInfo ciDiagonalUpLeft = allCells.Find(x => x.cellCoordinate == diagonalUpLeft);
+        WFCV2_CellInfo ciDiagonalDownLeft = allCells.Find(x => x.cellCoordinate == diagonalDownLeft);
         if (ciLeft != null)
         {
             if (ciLeft.superPosition[0].prefab.name == name)
@@ -467,6 +528,30 @@ public class WFCV2_Main : MonoBehaviour
                 return false;
             }
         }
+        if(ciDiagonalUpLeft != null)
+        {
+            if(ciDiagonalUpLeft.superPosition[0].prefab.name == name)
+            {
+                return false;
+            }
+        }
+        if (ciDiagonalDownLeft != null)
+        {
+            if (ciDiagonalDownLeft.superPosition[0].prefab.name == name)
+            {
+                return false;
+            }
+        }
         return true;
+    }
+
+    private bool CheckIfMirrored(GameObject island)
+    {
+        if (mirroredIslands.Find(x => x.name.ToLower().Contains(island.name.ToLower())))
+        {
+            mirroredIsland = mirroredIslands.Find(x => x.name.ToLower().Contains(island.name.ToLower()));
+            return true;
+        }
+        return false;
     }
 }
