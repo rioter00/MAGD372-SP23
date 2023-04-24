@@ -4,9 +4,10 @@ using System.IO;
 
 public class WFCV2_Main : MonoBehaviour
 {
-    public List<GameObject> allPrefabs;
+    public List<GameObject> baseAndWellPrefabs;
     public List<GameObject> easyIslands;
     public List<GameObject> mediumIslands;
+    public List<GameObject> hardIslands;
     public List<GameObject> selectableIslands;
     public List<GameObject> mirroredIslands;
     public Vector3 grid;
@@ -33,10 +34,15 @@ public class WFCV2_Main : MonoBehaviour
     [SerializeField] private Transform IslandHolder;
     private GameObject mirroredIsland;
 
+    private int totalIslandSpaces = 36;
+    [SerializeField] private int easyIslandAmount;
+    [SerializeField] private int mediumIslandAmount;
+    [SerializeField] private int hardIslandAmount;
+
     // Start is called before the first frame update
     void Start()
     {
-        selectableIslands.AddRange(allPrefabs);
+        selectableIslands.AddRange(baseAndWellPrefabs);
         selectableIslands.AddRange(easyIslands);
         selectableIslands.AddRange(mediumIslands);
         collapsed = 0;
@@ -67,8 +73,9 @@ public class WFCV2_Main : MonoBehaviour
         {
             islandsHaveBeenPlaced = true;
             Vector3 wellPlacement = new Vector3(grid.x * 30, 0, grid.z * 30);
-            Instantiate(allPrefabs[2], wellPlacement, Quaternion.identity, IslandHolder);
+            Instantiate(baseAndWellPrefabs[2], wellPlacement, Quaternion.identity, IslandHolder);
             CreateBases();
+            //Debug.Log(totalIslandSpaces);
         }
     }
 
@@ -86,16 +93,16 @@ public class WFCV2_Main : MonoBehaviour
     {
         GameObject obj;
 
-        obj = Instantiate(allPrefabs[3], basePositions[0], Quaternion.identity, IslandHolder);
+        obj = Instantiate(baseAndWellPrefabs[3], basePositions[0], Quaternion.identity, IslandHolder);
         obj.transform.Rotate(0, 180, 0);
 
-        obj = Instantiate(allPrefabs[4], new Vector3(0, 0, grid.z * 50), Quaternion.identity, IslandHolder);
+        obj = Instantiate(baseAndWellPrefabs[4], new Vector3(0, 0, grid.z * 50), Quaternion.identity, IslandHolder);
         obj.transform.Rotate(0, 270, 0);
 
-        obj = Instantiate (allPrefabs[5], new Vector3(grid.x * 50, 0, 0), Quaternion.identity, IslandHolder);
+        obj = Instantiate (baseAndWellPrefabs[5], new Vector3(grid.x * 50, 0, 0), Quaternion.identity, IslandHolder);
         obj.transform.Rotate(0, 90, 0);
 
-        obj = Instantiate(allPrefabs[6], new Vector3(grid.x * 50, 0, grid.z * 50), Quaternion.identity, IslandHolder);
+        obj = Instantiate(baseAndWellPrefabs[6], new Vector3(grid.x * 50, 0, grid.z * 50), Quaternion.identity, IslandHolder);
         obj.transform.Rotate(0, 0, 0);
     }
 
@@ -387,7 +394,12 @@ public class WFCV2_Main : MonoBehaviour
             lowestCount = Random.Range(0, lowestCount);
         }
         ss = lowestEntropyCellInfo.superPosition[lowestCount];
-        
+        string diff = GetIslandDifficulty();
+        while(ss.prefab.name.Contains(diff) == false)
+        {
+            ss = FindLowestEntropyAgain();
+        }
+
         adjustedCord = lowestEntropyCellInfo.cellCoordinate;
         adjustedCord = new Vector3(adjustedCord.x * cellSpacing, 0, adjustedCord.z * cellSpacing);
         tempCord = GetReflectedPosition(adjustedCord);
@@ -396,12 +408,12 @@ public class WFCV2_Main : MonoBehaviour
             if (CheckIfBasePosition(lowestEntropyCellInfo.cellCoordinate))
             {
                 spawn(selectableIslands[0], adjustedCord, ss.rotationIndex);
-                Instantiate(selectableIslands[0], tempCord, Quaternion.identity, IslandHolder);
+                spawn(selectableIslands[0], tempCord, ss.rotationIndex);
             }
             else if (CheckIfWellPosition(lowestEntropyCellInfo.cellCoordinate))
             {
                 spawn(selectableIslands[1], adjustedCord, ss.rotationIndex);
-                Instantiate(selectableIslands[1], tempCord, Quaternion.identity, IslandHolder);
+                spawn(selectableIslands[1], tempCord, ss.rotationIndex);
             }
             else
             {
@@ -448,7 +460,7 @@ public class WFCV2_Main : MonoBehaviour
                 }
                 else
                 {
-                    spawn(ss.prefab, tempCord, ss.rotationIndex);//flip rotation?
+                    spawn(ss.prefab, tempCord, ss.rotationIndex);
                 }  
 
             }
@@ -475,6 +487,7 @@ public class WFCV2_Main : MonoBehaviour
         wsd.rotation = pf.transform.rotation;
         wsd.position = position;
         allSpawnedPrefab.wsdList.Add(wsd);
+        totalIslandSpaces--;
     }
 
     private WFCV2_SingleState FindLowestEntropyAgain()
@@ -553,5 +566,34 @@ public class WFCV2_Main : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private string GetIslandDifficulty()
+    {
+        string str = "";
+        int realAmountSpacesLeft = totalIslandSpaces / 2;
+
+        int rand = Random.Range(1, realAmountSpacesLeft + 1);
+        //if(rand <= hardIslandAmount)
+        //{
+        //    Debug.Log(rand + " hard island");
+        //    hardIslandAmount--;
+        //    str = "Hard";
+        //}
+        if(rand  <= mediumIslandAmount)
+        {
+            Debug.Log(rand + " medium island");
+            mediumIslandAmount--;
+            str = "Medium";
+        }
+        else if (rand <= easyIslandAmount)
+        {
+            Debug.Log(rand + " easy island");
+            easyIslandAmount--;
+            str = "Easy";
+        }
+
+        return str;
+
     }
 }

@@ -152,13 +152,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f32073b12c233e41bf0b608598e5bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allPrefabs:
+  baseAndWellPrefabs:
   - {fileID: 7552080542404803687, guid: e3ddf9bd9f418e44ab868ef038f76012, type: 3}
   - {fileID: 1748383246633818730, guid: 23622aeef136a2543941107a13afa597, type: 3}
   - {fileID: 2149332110762163900, guid: 88f55362e6cc9754ba7a962658cf30ce, type: 3}
   - {fileID: 3553159999401521496, guid: 973cdad910abf5b45998ba92308810f5, type: 3}
-  - {fileID: 1455823692948376369, guid: eeae2eed526d9b041849ebde3542a1d9, type: 3}
   - {fileID: 3266145077547982256, guid: 24bda550edfacd24da73c5657e1e95fb, type: 3}
+  - {fileID: 1455823692948376369, guid: eeae2eed526d9b041849ebde3542a1d9, type: 3}
   - {fileID: 8786129199494465682, guid: 3f16c2b04f28bbc4ea2f7c95f5137a0c, type: 3}
   easyIslands:
   - {fileID: 4499874094878309412, guid: 21acf3f19349a65449d853e2901f3f6e, type: 3}
@@ -181,6 +181,7 @@ MonoBehaviour:
   - {fileID: 8749824642869489813, guid: c46cd54e912943241a84760f5416c065, type: 3}
   - {fileID: 3899181808703092380, guid: f83587ff2767bcc4bb57f2796df8baed, type: 3}
   - {fileID: 6538775292819550993, guid: fa46cd7e4196bf249aab43393755c630, type: 3}
+  hardIslands: []
   selectableIslands: []
   mirroredIslands:
   - {fileID: 3432444820156210764, guid: fa9910fbb721bf44194972677a384adc, type: 3}
@@ -198,6 +199,9 @@ MonoBehaviour:
   allSpawnedPrefab:
     wsdList: []
   IslandHolder: {fileID: 45420299}
+  easyIslandAmount: 7
+  mediumIslandAmount: 7
+  hardIslandAmount: 2
 --- !u!4 &41069140
 Transform:
   m_ObjectHideFlags: 0
@@ -321,7 +325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006222888}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 293, y: 527, z: 233}
+  m_LocalPosition: {x: 293, y: 527, z: 250.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
