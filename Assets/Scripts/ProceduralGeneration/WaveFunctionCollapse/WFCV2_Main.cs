@@ -45,6 +45,7 @@ public class WFCV2_Main : MonoBehaviour
         selectableIslands.AddRange(baseAndWellPrefabs);
         selectableIslands.AddRange(easyIslands);
         selectableIslands.AddRange(mediumIslands);
+        selectableIslands.AddRange(hardIslands);
         collapsed = 0;
         boundingUnit = new Vector3(cellSize / 2, 0, cellSize / 2);
         processPrefab();
@@ -574,13 +575,13 @@ public class WFCV2_Main : MonoBehaviour
         int realAmountSpacesLeft = totalIslandSpaces / 2;
 
         int rand = Random.Range(1, realAmountSpacesLeft + 1);
-        //if(rand <= hardIslandAmount)
-        //{
-        //    Debug.Log(rand + " hard island");
-        //    hardIslandAmount--;
-        //    str = "Hard";
-        //}
-        if(rand  <= mediumIslandAmount)
+        if (rand <= hardIslandAmount)
+        {
+            Debug.Log(rand + " hard island");
+            hardIslandAmount--;
+            str = "Hard";
+        }
+        else if (rand  <= mediumIslandAmount)
         {
             Debug.Log(rand + " medium island");
             mediumIslandAmount--;

@@ -181,7 +181,8 @@ MonoBehaviour:
   - {fileID: 8749824642869489813, guid: c46cd54e912943241a84760f5416c065, type: 3}
   - {fileID: 3899181808703092380, guid: f83587ff2767bcc4bb57f2796df8baed, type: 3}
   - {fileID: 6538775292819550993, guid: fa46cd7e4196bf249aab43393755c630, type: 3}
-  hardIslands: []
+  hardIslands:
+  - {fileID: 7616429610233617908, guid: a9fdb70daca6f7a4fb63c008062e462a, type: 3}
   selectableIslands: []
   mirroredIslands:
   - {fileID: 3432444820156210764, guid: fa9910fbb721bf44194972677a384adc, type: 3}
@@ -200,7 +201,7 @@ MonoBehaviour:
     wsdList: []
   IslandHolder: {fileID: 45420299}
   easyIslandAmount: 7
-  mediumIslandAmount: 7
+  mediumIslandAmount: 5
   hardIslandAmount: 2
 --- !u!4 &41069140
 Transform:
