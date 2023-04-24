@@ -289,7 +289,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 612203683}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnMove
+        m_MethodName: PlayerMove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -305,7 +305,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 612203683}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnCamera
+        m_MethodName: PlayerCamera
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -321,7 +321,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 612203683}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnJump
+        m_MethodName: PlayerJump
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -337,7 +337,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 612203683}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnInteract
+        m_MethodName: PlayerInteract
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -353,7 +353,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 612203683}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnShove
+        m_MethodName: PlayerShove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -369,7 +369,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 612203683}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnPowerup
+        m_MethodName: PlayerPowerupOne
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -385,7 +385,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 612203683}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnPause
+        m_MethodName: PlayerPause
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -397,6 +397,66 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 50c34507-9bf6-4532-8485-d184f5e45183
     m_ActionName: Player/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 612203683}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: PlayerPowerupTwo
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 107e7210-fd94-400c-8761-47200a03ebae
+    m_ActionName: Player/Powerup 2[/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 612203683}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: PlayerSpill
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: bd4114a9-2b4f-4007-822c-770b7f90fbdb
+    m_ActionName: Player/Spill[/XInputControllerWindows/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ec08daf0-80fa-46cc-a93a-f18df6bf8ce6
+    m_ActionName: Menu/Cursor Up[/XInputControllerWindows/leftStick/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b39523e8-1452-439d-a27e-896e19b7090b
+    m_ActionName: Menu/Cursor Down[/XInputControllerWindows/leftStick/down]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 840ead78-c24f-4e84-b70a-a7098c7286ff
+    m_ActionName: Menu/Cursor Left[/XInputControllerWindows/leftStick/left]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 48565df0-a2fc-44b5-a7aa-988922ca2732
+    m_ActionName: Menu/Cursor Right[/XInputControllerWindows/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c99aa81b-d753-4ea3-afe5-b146c8463054
+    m_ActionName: Menu/Select[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f81c298b-03e6-4b2c-af80-a09397e3c809
+    m_ActionName: Menu/Back[/XInputControllerWindows/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 744464ac-ce66-4547-8c9b-e01d6cb0e11d
+    m_ActionName: Player/HoldInteract[/XInputControllerWindows/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Controller
   m_DefaultActionMap: Player

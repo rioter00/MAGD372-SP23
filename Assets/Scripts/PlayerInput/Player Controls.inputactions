@@ -51,9 +51,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Powerup",
+                    "name": "Powerup 1",
                     "type": "Button",
                     "id": "db935f0c-5564-421d-9463-2df99830ef11",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Powerup 2",
+                    "type": "Button",
+                    "id": "107e7210-fd94-400c-8761-47200a03ebae",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -74,7 +83,7 @@
                     "id": "bd4114a9-2b4f-4007-822c-770b7f90fbdb",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 }
             ],
@@ -251,18 +260,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "Powerup",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "86d7add4-4b76-431c-b853-646f2028c4b4",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Powerup",
+                    "action": "Powerup 1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -298,6 +296,17 @@
                     "action": "Spill",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6e40a3b1-c60e-4bb7-989f-b173ef04f797",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Powerup 2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -306,9 +315,54 @@
             "id": "fee60ca1-6a50-48d5-83b7-afe4c411aefd",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Cursor Up",
                     "type": "Button",
                     "id": "ec08daf0-80fa-46cc-a93a-f18df6bf8ce6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cursor Down",
+                    "type": "Button",
+                    "id": "b39523e8-1452-439d-a27e-896e19b7090b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cursor Left",
+                    "type": "Button",
+                    "id": "840ead78-c24f-4e84-b70a-a7098c7286ff",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cursor Right",
+                    "type": "Button",
+                    "id": "48565df0-a2fc-44b5-a7aa-988922ca2732",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "c99aa81b-d753-4ea3-afe5-b146c8463054",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Back",
+                    "type": "Button",
+                    "id": "f81c298b-03e6-4b2c-af80-a09397e3c809",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -319,11 +373,66 @@
                 {
                     "name": "",
                     "id": "f51afb7b-92a4-4e16-850a-ccadd9d0a34e",
-                    "path": "",
+                    "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Cursor Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2289ba8b-e7fa-4a99-850f-557263d12138",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cursor Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "37a8dfd7-affd-4926-a262-62d5b2d4563c",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cursor Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "593646a3-b538-4058-8f90-383c3b862d95",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cursor Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8b277732-dde3-4f3d-8c1f-3ef31ceae6a0",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c91edd47-2506-4dad-88b4-1665e4600c1c",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

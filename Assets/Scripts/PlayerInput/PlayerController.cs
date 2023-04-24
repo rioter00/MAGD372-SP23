@@ -26,43 +26,56 @@ public class PlayerController : MonoBehaviour
         controller = gameObject.GetComponent<CharacterController>();
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void PlayerMove(InputAction.CallbackContext context)
     {
+        //Replace this with anything you would need for movement
         movementInput = context.ReadValue<Vector2>();
     }
 
-    public void OnCamera(InputAction.CallbackContext context)
+    public void PlayerCamera(InputAction.CallbackContext context)
     {
         Debug.Log("Camera is moving");
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    public void PlayerJump(InputAction.CallbackContext context)
     {
+        //Replace this with anything you would need for jumping
         jumped = context.action.triggered;
     }
 
-    public void OnInteract(InputAction.CallbackContext context)
+    public void PlayerInteract(InputAction.CallbackContext context)
     {
         Debug.Log("Interacting with object");
     }
 
-    public void OnShove(InputAction.CallbackContext context)
+    public void PlayerShove(InputAction.CallbackContext context)
     {
         Debug.Log("Shoving");
     }
 
-    public void OnPowerup(InputAction.CallbackContext context)
+    public void PlayerSpill(InputAction.CallbackContext context)
     {
-        Debug.Log("Activating Powerup");
+        Debug.Log("Spilling water");
     }
 
-    public void OnPause(InputAction.CallbackContext context)
+    public void PlayerPowerupOne(InputAction.CallbackContext context)
+    {
+        Debug.Log("Activating Powerup One");
+    }
+
+    public void PlayerPowerupTwo(InputAction.CallbackContext context)
+    {
+        Debug.Log("Activating Powerup Two");
+    }
+
+    public void PlayerPause(InputAction.CallbackContext context)
     {
         Debug.Log("The game would pause here");
     }
 
     void Update()
     {
+        //Replace this with anything you would need for player actions
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
@@ -72,7 +85,6 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        // Changes the height position of the player..
         if (jumped && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
