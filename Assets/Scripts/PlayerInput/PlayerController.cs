@@ -2,95 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Essentials.Reference_Variables.Variables;
 
-[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-
-    [SerializeField]
-    private float playerSpeed = 2.0f;
-    [SerializeField]
-    private float jumpHeight = 1.0f;
-    [SerializeField]
-    private float gravityValue = -9.81f;
-
-    private CharacterController controller;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
-
-    private Vector2 movementInput = Vector2.zero;
-    private bool jumped = false;
-
-    private void Start()
-    {
-        controller = gameObject.GetComponent<CharacterController>();
-    }
+    [SerializeField] private Vector2Variable move_input;
+    [SerializeField] private Vector2Variable camera_input;
+    [SerializeField] private FloatVariable jump_input;
+    [SerializeField] private FloatVariable interact_input;
+    [SerializeField] private FloatVariable shove_input;
+    [SerializeField] private FloatVariable spill_input;
+    [SerializeField] private FloatVariable powerup_one_input;
+    [SerializeField] private FloatVariable powerup_two_input;
+    [SerializeField] private FloatVariable pause_input;
 
     public void PlayerMove(InputAction.CallbackContext context)
     {
-        //Replace this with anything you would need for movement
-        movementInput = context.ReadValue<Vector2>();
+        move_input.Value = context.ReadValue<Vector2>();
     }
 
     public void PlayerCamera(InputAction.CallbackContext context)
     {
-        Debug.Log("Camera is moving");
+        camera_input.Value = context.ReadValue<Vector2>();
     }
 
     public void PlayerJump(InputAction.CallbackContext context)
     {
-        //Replace this with anything you would need for jumping
-        jumped = context.action.triggered;
+        jump_input.Value = context.ReadValue<float>();
     }
 
     public void PlayerInteract(InputAction.CallbackContext context)
     {
-        Debug.Log("Interacting with object");
+        interact_input.Value = context.ReadValue<float>();
     }
 
     public void PlayerShove(InputAction.CallbackContext context)
     {
-        Debug.Log("Shoving");
+        shove_input.Value = context.ReadValue<float>();
     }
 
     public void PlayerSpill(InputAction.CallbackContext context)
     {
-        Debug.Log("Spilling water");
+        spill_input.Value = context.ReadValue<float>();
     }
 
     public void PlayerPowerupOne(InputAction.CallbackContext context)
     {
-        Debug.Log("Activating Powerup One");
+        powerup_one_input.Value = context.ReadValue<float>();
     }
 
     public void PlayerPowerupTwo(InputAction.CallbackContext context)
     {
-        Debug.Log("Activating Powerup Two");
+        powerup_two_input.Value = context.ReadValue<float>();
     }
 
     public void PlayerPause(InputAction.CallbackContext context)
     {
-        Debug.Log("The game would pause here");
-    }
-
-    void Update()
-    {
-        //Replace this with anything you would need for player actions
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
-
-        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
-        controller.Move(move * Time.deltaTime * playerSpeed);
-
-        if (jumped && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
-
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        pause_input.Value = context.ReadValue<float>();
     }
 }
