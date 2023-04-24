@@ -115,7 +115,7 @@ AudioMixerController:
   - guid: a014356c7f3302145b4519bbb7adfdbc
     name: characterVol
   - guid: 226aa91fd4a1574499a7c66e24a63468
-    name: footstepsVol
+    name: environmentVol
   - guid: 0959a0aa8e23a104a834fe2f8a2fa883
     name: masterVol
   - guid: 4a5e973a95f28aa4d915bf14f6332715
@@ -208,7 +208,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Footsteps
+  m_Name: Environment
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: e35b2fa56588e1048bc346f90ac1c078
   m_Children: []
@@ -279,7 +279,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ui
+  m_Name: UI
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 5c867bdc0b5eaa6499c98997290c4df5
   m_Children: []
