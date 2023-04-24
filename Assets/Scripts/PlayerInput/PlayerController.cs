@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private FloatVariable powerup_two_input;
     [SerializeField] private FloatVariable pause_input;
 
+
     public void PlayerMove(InputAction.CallbackContext context)
     {
         move_input.Value = context.ReadValue<Vector2>();
