@@ -2,43 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Essentials.Reference_Variables.Variables;
 
 public class MenuController : MonoBehaviour
 {
-
+    [SerializeField] private FloatVariable up_input;
+    [SerializeField] private FloatVariable down_input;
+    [SerializeField] private FloatVariable left_input;
+    [SerializeField] private FloatVariable right_input;
+    [SerializeField] private FloatVariable select_input;
+    [SerializeField] private FloatVariable back_input;
     public void MenuUp(InputAction.CallbackContext context)
     {
-        Debug.Log("Moving menu cursor up");
+        up_input.Value = context.ReadValue<float>();
     }
 
     public void MenuDown(InputAction.CallbackContext context)
     {
-        Debug.Log("Moving menu cursor down");
+        down_input.Value = context.ReadValue<float>();
     }
 
     public void MenuLeft(InputAction.CallbackContext context)
     {
-        Debug.Log("Moving menu cursor left");
+        left_input.Value = context.ReadValue<float>();
     }
 
     public void MenuRight(InputAction.CallbackContext context)
     {
-        Debug.Log("Moving menu cursor right");
+        right_input.Value = context.ReadValue<float>();
     }
 
     public void MenuSelect(InputAction.CallbackContext context)
     {
-        Debug.Log("Selecting current option");
+        select_input.Value = context.ReadValue<float>();
     }
 
     public void MenuBack(InputAction.CallbackContext context)
     {
-        Debug.Log("Going back one");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        back_input.Value = context.ReadValue<float>();
     }
 }
