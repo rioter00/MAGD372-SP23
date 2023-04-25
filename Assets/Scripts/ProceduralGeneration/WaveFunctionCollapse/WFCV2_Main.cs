@@ -575,22 +575,23 @@ public class WFCV2_Main : MonoBehaviour
         int realAmountSpacesLeft = totalIslandSpaces / 2;
 
         int rand = Random.Range(1, realAmountSpacesLeft + 1);
+        Debug.Log("Random number is " + rand);
         if (rand <= hardIslandAmount)
         {
-            Debug.Log(rand + " hard island");
             hardIslandAmount--;
+            Debug.Log(hardIslandAmount + " hard islands left");
             str = "Hard";
         }
         else if (rand  <= mediumIslandAmount)
         {
-            Debug.Log(rand + " medium island");
             mediumIslandAmount--;
+            Debug.Log(mediumIslandAmount + " medium islands left");
             str = "Medium";
         }
         else if (rand <= easyIslandAmount)
         {
-            Debug.Log(rand + " easy island");
             easyIslandAmount--;
+            Debug.Log(easyIslandAmount + " easy islands left");
             str = "Easy";
         }
 
