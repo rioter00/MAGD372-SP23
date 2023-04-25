@@ -38,6 +38,7 @@ public class WFCV2_Main : MonoBehaviour
     [SerializeField] private int easyIslandAmount;
     [SerializeField] private int mediumIslandAmount;
     [SerializeField] private int hardIslandAmount;
+    private bool diffIslandsHaveBeenPlaced = false;
 
     // Start is called before the first frame update
     void Start()
@@ -395,12 +396,14 @@ public class WFCV2_Main : MonoBehaviour
             lowestCount = Random.Range(0, lowestCount);
         }
         ss = lowestEntropyCellInfo.superPosition[lowestCount];
-        string diff = GetIslandDifficulty();
-        while(ss.prefab.name.Contains(diff) == false)
+        if(diffIslandsHaveBeenPlaced == false)
         {
-            ss = FindLowestEntropyAgain();
+            string diff = GetIslandDifficulty();
+            while(ss.prefab.name.Contains(diff) == false)
+            {
+                ss = FindLowestEntropyAgain();
+            }
         }
-
         adjustedCord = lowestEntropyCellInfo.cellCoordinate;
         adjustedCord = new Vector3(adjustedCord.x * cellSpacing, 0, adjustedCord.z * cellSpacing);
         tempCord = GetReflectedPosition(adjustedCord);
@@ -572,27 +575,33 @@ public class WFCV2_Main : MonoBehaviour
     private string GetIslandDifficulty()
     {
         string str = "";
-        int realAmountSpacesLeft = totalIslandSpaces / 2;
+        int rand = Random.Range(0, 3);
 
-        int rand = Random.Range(1, realAmountSpacesLeft + 1);
-        Debug.Log("Random number is " + rand);
-        if (rand <= hardIslandAmount)
+        if(hardIslandAmount != 0 && rand == 0)
         {
             hardIslandAmount--;
-            Debug.Log(hardIslandAmount + " hard islands left");
+            //Debug.Log(hardIslandAmount + " hard islands left");
             str = "Hard";
         }
-        else if (rand  <= mediumIslandAmount)
+        else if (mediumIslandAmount != 0 && rand == 1)
         {
             mediumIslandAmount--;
-            Debug.Log(mediumIslandAmount + " medium islands left");
+            //Debug.Log(mediumIslandAmount + " medium islands left");
             str = "Medium";
         }
-        else if (rand <= easyIslandAmount)
+        else if (easyIslandAmount != 0 && rand == 2)
         {
             easyIslandAmount--;
-            Debug.Log(easyIslandAmount + " easy islands left");
+            //Debug.Log(easyIslandAmount + " easy islands left");
             str = "Easy";
+        }
+        else
+        {
+            str = GetIslandDifficulty();
+        }
+        if (easyIslandAmount == 0 && mediumIslandAmount == 0 && hardIslandAmount == 0)
+        {
+            diffIslandsHaveBeenPlaced = true;
         }
 
         return str;
