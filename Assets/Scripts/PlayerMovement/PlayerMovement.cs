@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-//use this for scriptable object Vect2Variables
 using Essentials.Reference_Variables.Variables;
 
 [RequireComponent(typeof(CharacterController))]
@@ -14,16 +12,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float gravityValue = -9.81f;
 
-    //from lucas example
-    [SerializeField] 
-    private Vector2Variable movementInputVariable; // thsi should be a scriptable object I guess?
+    
+    [SerializeField]//movement scriptable object
+    private Vector2Variable movementInputVariable;
+
+    [SerializeField]//Jump scriptable object
+    private FloatVariable jumpInputVariable;
 
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
 
     private Vector2 moveInput = Vector2.zero;
-    private Vector2 movementInput33 = Vector2.zero;
     private bool jumped = false;
 
     private Vector2 movementInput
@@ -34,21 +34,29 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private FloatVariable jumpInput
+    {
+        get
+        {
+            return jumpInputVariable;
+        }
+    }
+
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMove()
     {
-        moveInput = movementInput;//context.ReadValue<Vector2>();
-        Debug.Log(movementInput + "movement input");
-        Debug.Log(context.ReadValue<Vector2>() + "context input");
+        moveInput = movementInput;
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        jumped = context.action.triggered;
+        Debug.Log(context.action.triggered + "normal");
+        Debug.Log(jumpInput + "new");
+        jumped = jumpInput;//context.action.triggered;
     }
 
     void Update()
@@ -81,6 +89,8 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+
+//include this stuff later
 
 //using UnityEngine;
 
