@@ -202,7 +202,7 @@ MonoBehaviour:
   IslandHolder: {fileID: 45420299}
   easyIslandAmount: 7
   mediumIslandAmount: 5
-  hardIslandAmount: 2
+  hardIslandAmount: 3
 --- !u!4 &41069140
 Transform:
   m_ObjectHideFlags: 0
