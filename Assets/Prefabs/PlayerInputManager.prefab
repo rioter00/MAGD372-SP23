@@ -9,14 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3293212861868286535}
-  - component: {fileID: 3293212861868286532}
-  - component: {fileID: 3293212861868286533}
   - component: {fileID: 3293212861868286534}
-  - component: {fileID: 3293212861868286586}
   - component: {fileID: 3293212861868286587}
-  - component: {fileID: 3293212861868286584}
   m_Layer: 0
-  m_Name: PlayerTest
+  m_Name: PlayerInputManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,56 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3293212861868286532
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3293212861868286585}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3293212861868286533
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3293212861868286585}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &3293212861868286534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,29 +45,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379bead6ebd068e4da871063ade15163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move_input: {fileID: 11400000, guid: abe9f5ca79056ac44bbc97fd2efb4c48, type: 2}
-  camera_input: {fileID: 11400000, guid: f7a77cface49d2e48bfcc69472fce2f8, type: 2}
-  jump_input: {fileID: 11400000, guid: 7e9eeb5eaeab34441b7cbdaa60df462e, type: 2}
-  interact_input: {fileID: 11400000, guid: 21fa6a64c29f4ca44a0f0e110c43205e, type: 2}
-  shove_input: {fileID: 11400000, guid: f3e912343dc41844a9be7785ba9e865a, type: 2}
-  spill_input: {fileID: 11400000, guid: 8c912ffbe4571994a8b5203c7ac2d958, type: 2}
-  powerup_one_input: {fileID: 11400000, guid: c35a302eadc399341a292391077b841a, type: 2}
-  powerup_two_input: {fileID: 11400000, guid: 5f2a3875943b4004d8a76afc8b77bc94, type: 2}
-  pause_input: {fileID: 11400000, guid: 899cad8acf55b274496a0b5b4e9f2058, type: 2}
-  flipped: 1
---- !u!65 &3293212861868286586
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3293212861868286585}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  player_one:
+    move_input: {fileID: 11400000, guid: abe9f5ca79056ac44bbc97fd2efb4c48, type: 2}
+    camera_input: {fileID: 11400000, guid: f7a77cface49d2e48bfcc69472fce2f8, type: 2}
+    jump_input: {fileID: 11400000, guid: 7e9eeb5eaeab34441b7cbdaa60df462e, type: 2}
+    interact_input: {fileID: 11400000, guid: 21fa6a64c29f4ca44a0f0e110c43205e, type: 2}
+    shove_input: {fileID: 11400000, guid: f3e912343dc41844a9be7785ba9e865a, type: 2}
+    spill_input: {fileID: 11400000, guid: 8c912ffbe4571994a8b5203c7ac2d958, type: 2}
+    powerup_one_input: {fileID: 11400000, guid: c35a302eadc399341a292391077b841a, type: 2}
+    powerup_two_input: {fileID: 11400000, guid: 5f2a3875943b4004d8a76afc8b77bc94, type: 2}
+    pause_input: {fileID: 11400000, guid: 899cad8acf55b274496a0b5b4e9f2058, type: 2}
+    flipped: 0
+  player_two:
+    move_input: {fileID: 11400000, guid: 28d24cbe9d7c110498d380cc887c0282, type: 2}
+    camera_input: {fileID: 11400000, guid: 3f792b7ae530c57408d2e7f6e5f34fb4, type: 2}
+    jump_input: {fileID: 11400000, guid: 7ad69a09c596394499e96c80855469c6, type: 2}
+    interact_input: {fileID: 11400000, guid: 09b6a512bb8385946867339c984e257d, type: 2}
+    shove_input: {fileID: 11400000, guid: d888ef65e62a34b49b807b41b3e940ac, type: 2}
+    spill_input: {fileID: 11400000, guid: 444dc9473a8e38145badc2895864ee77, type: 2}
+    powerup_one_input: {fileID: 11400000, guid: 8af35eac7497a1440bbdbb3b45a550a4, type: 2}
+    powerup_two_input: {fileID: 11400000, guid: 0db5b2abf152b564586c75b2cfee8597, type: 2}
+    pause_input: {fileID: 11400000, guid: e3ff8b1bda3d30345b1b9ce3f71a6fb1, type: 2}
+    flipped: 1
 --- !u!114 &3293212861868286587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,21 +265,3 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!143 &3293212861868286584
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3293212861868286585}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0, z: 0}
