@@ -57,6 +57,7 @@ public class Tumbleweed : MonoBehaviour
 
     void Push(Rigidbody player)
     {
-        player.AddForce(-pushForce, pushForce, 0, ForceMode.Impulse); // might have to check whether it should be x or z, also which direction tumbleweed is facing
+        //player.AddForce(-pushForce, pushForce, 0, ForceMode.Impulse); // might have to check whether it should be x or z, also which direction tumbleweed is facing
+        player.AddForce(Vector3.forward * pushForce + Vector3.up * pushForce, ForceMode.Impulse);
     }
 }
