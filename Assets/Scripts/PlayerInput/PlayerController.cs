@@ -137,41 +137,113 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerCamera(InputAction.CallbackContext context)
     {
-
+        InputDevice device = context.control.device;
+        Vector2 input = context.ReadValue<Vector2>();
+        if (device == player1)
+        {
+            player_one.Camera = input;
+        }
+        else if (device == player2)
+        {
+            player_two.Camera = input;
+        }
     }
 
     public void PlayerJump(InputAction.CallbackContext context)
     {
-        
+        InputDevice device = context.control.device;
+        float input = context.ReadValue<float>();
+        if (device == player1)
+        {
+            player_one.Jump = input;
+        }
+        else if (device == player2)
+        {
+            player_two.Jump = input;
+        }
     }
 
     public void PlayerInteract(InputAction.CallbackContext context)
     {
-        
+        InputDevice device = context.control.device;
+        float input = context.ReadValue<float>();
+        if (device == player1)
+        {
+            player_one.Interact = input;
+        }
+        else if (device == player2)
+        {
+            player_two.Interact = input;
+        }
     }
 
     public void PlayerShove(InputAction.CallbackContext context)
     {
-        
+        InputDevice device = context.control.device;
+        float input = context.ReadValue<float>();
+        if (device == player1)
+        {
+            player_one.Shove = input;
+        }
+        else if (device == player2)
+        {
+            player_two.Shove = input;
+        }
     }
 
     public void PlayerSpill(InputAction.CallbackContext context)
     {
-        
+        InputDevice device = context.control.device;
+        float input = context.ReadValue<float>();
+        if (device == player1)
+        {
+            player_one.Spill = input;
+        }
+        else if (device == player2)
+        {
+            player_two.Spill = input;
+        }
     }
 
     public void PlayerPowerupOne(InputAction.CallbackContext context)
     {
-        
+        InputDevice device = context.control.device;
+        float input = context.ReadValue<float>();
+        if (device == player1)
+        {
+            player_one.PowerupOne = input;
+        }
+        else if (device == player2)
+        {
+            player_two.PowerupOne = input;
+        }
     }
 
     public void PlayerPowerupTwo(InputAction.CallbackContext context)
     {
-        
+        InputDevice device = context.control.device;
+        float input = context.ReadValue<float>();
+        if (device == player1)
+        {
+            player_one.PowerupTwo = input;
+        }
+        else if (device == player2)
+        {
+            player_two.PowerupTwo = input;
+        }
     }
 
     public void PlayerPause(InputAction.CallbackContext context)
     {
-        
+        InputDevice device = context.control.device;
+        float input = context.ReadValue<float>();
+        if (device == player1)
+        {
+            player_one.Pause = input;
+        }
+        else if (device == player2)
+        {
+            player_two.Pause = input;
+        }
     }
 }
