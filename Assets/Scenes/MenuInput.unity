@@ -330,12 +330,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a988462bc1a2d44b77d74fa4e619c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  up_input: {fileID: 11400000, guid: d160f295b226514448bc72fc0ed09166, type: 2}
-  down_input: {fileID: 11400000, guid: fa1e43303e719fa458143a192c15b3f0, type: 2}
-  left_input: {fileID: 11400000, guid: 639c3a2ffd4ad5b41a2710f2b64172ef, type: 2}
-  right_input: {fileID: 11400000, guid: 3f0a0d4d58f789449a9dc9ac55f46dd0, type: 2}
-  select_input: {fileID: 11400000, guid: 14e0e4da159832f4fad285f7beea18f5, type: 2}
-  back_input: {fileID: 11400000, guid: 85229186f61892b44b754d11de9ffdd3, type: 2}
+  player_one:
+    up_input: {fileID: 11400000, guid: d160f295b226514448bc72fc0ed09166, type: 2}
+    down_input: {fileID: 11400000, guid: fa1e43303e719fa458143a192c15b3f0, type: 2}
+    left_input: {fileID: 11400000, guid: 639c3a2ffd4ad5b41a2710f2b64172ef, type: 2}
+    right_input: {fileID: 11400000, guid: 3f0a0d4d58f789449a9dc9ac55f46dd0, type: 2}
+    select_input: {fileID: 11400000, guid: 14e0e4da159832f4fad285f7beea18f5, type: 2}
+    back_input: {fileID: 11400000, guid: 85229186f61892b44b754d11de9ffdd3, type: 2}
+  player_two:
+    up_input: {fileID: 11400000, guid: d160f295b226514448bc72fc0ed09166, type: 2}
+    down_input: {fileID: 11400000, guid: fa1e43303e719fa458143a192c15b3f0, type: 2}
+    left_input: {fileID: 11400000, guid: 639c3a2ffd4ad5b41a2710f2b64172ef, type: 2}
+    right_input: {fileID: 11400000, guid: 3f0a0d4d58f789449a9dc9ac55f46dd0, type: 2}
+    select_input: {fileID: 11400000, guid: 14e0e4da159832f4fad285f7beea18f5, type: 2}
+    back_input: {fileID: 11400000, guid: 85229186f61892b44b754d11de9ffdd3, type: 2}
 --- !u!1 &616357703
 GameObject:
   m_ObjectHideFlags: 0
