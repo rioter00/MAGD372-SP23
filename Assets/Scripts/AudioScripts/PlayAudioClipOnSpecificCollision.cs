@@ -18,7 +18,6 @@ public class PlayAudioClipOnSpecificCollision : MonoBehaviour // C# Script
 
     void OnCollisionEnter(Collision hit)
     {
-        Debug.Log(hit.transform.gameObject.name);
         if (hit.transform.gameObject.name == "RigidBodyFPSController")
         {
             PlayTaskOnClick();
