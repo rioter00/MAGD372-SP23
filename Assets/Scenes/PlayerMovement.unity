@@ -796,7 +796,7 @@ MonoBehaviour:
   moveSpeed: 10
   groundDrag: 5
   jumpForce: 15
-  jumpCooldown: 0.25
+  jumpCooldown: 0.255
   airMultiplier: 0.4
   jumpKey: 32
   playerHeight: 2

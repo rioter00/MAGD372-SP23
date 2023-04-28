@@ -1,119 +1,211 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Essentials.Reference_Variables.Variables;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
-    public float moveSpeed;
+    [SerializeField]
+    private float playerSpeed = 2.0f;
+    [SerializeField]
+    private float jumpHeight = 1.0f;
+    [SerializeField]
+    private float gravityValue = -9.81f;
 
-    public float groundDrag;
+    
+    [SerializeField]//movement scriptable object
+    private Vector2Variable movementInputVariable;
 
-    public float jumpForce;
-    public float jumpCooldown;
-    public float airMultiplier;
-    bool readyToJump = true;
+    [SerializeField]//Jump scriptable object
+    private FloatVariable jumpInputVariable;
 
-    [Header("KeyBinds")]//change this out for playIntput Controller
-    public KeyCode jumpKey = KeyCode.Space;
+    private CharacterController controller;
+    private Vector3 playerVelocity;
+    private bool groundedPlayer;
 
-    [Header("Ground Check")]
-    public float playerHeight;
-    public LayerMask whatIsGround;
-    bool grounded;
+    private Vector2 moveInput = Vector2.zero;
+    private bool jumped = false;
 
+    private Vector2 movementInput
+    {
+        get
+        {
+            return movementInputVariable.Value;
+        }
+    }
 
-
-
-    public Transform orientation;
-
-    float horizontalInput;
-    float verticalInput;
-
-    Vector3 moveDirection;
-
-    Rigidbody rb;
+    private FloatVariable jumpInput
+    {
+        get
+        {
+            return jumpInputVariable;
+        }
+    }
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
-    }
-    public void Update()
-    {
-        //bool check to see if youre grounded. raycast half your height then some.
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
-
-        MyInput();
-        Speedcontrol();
-
-        //handle drag
-        if (grounded)
-            rb.drag = groundDrag;
-        else
-            rb.drag = 0;
+        controller = gameObject.GetComponent<CharacterController>();
     }
 
-    private void FixedUpdate()
+    public void OnMove()
     {
-        MovePlayer();
+        moveInput = movementInput;
     }
 
-    private void MyInput()
+    public void OnJump(InputAction.CallbackContext context)
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
+        Debug.Log(context.action.triggered + "normal");
+        Debug.Log(jumpInput + "new");
+        jumped = jumpInput;//context.action.triggered;
+    }
 
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+    void Update()
+    {
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
         {
-
-            readyToJump = false;
-
-            Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown);//this is jump cooldown
+            playerVelocity.y = 0f;
         }
 
-    }
+        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+        controller.Move(move * Time.deltaTime * playerSpeed);
 
-    private void MovePlayer()
-    {
-        //to move in the direction youre looking
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        //move direction will be replayced by the PlayerInput controller keybind. (Dont have a controller to test currently)
-
-        if(grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
-
-
-    }
-
-    private void Speedcontrol()
-    {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        //limit velocity 
-        if(flatVel.magnitude > moveSpeed)
+        //remove possibly
+        if (move != Vector3.zero)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            gameObject.transform.forward = move;
         }
 
-    }
+        // Changes the height position of the player..
+        if (jumped && groundedPlayer)
+        {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }
 
-    private void Jump()
-    {
-        //reset y velocity
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-
-    }
-    private void ResetJump()
-    {
-        readyToJump = true;
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
     }
 }
+
+
+
+
+//include this stuff later
+
+//using UnityEngine;
+
+//public class PlayerMovement : MonoBehaviour
+//{
+//    [Header("Movement")]
+//    public float moveSpeed;
+
+//    public float groundDrag;
+
+//    public float jumpForce;
+//    public float jumpCooldown;
+//    public float airMultiplier;
+//    bool readyToJump = true;
+
+//    [Header("KeyBinds")]//change this out for playIntput Controller
+//    public KeyCode jumpKey = KeyCode.Space;
+
+//    [Header("Ground Check")]
+//    public float playerHeight;
+//    public LayerMask whatIsGround;
+//    bool grounded;
+
+
+
+
+//    public Transform orientation;
+
+//    float horizontalInput;
+//    float verticalInput;
+
+//    Vector3 moveDirection;
+
+//    Rigidbody rb;
+
+//    private void Start()
+//    {
+//        rb = GetComponent<Rigidbody>();
+//        rb.freezeRotation = true;
+//    }
+//    public void Update()
+//    {
+//        //bool check to see if youre grounded. raycast half your height then some.
+//        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+
+
+//        MyInput();
+//        Speedcontrol();
+
+//        //handle drag
+//        if (grounded)
+//            rb.drag = groundDrag;
+//        else
+//            rb.drag = 0;
+//    }
+
+//    private void FixedUpdate()
+//    {
+//        MovePlayer();
+//    }
+
+//    private void MyInput()
+//    {
+//        horizontalInput = Input.GetAxisRaw("Horizontal");
+//        verticalInput = Input.GetAxisRaw("Vertical");
+
+//        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+//        {
+
+//            readyToJump = false;
+
+//            Jump();
+
+//            Invoke(nameof(ResetJump), jumpCooldown);//this is jump cooldown
+//        }
+
+//    }
+
+//    private void MovePlayer()
+//    {
+//        //to move in the direction youre looking
+//        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+//        //move direction will be replayced by the PlayerInput controller keybind. (Dont have a controller to test currently)
+
+//        if(grounded)
+//            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+//        else if (!grounded)
+//            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+
+
+//    }
+
+//    private void Speedcontrol()
+//    {
+//        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+//        //limit velocity 
+//        if(flatVel.magnitude > moveSpeed)
+//        {
+//            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+//            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+//        }
+
+//    }
+
+//    private void Jump()
+//    {
+//        //reset y velocity
+//        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+//        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+
+//    }
+//    private void ResetJump()
+//    {
+//        readyToJump = true;
+//    }
+//}
