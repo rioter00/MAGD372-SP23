@@ -1,5 +1,5 @@
-//using System.Collections;
-//using System.Collections.Generic;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Essentials.Reference_Variables.Variables;
 using TMPro;
@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviour
     private float team1WaterLevel; //water level of team 1's well
     private float team2WaterLevel; //water level of team 2's well
 
-    public Fill team1WaterMeter;
-    public Fill team2WaterMeter;
+    //public Fill team1WaterMeter;
+    //public Fill team2WaterMeter;
     public TMP_Text timerText;
     public Canvas settingsScreen;
     public Canvas instructionsScreen;
@@ -140,10 +140,10 @@ public class GameManager : MonoBehaviour
     {
         team1WaterLevel += amount;
 
-        if (team1WaterLevel > waterLvlForVictory)
+        if (team1WaterLevel >= waterLvlForVictory)
         {
 
-            setGameStage(3);
+            setGameStage(GameStage.roundBeginning);
         }
 
 
@@ -154,10 +154,10 @@ public class GameManager : MonoBehaviour
     {
         team2WaterLevel += amount;
 
-        if (team2WaterLevel > waterLvlForVictory)
+        if (team2WaterLevel >= waterLvlForVictory)
         {
 
-            setGameStage(3);
+            setGameStage(GameStage.roundBeginning);
         }
 
         updateWaterLevelGraphics();
@@ -183,18 +183,18 @@ public class GameManager : MonoBehaviour
     private void OnPlayer1Paused(object sender, System.EventArgs args)
     {
 
-        if (player1Paused.Value == 1)
+        if (player1Paused)
         {
-            togglePauseGameAs(Player.player1);
+            togglePauseGameAs((int)Player.player1);
         }
     }
 
     private void OnPlayer2Paused(object sender, System.EventArgs args)
     {
 
-        if (player2Paused.Value == 1)
+        if (player2Paused)
         {
-            togglePauseGameAs(Player.player2);
+            togglePauseGameAs((int)Player.player2);
         }
     }
 
@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
     public void togglePauseGameAs(int asPlayer)
     {
 
-        if (asPlayer == Player.player1)
+        if (asPlayer == (int)Player.player1)
         {
             player1Paused = !player1Paused;
 
@@ -231,7 +231,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
 
-        setGameState(GameState.menuScreen);
+        setGameStage(GameStage.mainMenu);
 
     }
 
