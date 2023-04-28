@@ -26,8 +26,6 @@ public enum GameStage
 
 public class GameManager : MonoBehaviour
 {
-
-    
     private GameStage gameStage;
     private bool player1Paused; //whether the first player has the game put on paused - local pause
     private bool player2Paused; //whether the second player has the game put on paused - local pause
@@ -58,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     float waterLvlForVictory; //the accumulated amount of water a player must bring back to their well in order for their team to win
 
-
+    [SerializeField] private Timer timer;
 
     private void updateTimerUI()
     {
