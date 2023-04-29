@@ -36,8 +36,8 @@ public class GameManager : MonoBehaviour {
       
     public:
         
-        Fill team1WaterMeter;
-        Fill team2WaterMeter;
+        Slider team1WaterMeter; //UI display for the water level in team 1's well
+        Slider team2WaterMeter; //UI display for the water level in team 2's well
         Text timerText;
         Canvas settingsScreen;
         Canvas instructionsScreen;
@@ -48,11 +48,14 @@ public class GameManager : MonoBehaviour {
         GameObject team1WaterWell;
         GameObject team2WaterWell;
         
+        Rigidbody player1RigidBody; //the game object of player 1's avatar
+        Rigidbody player2RigidBody; //the game object of player 2's avatar
+        
         public FloatVariable player1Pause;
         public FloatVariable player2Pause;
         
-        Transform player1Spawnpoint;
-        Transform player2Spawnpoint;
+        Transform player1Spawnpoint; //where player1 starts in a round
+        Transform player2Spawnpoint; //where player2 starts in a round
         
         float waterLvlForVictory; //the accumulated amount of water a player must bring back to their well in order for their team to win
         
@@ -97,6 +100,11 @@ public class GameManager : MonoBehaviour {
                 gamePaused = true;
                 
             case GameStage.roundBeginning:
+                player1Rigidbody.MovePosition(player1Spawnpoint.position);
+                player2Rigidbody.MovePosition(player2Spawnpoint.position);
+                player1Rigidbody.MoveRotation(player1Spawnpoint.rotation);
+                player2Rigidbody.MoveRotation(player2Spawnpoint.rotation);
+                
                 setTeam1WaterLevel(0);
                 setTeam2WaterLevel(0);
                 
