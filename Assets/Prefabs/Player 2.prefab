@@ -449,7 +449,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948258380727605067}
-  m_LocalRotation: {x: 0.10135635, y: -0.69955695, z: 0.10128303, w: 0.7000634}
+  m_LocalRotation: {x: 0.012475586, y: 0.9859228, z: -0.14274363, w: 0.08616822}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -697,7 +697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948258380993228689}
   m_LocalRotation: {x: -0, y: 0.7265746, z: -0, w: 0.68708766}
-  m_LocalPosition: {x: -0.16963118, y: 4.13, z: -2.9952004}
+  m_LocalPosition: {x: 2.9789612, y: 4.130001, z: 0.35467982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -856,8 +856,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948258381146067290}
-  m_LocalRotation: {x: 0.16115388, y: 0.027913202, z: -0.0045597684, w: 0.9865239}
-  m_LocalPosition: {x: -0.16963118, y: 4.13, z: -2.9952004}
+  m_LocalRotation: {x: -0.10704792, y: 0.7379575, z: -0.12054932, w: -0.65530705}
+  m_LocalPosition: {x: 2.9789612, y: 4.130001, z: 0.35467982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1063,7 +1063,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948258381195360042}
-  m_LocalRotation: {x: 0.11403983, y: -0.6976044, z: 0.11395733, w: 0.6981094}
+  m_LocalRotation: {x: 0.01403675, y: 0.98317087, z: -0.16060622, w: 0.08592772}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1172,7 +1172,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948258381292119100}
-  m_LocalRotation: {x: 0.12671924, y: -0.69541615, z: 0.12662756, w: 0.69591963}
+  m_LocalRotation: {x: 0.015597409, y: 0.9800869, z: -0.17846303, w: 0.085658245}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1428,7 +1428,7 @@ CapsuleCollider:
   m_Radius: 0.6607971
   m_Height: 4.579183
   m_Direction: 1
-  m_Center: {x: -0.054715753, y: 2.2895916, z: 0}
+  m_Center: {x: 0, y: 2.2895916, z: 0}
 --- !u!143 &6163773750119333288
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1446,7 +1446,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &4661801079863987518
 MonoBehaviour:
   m_ObjectHideFlags: 0

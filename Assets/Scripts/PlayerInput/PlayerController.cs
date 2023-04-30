@@ -131,7 +131,8 @@ public class PlayerController : MonoBehaviour
         {
             player_one.Move = input;
         }
-        else if (device == player2) {
+        else if (device == player2)
+        {
             player_two.Move = input;
         }
     }
