@@ -3,7 +3,16 @@ guid: 379bead6ebd068e4da871063ade15163
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - move_input: {fileID: 11400000, guid: abe9f5ca79056ac44bbc97fd2efb4c48, type: 2}
+  - camera_input: {fileID: 11400000, guid: f7a77cface49d2e48bfcc69472fce2f8, type: 2}
+  - jump_input: {instanceID: 0}
+  - interact_input: {instanceID: 0}
+  - shove_input: {instanceID: 0}
+  - spill_input: {instanceID: 0}
+  - powerup_one_input: {instanceID: 0}
+  - powerup_two_input: {instanceID: 0}
+  - pause_input: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

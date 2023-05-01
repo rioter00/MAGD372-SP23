@@ -39,6 +39,7 @@ public class WFCV2_Main : MonoBehaviour
     [SerializeField] private int mediumIslandAmount;
     [SerializeField] private int hardIslandAmount;
     private bool diffIslandsHaveBeenPlaced = false;
+    [SerializeField] private PlayerManager playerManager;
 
     // Start is called before the first frame update
     void Start()
@@ -77,7 +78,10 @@ public class WFCV2_Main : MonoBehaviour
             Vector3 wellPlacement = new Vector3(grid.x * 30, 0, grid.z * 30);
             Instantiate(baseAndWellPrefabs[2], wellPlacement, Quaternion.identity, IslandHolder);
             CreateBases();
-            //Debug.Log(totalIslandSpaces);
+            Vector3 player1Space = new Vector3(0, 3, 0);
+            Vector3 player2Space = new Vector3(grid.x * 50, 3, 0);
+            playerManager.CreateCharacters(player1Space, player2Space);
+            //playerManager.Create();
         }
     }
 
