@@ -514,39 +514,16 @@ GameObject:
   - component: {fileID: 1665610118}
   - component: {fileID: 1665610117}
   - component: {fileID: 1665610116}
-  - component: {fileID: 1665610115}
   - component: {fileID: 1665610120}
   - component: {fileID: 1665610121}
+  - component: {fileID: 1665610122}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Test Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1665610115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665610114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4069edbbca301aa44a1ae17c8e0469ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  groundDrag: 1
-  jumpForce: 5
-  jumpCooldown: 1
-  airMultiplier: 1
-  jumpKey: 32
-  playerHeight: 2
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 16
-  orientation: {fileID: 732612223}
 --- !u!136 &1665610116
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -656,6 +633,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea75ad8a8fe74d449b231dd8f89ae33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1665610122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665610114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd3a2f7181d757346a33c6c906c5b759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  groundDrag: 3
+  jumpForce: 5
+  jumpCooldown: 1
+  airMultiplier: 1
+  jumpKey: 32
+  playerHeight: 2
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 16
+  orientation: {fileID: 732612223}
 --- !u!1 &1977547304
 GameObject:
   m_ObjectHideFlags: 0
