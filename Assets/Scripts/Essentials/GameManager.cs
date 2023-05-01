@@ -45,8 +45,15 @@ public class GameManager : MonoBehaviour
     public GameObject pauseScreenPlayer1;
     public GameObject pauseScreenPlayer2;
 
-    public GameObject team1WaterWell;
-    public GameObject team2WaterWell;
+    public float team1WaterWell;
+    private float team1WaterMax;
+    [SerializeField] private FloatVariable team1Well1;
+    [SerializeField] private FloatVariable team1Well2;
+
+    public float team2WaterWell;
+    private float team2WaterMax;
+    [SerializeField] private FloatVariable team2Well1;
+    [SerializeField] private FloatVariable team2Well2;
 
     public FloatVariable player1Pause;
     public FloatVariable player2Pause;
@@ -233,6 +240,11 @@ public class GameManager : MonoBehaviour
 
         setGameStage(GameStage.mainMenu);
 
+    }
+
+    public void StartTimer()
+    {
+        timer.StartTimer();
     }
 
 

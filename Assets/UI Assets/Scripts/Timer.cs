@@ -10,19 +10,25 @@ public class Timer : MonoBehaviour
 
     public TextMeshProUGUI timeText;
 
+    public bool startTimer = false;
+
 
     void Update()
     {
-        if (timeValue > 0)
+        if (startTimer)
         {
-            timeValue -= Time.deltaTime;
-        }
-        else
-        {
-            timeValue = 0;
-        }
+            if (timeValue > 0)
+            {
+                timeValue -= Time.deltaTime;
+            }
+            else
+            {
+                timeValue = 0;
+                startTimer = false;
+            }
 
-        DisplayTime(timeValue);
+            DisplayTime(timeValue);
+        }
 
     }
 
@@ -43,6 +49,11 @@ public class Timer : MonoBehaviour
 
         timeText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
 
+    }
+
+    public void StartTimer()
+    {
+        startTimer = true;
     }
     
 }
