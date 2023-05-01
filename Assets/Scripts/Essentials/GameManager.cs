@@ -42,8 +42,8 @@ public class GameManager : MonoBehaviour
     public Canvas settingsScreen;
     public Canvas instructionsScreen;
     public Canvas menuScreen; //main menu screen
-    public Canvas pauseScreenPlayer1;
-    public Canvas pauseScreenPlayer2;
+    public GameObject pauseScreenPlayer1;
+    public GameObject pauseScreenPlayer2;
 
     public GameObject team1WaterWell;
     public GameObject team2WaterWell;
@@ -78,11 +78,13 @@ public class GameManager : MonoBehaviour
 
     public void setGameStage(GameStage stage)
     {
-        settingsScreen.enabled = false;
-        instructionsScreen.enabled = false;
-        menuScreen.enabled = false;
-        pauseScreenPlayer1.enabled = false;
-        pauseScreenPlayer2.enabled = false;
+        //settingsScreen.enabled = false;
+        //instructionsScreen.enabled = false;
+        //menuScreen.enabled = false;
+        //pauseScreenPlayer1.enabled = false;
+        //pauseScreenPlayer2.enabled = false;
+        pauseScreenPlayer1.SetActive(false);
+        pauseScreenPlayer2.SetActive(false);
         gameStage = stage;
 
         switch (gameStage)
@@ -99,7 +101,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameStage.mainMenu:
-                menuScreen.enabled = true;
+                //menuScreen.enabled = true;
                 gamePaused = true;
                 break;
 
@@ -204,14 +206,14 @@ public class GameManager : MonoBehaviour
         {
             player1Paused = !player1Paused;
 
-            pauseScreenPlayer1.enabled = player1Paused;
+            pauseScreenPlayer1.SetActive(player1Paused);
 
         }
         else
         {
             player2Paused = !player2Paused;
 
-            pauseScreenPlayer2.enabled = player2Paused;
+            pauseScreenPlayer2.SetActive(player2Paused);
         }
 
         setGamePaused(player1Paused || player2Paused);
