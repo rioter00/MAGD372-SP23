@@ -927,6 +927,7 @@ GameObject:
   - component: {fileID: 3723855164010909865}
   - component: {fileID: 8857886529387172738}
   - component: {fileID: 1569446475334572741}
+  - component: {fileID: 4412384414628141753}
   m_Layer: 0
   m_Name: Sand
   m_TagString: Untagged
@@ -999,6 +1000,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4412384414628141753
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7738292055602172275}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1750125985355865389, guid: 3514204e986721b4f9e349f418ae3f8d, type: 3}
 --- !u!1 &7978147454121129645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,6 +1025,7 @@ GameObject:
   - component: {fileID: 6988520493265313097}
   - component: {fileID: 908959042738498702}
   - component: {fileID: 8683269100572169969}
+  - component: {fileID: 8450391237824345719}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -1082,6 +1098,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8450391237824345719
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7978147454121129645}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1750125985355865389, guid: 3514204e986721b4f9e349f418ae3f8d, type: 3}
 --- !u!1 &8749824642869489813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,7 +1135,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8749824642869489813}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  m_LocalRotation: {x: 0, y: -0.00000008742278, z: 0, w: -1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

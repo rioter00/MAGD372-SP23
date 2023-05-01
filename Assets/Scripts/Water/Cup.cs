@@ -117,6 +117,11 @@ public class Cup : WaterContainer
     {
         StopCoroutine(waterCollection);
     }
+
+    void OnDestroy()
+    {
+        bucketFillInputVariable.ValueChanged -= InputHandler;
+    }
 }
 
 public class ShoveEvent
