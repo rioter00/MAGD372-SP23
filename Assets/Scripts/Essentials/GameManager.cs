@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
             case GameStage.roundBeginning:
                 setTeam1WaterLevel(0);
                 setTeam2WaterLevel(0);
+                StartTimer();
                 break;
 
             case GameStage.inRound:
@@ -245,6 +246,11 @@ public class GameManager : MonoBehaviour
     public void StartTimer()
     {
         timer.StartTimer();
+    }
+
+    public void EndRound()
+    {
+        setGameStage(GameStage.roundBeginning);
     }
 
 

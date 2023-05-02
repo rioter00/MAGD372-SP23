@@ -7,11 +7,18 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     public float timeValue = 120f;
+    private float roundTime;
 
     public TextMeshProUGUI timeText;
 
     public bool startTimer = false;
 
+    [SerializeField] private GameManager gameManager;
+
+    private void Start()
+    {
+        roundTime = timeValue;
+    }
 
     void Update()
     {
@@ -25,6 +32,7 @@ public class Timer : MonoBehaviour
             {
                 timeValue = 0;
                 startTimer = false;
+                gameManager.EndRound();
             }
 
             DisplayTime(timeValue);
@@ -53,7 +61,9 @@ public class Timer : MonoBehaviour
 
     public void StartTimer()
     {
+        timeValue = roundTime;
         startTimer = true;
+
     }
     
 }
