@@ -1,0 +1,215 @@
+//using System.Collections;
+//using System.Collections.Generic;
+using UnityEngine;
+using Essentials.Reference_Variables.Variables;
+
+
+public enum Player {
+    player1
+    player2
+}
+
+
+public enum GameStage {
+    settingsScreen,
+    instructions,
+    mainMenu,
+    roundBeginning,
+    inRound,
+    roundEnding,
+    gameEnding
+}
+
+
+public class GameManager : MonoBehaviour {
+    
+    private:
+        GameStage gameStage;
+        bool player1Paused; //whether the first player has the game put on paused - local pause
+        bool player2Paused; //whether the second player has the game put on paused - local pause
+        bool gamePaused; //whether gameplay is paused over all - global pause
+        
+        float timeLeftInRound; //time left in round in seconds
+        
+        float team1WaterLevel; //water level of team 1's well
+        float team2WaterLevel; //water level of team 2's well
+      
+    public:
+        
+        Fill team1WaterMeter;
+        Fill team2WaterMeter;
+        Text timerText;
+        Canvas settingsScreen;
+        Canvas instructionsScreen;
+        Canvas menuScreen; //main menu screen
+        Canvas pauseScreenPlayer1;
+        Canvas pauseScreenPlayer2;
+        
+        GameObject team1WaterWell;
+        GameObject team2WaterWell;
+        
+        public FloatVariable player1Pause;
+        public FloatVariable player2Pause;
+        
+        Transform player1Spawnpoint;
+        Transform player2Spawnpoint;
+        
+        float waterLvlForVictory; //the accumulated amount of water a player must bring back to their well in order for their team to win
+        
+        
+    
+    private void updateTimerUI () {
+        
+        timerText = (String) timeLeftInRound;
+    }
+    
+    private void updateWaterLevelGraphics () {
+    
+        //waterLevelUI.text = "Water level: " + (String) team1WaterLevel;
+    }
+    
+    
+    public GameStage getGameStage () {
+        return gameStage;
+    }
+    
+    public void setGameStage (GameStage stage) {
+        gameStage = stage;
+        
+        switch (gameStage) {
+            settingsScreen.enabled = false;
+            instructionsScreen.enabled = false;
+            menuScreen.enabled = false;
+            pauseScreenPlayer1.enabled = false;
+            pauseScreenPlayer2.enabled = false;
+            
+            
+            case GameStage.settingsScreen:
+                settingsScreen.enabled = true;
+                gamePaused = true;
+            
+            case GameStage.instructions:
+                instructionsScreen.enabled = true;
+                gamePaused = true;
+                
+            case GameStage.mainMenu:
+                menuScreen.enabled = true;
+                gamePaused = true;
+                
+            case GameStage.roundBeginning:
+                setTeam1WaterLevel(0);
+                setTeam2WaterLevel(0);
+                
+            case GameStage.inRound:
+                setTeam1WaterLevel(0);
+                setTeam2WaterLevel(0);
+            
+            default:
+                gamePaused = false;
+        }
+    }
+    
+    
+    public void setTeam1WaterLevel (float level) {
+        team1WaterLevel = 0;
+        
+        updateWaterLevelGraphics();
+    }
+    
+    public void setTeam2WaterLevel (float level) {
+        team2WaterLevel = 0;
+        
+        updateWaterLevelGraphics();
+    }
+    
+    public void addWaterToTeam1Well (float amount) {
+        team1WaterLevel += amount;
+        
+        if (team1WaterLevel > waterLvlForVictory) {
+        
+            setGameStage(3);
+        }
+        
+        
+        updateWaterLevelGraphics();
+    }
+    
+    public void addWaterToTeam2Well (float amount) {
+        team2WaterLevel += amount;
+        
+        if (team2WaterLevel > waterLvlForVictory) {
+        
+            setGameStage(3);
+        }
+        
+        updateWaterLevelGraphics();
+    }
+    
+    private void setGamePaused (bool paused) {
+        
+        gamePaused = paused;
+        
+        if (gamePaused) {
+            
+            Time.timeScale = 0;
+        } else {
+            
+            Time.timeScale = 1;
+        }
+    }
+    
+    private void OnPlayer1Paused (object sender, System.EventArgs args) {
+        
+        if (player1Paused.Value == 1) {
+            togglePauseGameAs(Player.player1);
+        }
+    }
+    
+    private void OnPlayer2Paused (object sender, System.EventArgs args) {
+        
+        if (player2Paused.Value == 1) {
+            togglePauseGameAs(Player.player2);
+        }
+    }
+    
+    //Pause the game from a particular player 1, 2's perspective.
+    public void togglePauseGameAs (int asPlayer) {
+        
+        if (asPlayer == Player.player1) {
+            player1Paused = !player1Paused;
+            
+            pauseScreenPlayer1.enabled = player1Paused;
+            
+        } else {
+            player2Paused = !player2Paused;
+            
+            pauseScreenPlayer2.enabled = player2Paused;
+        }
+        
+        setGamePaused(player1Paused || player2Paused);
+    }
+    
+    
+    public void Awake () {
+        
+        player1Pause.ValueChanged += OnPlayer1Paused;
+        player2Pause.ValueChanged += OnPlayer2Paused;
+    }
+    
+    
+    public void Start () {
+        
+        setGameState(GameState.menuScreen);
+        
+    }
+    
+    
+    //Main co-routine for mid-round
+    public IEnumerator mainGameLoop() {
+        
+        timeLeftInRound += Time.deltaTime;
+        updateTimerUI();
+        
+        yield return mainGameLoop();
+    }
+}

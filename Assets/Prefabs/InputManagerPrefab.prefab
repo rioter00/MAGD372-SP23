@@ -45,15 +45,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379bead6ebd068e4da871063ade15163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move_input: {fileID: 11400000, guid: abe9f5ca79056ac44bbc97fd2efb4c48, type: 2}
-  camera_input: {fileID: 11400000, guid: f7a77cface49d2e48bfcc69472fce2f8, type: 2}
-  jump_input: {fileID: 11400000, guid: 7e9eeb5eaeab34441b7cbdaa60df462e, type: 2}
-  interact_input: {fileID: 11400000, guid: 21fa6a64c29f4ca44a0f0e110c43205e, type: 2}
-  shove_input: {fileID: 11400000, guid: f3e912343dc41844a9be7785ba9e865a, type: 2}
-  spill_input: {fileID: 11400000, guid: 8c912ffbe4571994a8b5203c7ac2d958, type: 2}
-  powerup_one_input: {fileID: 11400000, guid: c35a302eadc399341a292391077b841a, type: 2}
-  powerup_two_input: {fileID: 11400000, guid: 5f2a3875943b4004d8a76afc8b77bc94, type: 2}
-  pause_input: {fileID: 11400000, guid: 899cad8acf55b274496a0b5b4e9f2058, type: 2}
+  player_one:
+    move_input: {fileID: 0}
+    camera_input: {fileID: 0}
+    jump_input: {fileID: 0}
+    interact_input: {fileID: 0}
+    shove_input: {fileID: 0}
+    spill_input: {fileID: 0}
+    powerup_one_input: {fileID: 0}
+    powerup_two_input: {fileID: 0}
+    pause_input: {fileID: 0}
+    flipped: 0
+  player_two:
+    move_input: {fileID: 0}
+    camera_input: {fileID: 0}
+    jump_input: {fileID: 0}
+    interact_input: {fileID: 0}
+    shove_input: {fileID: 0}
+    spill_input: {fileID: 0}
+    powerup_one_input: {fileID: 0}
+    powerup_two_input: {fileID: 0}
+    pause_input: {fileID: 0}
+    flipped: 0
 --- !u!114 &8196701452957594146
 MonoBehaviour:
   m_ObjectHideFlags: 0
