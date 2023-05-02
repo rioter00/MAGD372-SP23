@@ -23,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3266145077547982256}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -246,11 +246,11 @@ MonoBehaviour:
   waterReference:
     useConstant: 0
     constantValue: 0
-    variable: {fileID: 0}
+    variable: {fileID: 11400000, guid: 9f34c454f0c01a645bcef96fdd1a1917, type: 2}
   maxFillAmountReference:
-    useConstant: 1
+    useConstant: 0
     constantValue: 10
-    variable: {fileID: 0}
+    variable: {fileID: 11400000, guid: 99c8997615598914cb891e96f02c136f, type: 2}
   leakRateReference:
     useConstant: 1
     constantValue: 0

@@ -114,11 +114,11 @@ MonoBehaviour:
   waterReference:
     useConstant: 0
     constantValue: 0
-    variable: {fileID: 0}
+    variable: {fileID: 11400000, guid: 3bd97346c06c0934ba6a67d07587e594, type: 2}
   maxFillAmountReference:
-    useConstant: 1
+    useConstant: 0
     constantValue: 10
-    variable: {fileID: 0}
+    variable: {fileID: 11400000, guid: 6d0cee280bb208b4bbf0e57c4e8b502c, type: 2}
   leakRateReference:
     useConstant: 1
     constantValue: 0
@@ -362,7 +362,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8786129199494465682}
-  m_LocalRotation: {x: 0, y: -0.00000008742278, z: 0, w: -1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
