@@ -7,22 +7,36 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     public float timeValue = 120f;
+    private float roundTime;
 
     public TextMeshProUGUI timeText;
 
+    public bool startTimer = false;
+
+    [SerializeField] private GameManager gameManager;
+
+    private void Start()
+    {
+        roundTime = timeValue;
+    }
 
     void Update()
     {
-        if (timeValue > 0)
+        if (startTimer)
         {
-            timeValue -= Time.deltaTime;
-        }
-        else
-        {
-            timeValue = 0;
-        }
+            if (timeValue > 0)
+            {
+                timeValue -= Time.deltaTime;
+            }
+            else
+            {
+                timeValue = 0;
+                startTimer = false;
+                gameManager.EndRound();
+            }
 
-        DisplayTime(timeValue);
+            DisplayTime(timeValue);
+        }
 
     }
 
@@ -41,7 +55,14 @@ public class Timer : MonoBehaviour
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
-        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timeText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+
+    }
+
+    public void StartTimer()
+    {
+        timeValue = roundTime;
+        startTimer = true;
 
     }
     

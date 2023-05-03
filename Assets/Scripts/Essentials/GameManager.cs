@@ -42,11 +42,18 @@ public class GameManager : MonoBehaviour
     public Canvas settingsScreen;
     public Canvas instructionsScreen;
     public Canvas menuScreen; //main menu screen
-    public Canvas pauseScreenPlayer1;
-    public Canvas pauseScreenPlayer2;
+    public GameObject pauseScreenPlayer1;
+    public GameObject pauseScreenPlayer2;
 
-    public GameObject team1WaterWell;
-    public GameObject team2WaterWell;
+    public float team1WaterWell;
+    private float team1WaterMax;
+    [SerializeField] private FloatVariable team1Well1;
+    [SerializeField] private FloatVariable team1Well2;
+
+    public float team2WaterWell;
+    private float team2WaterMax;
+    [SerializeField] private FloatVariable team2Well1;
+    [SerializeField] private FloatVariable team2Well2;
 
     public FloatVariable player1Pause;
     public FloatVariable player2Pause;
@@ -78,11 +85,13 @@ public class GameManager : MonoBehaviour
 
     public void setGameStage(GameStage stage)
     {
-        settingsScreen.enabled = false;
-        instructionsScreen.enabled = false;
-        menuScreen.enabled = false;
-        pauseScreenPlayer1.enabled = false;
-        pauseScreenPlayer2.enabled = false;
+        //settingsScreen.enabled = false;
+        //instructionsScreen.enabled = false;
+        //menuScreen.enabled = false;
+        //pauseScreenPlayer1.enabled = false;
+        //pauseScreenPlayer2.enabled = false;
+        pauseScreenPlayer1.SetActive(false);
+        pauseScreenPlayer2.SetActive(false);
         gameStage = stage;
 
         switch (gameStage)
@@ -99,13 +108,14 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameStage.mainMenu:
-                menuScreen.enabled = true;
+                //menuScreen.enabled = true;
                 gamePaused = true;
                 break;
 
             case GameStage.roundBeginning:
                 setTeam1WaterLevel(0);
                 setTeam2WaterLevel(0);
+                StartTimer();
                 break;
 
             case GameStage.inRound:
@@ -204,14 +214,14 @@ public class GameManager : MonoBehaviour
         {
             player1Paused = !player1Paused;
 
-            pauseScreenPlayer1.enabled = player1Paused;
+            pauseScreenPlayer1.SetActive(player1Paused);
 
         }
         else
         {
             player2Paused = !player2Paused;
 
-            pauseScreenPlayer2.enabled = player2Paused;
+            pauseScreenPlayer2.SetActive(player2Paused);
         }
 
         setGamePaused(player1Paused || player2Paused);
@@ -231,6 +241,16 @@ public class GameManager : MonoBehaviour
 
         setGameStage(GameStage.mainMenu);
 
+    }
+
+    public void StartTimer()
+    {
+        timer.StartTimer();
+    }
+
+    public void EndRound()
+    {
+        setGameStage(GameStage.roundBeginning);
     }
 
 

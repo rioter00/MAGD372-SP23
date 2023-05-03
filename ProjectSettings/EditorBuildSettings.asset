@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI Test In-Game.unity
     guid: 8d709f4309e8ee746bf7174518206e1c
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/MainMenu.unity
+    guid: 64e63cc54bf643745b9539e858477ad2
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/GameLevel.unity
+    guid: edd749dc844695c459f43528b898ab5d
   m_configObjects: {}
