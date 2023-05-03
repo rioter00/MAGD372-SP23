@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Essentials.Reference_Variables.Variables;
+using System;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
@@ -34,12 +35,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private FloatVariable jumpInput
+    private float jumpInput
     {
         get
         {
-            return jumpInputVariable;
+            return jumpInputVariable.Value;
         }
+    }
+
+    private void Awake()
+    {
+        jumpInputVariable.ValueChanged += OnJump;
     }
 
     private void Start()
@@ -52,11 +58,9 @@ public class PlayerMovement : MonoBehaviour
         moveInput = movementInput;
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    public void OnJump(object sender, EventArgs args)
     {
-        Debug.Log(context.action.triggered + "normal");
-        Debug.Log(jumpInput + "new");
-        jumped = jumpInput;//context.action.triggered;
+        jumped = jumpInput == 1;
     }
 
     private void FixedUpdate()
@@ -90,6 +94,12 @@ public class PlayerMovement : MonoBehaviour
         float groundDistance = 0.1f;
         Vector3 position = transform.position;
         groundedPlayer = Physics.Raycast(position, Vector3.down, groundDistance);
+    }
+
+    void OnDestroy()
+    {
+        jumpInputVariable.ValueChanged -= OnJump;
+
     }
 }
 

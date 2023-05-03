@@ -2134,7 +2134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8196701452957594143, guid: 8c18a61b95361dd408fe9249c9749d44, type: 3}
       propertyPath: player_one.flipped
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8196701452957594143, guid: 8c18a61b95361dd408fe9249c9749d44, type: 3}
       propertyPath: player_two.flipped
@@ -2162,7 +2162,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 899cad8acf55b274496a0b5b4e9f2058, type: 2}
     - target: {fileID: 8196701452957594143, guid: 8c18a61b95361dd408fe9249c9749d44, type: 3}
       propertyPath: player_one.playerSpeed
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8196701452957594143, guid: 8c18a61b95361dd408fe9249c9749d44, type: 3}
       propertyPath: player_one.shove_input
