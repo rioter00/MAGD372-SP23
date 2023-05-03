@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputValues player_one;
     [SerializeField] private InputValues player_two;
 
+
     [System.Serializable]
     public class InputValues
     {
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
         [SerializeField] private FloatVariable powerup_two_input;
         [SerializeField] private FloatVariable pause_input;
         [SerializeField] bool flipped;
+        [SerializeField] float playerSpeed = 0.25f; // added to adjust player speed
 
         public Vector2 Move
         {
@@ -31,7 +33,7 @@ public class PlayerController : MonoBehaviour
                 {
                     value.x = -value.x;
                 }
-                move_input.Value = value;
+                move_input.Value = (value * playerSpeed);
             }
         }
 
