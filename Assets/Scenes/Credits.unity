@@ -380,21 +380,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Navnit Venkatesh: \u201CVisual-Effects\u201D Branch, Shader and FVX Graph\n\nMarco
-    Unate: UI Art and Script, \u201CUI\u201D Branch\n\nBrian Michael: Hazards and
-    Items Scripting, \u201CHazards-and-Items-Scripts\u201D Branch\n\nAiden Currie:
-    Game manager, \u201Cajcurrie-a11y-patch-1\u201D Branch\n\nGriffin Clos: Camera,
-    \u201CSplit-Screen\u201D branch\n\nCorbin Giese: audio \u201CSounds_Music\u201D
+  m_text: "Credits:\n\nMarco Unate: UI Art and Script, \u201CUI\u201D Branch\n\nBrian
+    Michael: Hazards and Items Scripting, \u201CHazards-and-Items-Scripts\u201D Branch\n\nAiden
+    Currie: Game manager, \u201Cajcurrie-a11y-patch-1\u201D Branch\n\nGriffin Clos:
+    Camera, \u201CSplit-Screen\u201D branch\n\nCorbin Giese: Audio, \u201CSounds_Music\u201D
     branch\n\nJacob McKenney: 3D modeler, \u201CLevel-Environment\u201D & \u201CCharacter\u201D
     branch\n\nEric Czapla: Level designer/sketches, \u201CLevel-Environment\u201D
     branch \n\nLucas Ackman: Water and Communications systems, \u201CWater-Functionality\u201D
-    and \u201CSystems\u201D branches\n\nNate Staddler: Player Input. \u201CPlayer-Input\u201D
+    and \u201CSystems\u201D branches\n\nNate Staddler: Player Input, \u201CPlayer-Input\u201D
     Branch\n\nLouie Marcou: Procedural Generation, Asset Integration, \u201CProcGen\u201D
-    and \u201CPuttingStuffTogether\u201D branches\n\n*Elguer Cabrera: 3D modeling,
-    \u201CLevel-environment\u201D Branch\n\nSinan Beyhan\n\nBrian Duncan: 3D modeling,
-    Objects and hazards\n\nPatrick Forbeck\n\nGabriel Kelty\n\nDominic Laskero: Player
-    Controller\n\nBrandon Meyer\n\nJustyn Reimer: Level designer/sketches, \u201CLevel-Environment\u201D
-    branch\n\nMatt Walter\n\nNick Hwang: Producer\n\n"
+    and \u201CPuttingStuffTogether\u201D branches\n\nElguer Cabrera: 3D modeling,
+    \u201CLevel-environment\u201D Branch\n\nBrian Duncan: 3D modeling, Objects and
+    hazards, \u201Chazards_and_items_scripts\u201D branch\n\nNavnit Venkatesh: Shader
+    and FVX Graph, \u201CVisual-Effects\u201D Branch\n\nPatrick Forbeck\n\nDominic
+    Laskero: Player Controller\n\nJustyn Reimer: Level designer, Sketch Artist\n\nNick
+    Hwang: Producer"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 73822196cccd1844ca69c0439ed58f3f, type: 2}
   m_sharedMaterial: {fileID: 3284812050030602267, guid: 73822196cccd1844ca69c0439ed58f3f, type: 2}
@@ -421,8 +421,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
