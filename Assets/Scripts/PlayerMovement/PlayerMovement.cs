@@ -60,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(object sender, EventArgs args)
     {
+        Debug.Log("Jump");
         jumped = jumpInput == 1;
     }
 
