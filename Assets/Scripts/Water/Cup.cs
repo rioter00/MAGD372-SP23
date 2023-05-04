@@ -39,8 +39,8 @@ public class Cup : WaterContainer
         bucketFillInputVariable.ValueChanged += InputHandler;
 
         var body = GetComponent<Rigidbody>();
-        body.isKinematic = true;
-        body.useGravity = false;
+        //body.isKinematic = true;
+        //body.useGravity = false;
     }
 
     private void OnShovedEvent(ShoveEvent args)
