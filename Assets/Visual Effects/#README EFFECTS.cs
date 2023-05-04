@@ -5,7 +5,8 @@ using UnityEngine;
 /*These are instructions on the effects here and their intended uses. This script
 also explains how to use them or change some of their properties.*/
 
-//THIS IS STILL UNFINISHED
+/*Sand and Water Particles: 
+Depending on the color of the sand and water in most levels, the particles colors may need to be changed/*
 
 //Pickup Effect/Backlight/Pickup Effect W/O Backlight
 
