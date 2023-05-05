@@ -12,7 +12,13 @@ public class NewPlayerController : MonoBehaviour
     [SerializeField]
     private float gravityValue = -9.81f;
 
+    public float groundDrag;
+
     private Rigidbody rb;
+
+    private Vector3 moveDirection;
+
+
     private Vector3 playerVelocity;
     private bool groundedPlayer;
 
@@ -20,6 +26,12 @@ public class NewPlayerController : MonoBehaviour
     private bool jumped = false;
 
     [SerializeField] private CameraLook cameraLook;
+
+    [SerializeField] private GameObject playerPausePanel;
+
+    //private InputActionAsset inputAsset;
+    //private InputActionMap player;
+    //private InputAction move;
 
     void Start()
     {
@@ -38,62 +50,127 @@ public class NewPlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        jumped = context.ReadValueAsButton();
+        
+        if(context.performed)
+        {
+            jumped = context.ReadValueAsButton();
+            DoJump();
+            //Debug.Log("jump pressed");
+        }
+        
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-
+        if(context.performed)
+        {
+            Debug.Log("interact pressed");
+        }
+        
     }
 
     public void OnShove(InputAction.CallbackContext context)
     {
-
+        if (context.performed)
+        {
+            Debug.Log("shove pressed");
+        }
     }
 
     public void OnPowerupOne(InputAction.CallbackContext context)
     {
-
+        if (context.performed)
+        {
+            Debug.Log("trigger left pressed");
+        }
     }
 
     public void OnPowerupTwo(InputAction.CallbackContext context)
     {
-
+        if (context.performed)
+        {
+            Debug.Log("trigger right pressed");
+        }
     }
 
     public void OnPause(InputAction.CallbackContext context)
     {
-
+        if (context.performed)
+        {
+            Debug.Log("pasued pressed");
+        }
     }
 
     public void OnSpill(InputAction.CallbackContext context)
     {
-
+        if (context.performed)
+        {
+            Debug.Log("spill pressed");
+        }
     }
+
+    //private void Awake()
+    //{
+    //    inputAsset = this.GetComponent<PlayerInput>().actions;
+    //    player = inputAsset.FindActionMap("Player");
+    //}
+
+    //private void OnEnable()
+    //{
+    //    player.FindAction("Jump").started += OnJump;
+    //    move = player.FindAction("Movement");
+    //    player.Enable();
+    //}
+
+    //private void OnDisable()
+    //{
+    //    player.FindAction("Jump").started -= OnJump;
+    //    player.Disable();
+    //}
 
     void FixedUpdate()
     {
         CheckGrounded();
-        if (groundedPlayer && playerVelocity.y < 0)
+
+        SpeedControl();
+        MovePlayer();
+
+
+        if (groundedPlayer)
         {
-            //playerVelocity.y = 0f;
+            rb.drag = groundDrag;
         }
+        else
+            rb.drag = 0;
+    }
 
-        playerVelocity = new Vector3(movementInput.x, rb.velocity.y, movementInput.y);
+    private void MovePlayer()
+    {
+        if (movementInput == Vector2.zero)
+            return;
+        moveDirection = transform.forward * movementInput.y + transform.right * movementInput.x;
 
-        //remove possibly
-        //if (playerVelocity != Vector3.zero)
-        //{
-        //    var move = Vector3.ProjectOnPlane(playerVelocity, Vector3.up);
-        //    gameObject.transform.forward = move;
-        //}
+        rb.AddForce(moveDirection.normalized * playerSpeed * 10f, ForceMode.Force);
+    }
 
-        // Changes the height position of the player..
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        if(flatVel.magnitude > playerSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * playerSpeed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
+
+    private void DoJump()
+    {
         if (jumped && groundedPlayer)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            Debug.Log("jumping");
+            rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
         }
-        rb.velocity = (playerVelocity * playerSpeed);
     }
 
     public void CheckGrounded()

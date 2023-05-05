@@ -6,16 +6,12 @@ using UnityEngine.InputSystem;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private List<PlayerInput> players = new List<PlayerInput>();
-    [SerializeField] private GameObject player1Prefab;
-    [SerializeField] private GameObject player2Prefab;
 
-    private GameObject player1;
-    private GameObject player2;
+    [SerializeField] private List<Transform> spawnPoints;
 
-    private Transform player1Spawn;
-    private Transform player2Spawn;
 
     [SerializeField] private PlayerInputManager playerInputManager;
+    [SerializeField] private GameManager gameManager;
 
     private void OnEnable()
     {
@@ -27,19 +23,26 @@ public class PlayerManager : MonoBehaviour
         playerInputManager.onPlayerJoined -= AddPlayer;
     }
 
-    public void CreateCharacters(Vector3 player1SpawnPos, Vector3  player2SpawnPos)
-    {
-        //player1Spawn.position = player1SpawnPos;
-        //player2Spawn.position = player2SpawnPos;
-        player1 = Instantiate(player1Prefab, player1SpawnPos, Quaternion.identity, player1Spawn);
-        AddPlayer(player1.GetComponent<PlayerInput>());
-        player2 = Instantiate(player2Prefab, player2SpawnPos, Quaternion.identity, player2Spawn);
-        AddPlayer(player2.GetComponent<PlayerInput>());
-    }
 
     public void AddPlayer(PlayerInput player)
     {
         players.Add(player);
+        player.transform.position = spawnPoints[players.Count - 1].position;
+
+        if(players.Count == 1)
+        {
+            player.actions.FindActionMap("Player").Disable();
+        }
+        if(players.Count == 2)
+        {
+            players[0].actions.FindActionMap("Player").Enable();
+            gameManager.StartTimer();
+        }
+    }
+
+    public void OnPlayerJoined(PlayerInput playerInput)
+    {
+        Debug.Log("player joined");
     }
 
 }

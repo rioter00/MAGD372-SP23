@@ -144,17 +144,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "WASD",
-                    "id": "67ba9807-a271-41aa-9541-80d70674b3fa",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "Control Stick",
                     "id": "564f88f5-ade1-4754-a248-421da219fad1",
                     "path": "2DVector",
@@ -306,17 +295,6 @@
                     "groups": "",
                     "action": "Powerup 2",
                     "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "WASD",
-                    "id": "22516009-9701-4de9-b3a1-0a047a624d66",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Movement",
-                    "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
