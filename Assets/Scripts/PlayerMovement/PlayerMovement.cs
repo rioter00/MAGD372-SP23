@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Essentials.Reference_Variables.Variables;
+using System;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]//Jump scriptable object
     private FloatVariable jumpInputVariable;
 
-    private CharacterController controller;
+    private Rigidbody controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
 
@@ -34,17 +35,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private FloatVariable jumpInput
+    private float jumpInput
     {
         get
         {
-            return jumpInputVariable;
+            return jumpInputVariable.Value;
         }
+    }
+
+    private void Awake()
+    {
+        jumpInputVariable.ValueChanged += OnJump;
     }
 
     private void Start()
     {
-        controller = gameObject.GetComponent<CharacterController>();
+        controller = gameObject.GetComponent<Rigidbody>();
     }
 
     public void OnMove()
@@ -52,27 +58,27 @@ public class PlayerMovement : MonoBehaviour
         moveInput = movementInput;
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    public void OnJump(object sender, EventArgs args)
     {
-        Debug.Log(context.action.triggered + "normal");
-        Debug.Log(jumpInput + "new");
-        jumped = jumpInput;//context.action.triggered;
+        Debug.Log("Jump");
+        jumped = jumpInput == 1;
     }
 
-    void Update()
+    private void FixedUpdate()
     {
-        groundedPlayer = controller.isGrounded;
+        CheckGrounded();
         if (groundedPlayer && playerVelocity.y < 0)
         {
-            playerVelocity.y = 0f;
+            //playerVelocity.y = 0f;
         }
 
-        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        playerVelocity = new Vector3(movementInput.x, controller.velocity.y, movementInput.y);
+        //controller.velocity = (move * playerSpeed);
 
         //remove possibly
-        if (move != Vector3.zero)
+        if (playerVelocity != Vector3.zero)
         {
+            var move = Vector3.ProjectOnPlane(playerVelocity, Vector3.up);
             gameObject.transform.forward = move;
         }
 
@@ -81,9 +87,20 @@ public class PlayerMovement : MonoBehaviour
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         }
+        controller.velocity = (playerVelocity);
+    }
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+    public void CheckGrounded()
+    {
+        float groundDistance = 0.1f;
+        Vector3 position = transform.position;
+        groundedPlayer = Physics.Raycast(position, Vector3.down, groundDistance);
+    }
+
+    void OnDestroy()
+    {
+        jumpInputVariable.ValueChanged -= OnJump;
+
     }
 }
 
