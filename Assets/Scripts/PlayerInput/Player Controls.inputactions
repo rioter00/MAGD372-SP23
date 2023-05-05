@@ -420,7 +420,7 @@
                     "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Controller",
                     "action": "Cursor Up",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -431,7 +431,7 @@
                     "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Controller",
                     "action": "Cursor Down",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -442,7 +442,7 @@
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Controller",
                     "action": "Cursor Left",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -453,7 +453,7 @@
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Controller",
                     "action": "Cursor Right",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -475,7 +475,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Controller",
                     "action": "Back",
                     "isComposite": false,
                     "isPartOfComposite": false
