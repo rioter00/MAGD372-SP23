@@ -143,6 +143,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1023885875782730365, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.28235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023885875782730365, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.078431375
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023885875782730365, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 296139268}
@@ -247,9 +255,25 @@ PrefabInstance:
       value: Main Menu Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 6750499683736700217, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.28235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750499683736700217, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.078431375
+      objectReference: {fileID: 0}
+    - target: {fileID: 6750499683736700217, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 296139268}
+    - target: {fileID: 9062513959014128218, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.28235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 9062513959014128218, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.078431375
+      objectReference: {fileID: 0}
     - target: {fileID: 9062513959014128218, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -259,6 +283,11 @@ PrefabInstance:
 --- !u!1 &177267601 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 177267601, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
+  m_PrefabInstance: {fileID: 88378597}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &253780673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6185529366319735606, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
   m_PrefabInstance: {fileID: 88378597}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &296139263
@@ -322,6 +351,7 @@ MonoBehaviour:
     right_input: {fileID: 11400000, guid: 3f0a0d4d58f789449a9dc9ac55f46dd0, type: 2}
     select_input: {fileID: 11400000, guid: 14e0e4da159832f4fad285f7beea18f5, type: 2}
     back_input: {fileID: 11400000, guid: 85229186f61892b44b754d11de9ffdd3, type: 2}
+  menuManager: {fileID: 296139268}
 --- !u!114 &296139267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,11 +537,17 @@ MonoBehaviour:
   Panels:
   - name: 0
     panel: {fileID: 1323208945}
+    backButton: {fileID: 253780673}
   - name: 1
     panel: {fileID: 177267601}
+    backButton: {fileID: 1775659746}
   - name: 2
     panel: {fileID: 1160436484}
+    backButton: {fileID: 481376233}
+  menuButtons: {fileID: 643093791}
+  currentActivePanel: {fileID: 0}
   gameStartScene: 0
+  eventSystem: {fileID: 1144142567}
 --- !u!114 &296139269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,6 +561,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStartScene: 1
+--- !u!1 &481376233 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4934760948231827798, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
+  m_PrefabInstance: {fileID: 88378597}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &643093791 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1094207763345790991, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
+  m_PrefabInstance: {fileID: 88378597}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &674415997
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,7 +661,7 @@ MonoBehaviour:
   m_ScrollWheelAction: {fileID: 0}
   m_TrackedDevicePositionAction: {fileID: 0}
   m_TrackedDeviceOrientationAction: {fileID: 0}
-  m_DeselectOnBackgroundClick: 1
+  m_DeselectOnBackgroundClick: 0
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
 --- !u!114 &1144142567
@@ -768,6 +814,11 @@ MonoBehaviour:
 --- !u!1 &1623059827 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1094207762397062584, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
+  m_PrefabInstance: {fileID: 88378597}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1775659746 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 775027807309077164, guid: 96d3b6fa2884348df9930678d660d485, type: 3}
   m_PrefabInstance: {fileID: 88378597}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1842123543

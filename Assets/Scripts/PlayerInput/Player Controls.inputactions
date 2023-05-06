@@ -482,7 +482,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Controller",
                     "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -493,7 +493,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Controller",
                     "action": "Back",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -504,7 +504,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Controller",
                     "action": "Exit",
                     "isComposite": false,
                     "isPartOfComposite": false

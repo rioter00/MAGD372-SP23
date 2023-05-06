@@ -79,6 +79,7 @@ public class WFCV2_Main : MonoBehaviour
             Vector3 wellPlacement = new Vector3(grid.x * 30, 0, grid.z * 30);
             Instantiate(baseAndWellPrefabs[2], wellPlacement, Quaternion.identity, IslandHolder);
             CreateBases();
+            playerManager.Create();
         }
     }
 
