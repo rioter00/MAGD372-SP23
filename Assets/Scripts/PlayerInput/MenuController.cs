@@ -9,6 +9,7 @@ public class MenuController : MonoBehaviour
 
     [SerializeField] private InputValues player_one;
     [SerializeField] private InputValues player_two;
+    [SerializeField] private MenuManager menuManager;
 
     [System.Serializable]
     public class InputValues
@@ -147,13 +148,16 @@ public class MenuController : MonoBehaviour
     {
         InputDevice device = context.control.device;
         float input = context.ReadValue<float>();
-        if (device == player1)
+        if (context.performed)
         {
-            player_one.Select = input;
-        }
-        else if (device == player2)
-        {
-            player_two.Select = input;
+            if (device == player1)
+            {
+                player_one.Select = input;
+            }
+            else if (device == player2)
+            {
+                player_two.Select = input;
+            }
         }
     }
 
@@ -161,13 +165,17 @@ public class MenuController : MonoBehaviour
     {
         InputDevice device = context.control.device;
         float input = context.ReadValue<float>();
-        if (device == player1)
+        if (context.performed)
         {
-            player_one.Back = input;
-        }
-        else if (device == player2)
-        {
-            player_two.Back = input;
+            if (device == player1)
+            {
+                player_one.Back = input;
+                menuManager.BackButton(menuManager.GetCurrentActivePanel());
+            }
+            else if (device == player2)
+            {
+                player_two.Back = input;
+            }
         }
     }
 }

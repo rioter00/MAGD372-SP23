@@ -201,4 +201,9 @@ public class NewPlayerController : MonoBehaviour
         Vector3 position = transform.position;
         groundedPlayer = Physics.Raycast(position, Vector3.down, groundDistance);
     }
+
+    public Camera GetCamera()
+    {
+        return cameraLook.gameObject.GetComponent<Camera>();
+    }
 }
