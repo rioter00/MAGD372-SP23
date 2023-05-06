@@ -31,12 +31,8 @@ public class PlayerManager : MonoBehaviour
 
         if(players.Count == 1)
         {
-<<<<<<< HEAD
-            //player.actions.FindActionMap("Player").Disable();
             player.gameObject.GetComponent<NewPlayerController>().playerPausePanel = gameManager.pauseScreenPlayer1;
-=======
-            player.actions.FindActionMap("Player").Disable();
->>>>>>> parent of ea144b9 (Working on ui)
+            //player.actions.FindActionMap("Player").Disable();
         }
         if(players.Count == 2)
         {

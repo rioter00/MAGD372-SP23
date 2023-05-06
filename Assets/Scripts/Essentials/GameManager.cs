@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     public Canvas menuScreen; //main menu screen
     public GameObject pauseScreenPlayer1;
     public GameObject pauseScreenPlayer2;
+    public GameObject currentOpenedPanel;
 
     public float team1WaterWell;
     private float team1WaterMax;
