@@ -91,8 +91,8 @@ public class GameManager : MonoBehaviour
         //menuScreen.enabled = false;
         //pauseScreenPlayer1.enabled = false;
         //pauseScreenPlayer2.enabled = false;
-        //pauseScreenPlayer1.SetActive(false);
-        //pauseScreenPlayer2.SetActive(false);
+        pauseScreenPlayer1.SetActive(false);
+        pauseScreenPlayer2.SetActive(false);
         gameStage = stage;
 
         switch (gameStage)
