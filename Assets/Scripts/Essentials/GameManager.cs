@@ -227,11 +227,6 @@ public class GameManager : MonoBehaviour
         setGamePaused(player1Paused || player2Paused);
     }
 
-    public void Pause(object sender, System.EventArgs args)
-    {
-        Debug.Log("pause");
-    }
-
 
     public void Awake()
     {

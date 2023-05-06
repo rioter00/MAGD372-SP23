@@ -27,22 +27,11 @@ public class NewPlayerController : MonoBehaviour
 
     [SerializeField] private CameraLook cameraLook;
 
-    public GameObject playerPausePanel;
-    [SerializeField] private int playerIndex;
-    private GameManager gameManager;
+    [SerializeField] private GameObject playerPausePanel;
 
-    private InputActionAsset inputAsset;
-    private InputActionMap player;
-    private InputActionMap menu;
+    //private InputActionAsset inputAsset;
+    //private InputActionMap player;
     //private InputAction move;
-
-    private void Awake()
-    {
-        inputAsset = this.GetComponent<PlayerInput>().actions;
-        player = inputAsset.FindActionMap("Player");
-        menu = inputAsset.FindActionMap("Menu");
-        gameManager = FindObjectOfType<GameManager>();
-    }
 
     void Start()
     {
@@ -108,18 +97,7 @@ public class NewPlayerController : MonoBehaviour
     {
         if (context.performed)
         {
-            if(playerPausePanel.activeInHierarchy)
-            {
-                playerPausePanel.SetActive(false);
-                menu.Disable();
-                player.Enable();
-            }
-            else if(playerPausePanel.activeInHierarchy == false)
-            {
-                playerPausePanel.SetActive(true);
-                menu.Enable();
-                player.Disable();
-            }
+            Debug.Log("pasued pressed");
         }
     }
 
@@ -130,6 +108,12 @@ public class NewPlayerController : MonoBehaviour
             Debug.Log("spill pressed");
         }
     }
+
+    //private void Awake()
+    //{
+    //    inputAsset = this.GetComponent<PlayerInput>().actions;
+    //    player = inputAsset.FindActionMap("Player");
+    //}
 
     //private void OnEnable()
     //{
@@ -198,5 +182,4 @@ public class NewPlayerController : MonoBehaviour
         Vector3 position = transform.position;
         groundedPlayer = Physics.Raycast(position, Vector3.down, groundDistance);
     }
-
 }
