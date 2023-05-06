@@ -148,6 +148,9 @@ public class NewPlayerController : MonoBehaviour
     {
         CheckGrounded();
 
+        //moveDirection = transform.forward * movementInput.y + transform.right * movementInput.x;
+        //rb.velocity = moveDirection * playerSpeed;
+
         SpeedControl();
         MovePlayer();
 
@@ -185,7 +188,7 @@ public class NewPlayerController : MonoBehaviour
         if (jumped && groundedPlayer)
         {
             Debug.Log("jumping");
-            rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+            rb.AddForce(transform.up * jumpHeight * playerSpeed, ForceMode.Impulse);
         }
     }
 
