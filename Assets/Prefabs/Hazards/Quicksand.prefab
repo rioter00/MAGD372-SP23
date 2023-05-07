@@ -147,11 +147,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: c3aebc7650af71d4991e6ae4aded5ecf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 327528a762fccac4e92699b5c74739e7, type: 2}
+      objectReference: {fileID: 2100000, guid: 6440a4fabadf0b2418799a6034f7c41e, type: 2}
     - target: {fileID: -7511558181221131132, guid: c3aebc7650af71d4991e6ae4aded5ecf, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 327528a762fccac4e92699b5c74739e7, type: 2}
+      objectReference: {fileID: 2100000, guid: 1c130b2f06f1ddc4e981a038c2090bc2, type: 2}
     - target: {fileID: 919132149155446097, guid: c3aebc7650af71d4991e6ae4aded5ecf, type: 3}
       propertyPath: m_Name
       value: Quicksand
