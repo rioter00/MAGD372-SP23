@@ -382,10 +382,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Credits:\n\nMarco Unate: UI Art and Script, \u201CUI\u201D Branch\n\nBrian
     Michael: Hazards and Items Scripting, \u201CHazards-and-Items-Scripts\u201D Branch\n\nAiden
-    Currie: Game manager, \u201Cajcurrie-a11y-patch-1\u201D Branch\n\nGriffin Clos:
-    Camera, \u201CSplit-Screen\u201D branch\n\nCorbin Giese: Audio, \u201CSounds_Music\u201D
-    branch\n\nJacob McKenney: 3D modeler, \u201CLevel-Environment\u201D & \u201CCharacter\u201D
-    branch\n\nEric Czapla: Level designer/sketches, \u201CLevel-Environment\u201D
+    Currie: Game manager, How-to-Play Section, \u201Cajcurrie-a11y-patch-1\u201D
+    Branch\n\nGriffin Clos: Camera, \u201CSplit-Screen\u201D branch\n\nCorbin Giese:
+    Audio, \u201CSounds_Music\u201D branch\n\nJacob McKenney: 3D modeler, \u201CLevel-Environment\u201D
+    & \u201CCharacter\u201D branch\n\nEric Czapla: Level designer/sketches, \u201CLevel-Environment\u201D
     branch \n\nLucas Ackman: Water and Communications systems, \u201CWater-Functionality\u201D
     and \u201CSystems\u201D branches\n\nNate Staddler: Player Input, \u201CPlayer-Input\u201D
     Branch\n\nLouie Marcou: Procedural Generation, Asset Integration, \u201CProcGen\u201D
