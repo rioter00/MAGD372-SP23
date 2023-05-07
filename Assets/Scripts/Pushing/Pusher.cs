@@ -22,6 +22,7 @@ public class Pusher : MonoBehaviour
 
     private void OnShovingValueChanged(object sender, EventArgs e)
     {
+        Debug.Log("shoved");
         if (shovingInput == 0)
             return;
         EventManager.TriggerEvent(shovingEventKey, new ShoveEvent());

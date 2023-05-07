@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class NewPlayerController : MonoBehaviour
 {
     [SerializeField]
@@ -41,6 +42,7 @@ public class NewPlayerController : MonoBehaviour
         player = inputAsset.FindActionMap("Player");
         menu = inputAsset.FindActionMap("Menu");
         gameManager = FindObjectOfType<GameManager>();
+
     }
 
     void Start()
