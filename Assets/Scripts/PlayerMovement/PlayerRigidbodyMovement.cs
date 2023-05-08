@@ -82,4 +82,11 @@ public class PlayerRigidbodyMovement : MonoBehaviour
 
         //rb.velocity.y += gravityValue * Time.deltaTime;
     }
+
+    public void CheckGrounded()
+    {
+        float groundDistance = 0.1f;
+        Vector3 position = transform.position;
+        groundedPlayer = Physics.Raycast(position, Vector3.down, groundDistance);
+    }
 }

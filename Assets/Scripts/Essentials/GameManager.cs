@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     public Canvas menuScreen; //main menu screen
     public GameObject pauseScreenPlayer1;
     public GameObject pauseScreenPlayer2;
+    public GameObject currentOpenedPanel;
 
     public float team1WaterWell;
     private float team1WaterMax;
@@ -90,8 +91,8 @@ public class GameManager : MonoBehaviour
         //menuScreen.enabled = false;
         //pauseScreenPlayer1.enabled = false;
         //pauseScreenPlayer2.enabled = false;
-        pauseScreenPlayer1.SetActive(false);
-        pauseScreenPlayer2.SetActive(false);
+        //pauseScreenPlayer1.SetActive(false);
+        //pauseScreenPlayer2.SetActive(false);
         gameStage = stage;
 
         switch (gameStage)
